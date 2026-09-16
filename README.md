@@ -43,6 +43,8 @@ Otras cosas que puedes editar en el mismo archivo:
   Si la dejas vacía (`motto: ""`), desaparecen las dos.
 - `csChat` — líneas de consola del Counter-Strike que van bajo los botones. El `tag`
   (`RADIO`, `DEAD`, `CT`, `T`, `SERVER`) decide el color.
+- `posts` — los posts de la sección **El hilo**: `{ user, text }`. Las líneas que empiezan
+  con `>` se pintan en verde, como en los imageboards.
 
 ### Estado online/offline
 

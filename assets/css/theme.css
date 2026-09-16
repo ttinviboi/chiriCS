@@ -71,6 +71,7 @@ html {
   --petal-a: #ffd6e3;
   --petal-b: #f5a8c4;
   --jp-color: #af0a0f;
+  --greentext: #789922;
 }
 
 /* ---------- Enlaces clásicos ---------- */
@@ -297,6 +298,12 @@ html .net-cta {
   text-decoration: underline;
 }
 html .net-cta svg { display: none; }
+
+/* ---------- El hilo ---------- */
+html .thread { gap: 10px; }
+html .post { padding: 14px; }
+html .post-body p { font-size: 13.3px; }
+html .post-body .greentext { color: #789922; }
 
 /* ---------- Toast ---------- */
 html .toast {

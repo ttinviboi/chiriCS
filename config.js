@@ -33,6 +33,17 @@ window.LITTTIN_CONFIG = {
     checkStatus: true            // true = consulta online/offline automáticamente
   },
 
+  /* ---------- El hilo: posts de los del culto ----------
+     Cada post es { user, text }. Si una línea del texto empieza con ">"
+     se pinta en verde, como en los imageboards. */
+  posts: [
+    { user: "lacto", text: "banco el server, banco el dust2, banco todo" },
+    { user: "cr0hno", text: ">cambiar el nick a cr0hno\n>entrar a dust2\n>morir en 4 segundos\n>gg" },
+    { user: "remiinis", text: "el que dice rush B y se queda en el spawn no cuenta" },
+    { user: "lacto", text: "el awp del que campea no se toca, banco" },
+    { user: "remiinis", text: ">comprar awp\n>fallar los 3 tiros\n>morir con cuchillo" }
+  ],
+
   /* ---------- Referencias del Counter-Strike ----------
      Sustituyen a los chips de IP y versión del hero. El "tag" le da el color
      de la consola: RADIO, DEAD, CT, T o SERVER. */

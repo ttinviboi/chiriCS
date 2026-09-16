@@ -499,6 +499,26 @@ code { font-family: var(--font-mono); }
 
 .empty { font-size: .9rem; color: var(--text-dim); }
 
+/* ---------- El hilo ---------- */
+.thread {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--gap);
+}
+.thread[hidden] { display: none; }
+
+.post {
+  padding: var(--card-pad);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.post-body p { margin: 0 0 4px; font-size: .92rem; }
+.post-body p:last-child { margin-bottom: 0; }
+
+.greentext { color: var(--greentext, #789922); }
+
 /* ---------- Toast ---------- */
 .toast {
   position: fixed;

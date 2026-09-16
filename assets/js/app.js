@@ -101,6 +101,32 @@
     list.hidden = lines.length === 0;
   }
 
+  /* ---------------- El hilo (posts de los usuarios) ---------------- */
+  function renderPosts() {
+    var host = $("#postList");
+    if (!host) return;
+
+    var posts = Array.isArray(CFG.posts) ? CFG.posts : [];
+
+    host.innerHTML = posts.map(function (post, i) {
+      var body = String(post.text || "").split("\n").map(function (line) {
+        var green = line.trim().charAt(0) === ">";
+        return "<p" + (green ? ' class="greentext"' : "") + ">" + esc(line) + "</p>";
+      }).join("");
+
+      return '<article class="post">' +
+        '<p class="post-header">' +
+        '<span class="ph-name">' + esc(post.user) + '</span>' +
+        '<span class="ph-date">' + chanStamp() + '</span>' +
+        '<span class="ph-no">No.' + (1000100 + i * 13) + '</span>' +
+        '</p>' +
+        '<div class="post-body">' + body + '</div>' +
+        '</article>';
+    }).join("");
+
+    host.hidden = posts.length === 0;
+  }
+
   /* ---------------- El Culto Del Toby (redes) ---------------- */
   function renderNetworks() {
     var grid = $("#networkGrid");
@@ -341,6 +367,7 @@
   function init() {
     applyConfig();
     renderCsChat();
+    renderPosts();
     renderNetworks();
     setupCopy();
     setupBedrock();
