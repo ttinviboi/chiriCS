@@ -109,13 +109,6 @@ html .kicker {
   background: #af0a0f;
 }
 
-html .hero-tagline {
-  margin-top: 10px;
-  max-width: 60ch;
-  font-size: 15px;
-  font-weight: 700;
-}
-
 html .hero-intro { font-size: 13.3px; color: #000; }
 
 html .hero-actions { margin-top: 16px; gap: 8px; }
@@ -164,11 +157,6 @@ html .cs-line--ct .cs-tag,
 html .cs-line--ct .cs-text { color: #0000ee; }
 html .cs-line--t .cs-tag,
 html .cs-line--t .cs-text { color: #af0a0f; }
-
-/* ---------- Mensaje del user lacto ---------- */
-html .quote { margin-top: 12px; font-size: 12.5px; }
-html .quote-user { color: #117743; }
-html .quote-text { color: #000; }
 
 /* ---------- Secciones ---------- */
 html .section { padding: 26px 0 0; }

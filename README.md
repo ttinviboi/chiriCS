@@ -21,7 +21,7 @@ python3 -m http.server 8000
 ## Qué tienes que tocar
 
 **Un solo archivo: `config.js`.** Ahí están la IP, el nombre del servidor, la versión, los
-textos, el mensaje del user lacto, la charla del Counter-Strike y el dashboard de redes.
+textos, la charla del Counter-Strike y el dashboard de redes.
 
 ```js
 server: {
@@ -37,8 +37,8 @@ disponibles son `youtube`, `spotify`, `discord`, `twitch`, `tiktok`, `x`, `insta
 
 Otras cosas que puedes editar en el mismo archivo:
 
-- `kicker` — el rótulo pequeño que va sobre el título.
-- `lacto` — el mensaje del user, que sale arriba y abajo de la descripción.
+- `kicker` — el rótulo pequeño que va sobre la descripción.
+- `intro` — la frase de presentación del hero.
 - `motto` — frase con sello propio: pegatina junto al rótulo y cinta animada al final.
   Si la dejas vacía (`motto: ""`), desaparecen las dos.
 - `csChat` — líneas de consola del Counter-Strike que van bajo los botones. El `tag`

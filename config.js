@@ -10,14 +10,7 @@ window.LITTTIN_CONFIG = {
 
   /* ---------- Identidad ---------- */
   kicker: "Seguidor del Culto Del Toby",
-  tagline: "Minecraft, YouTube y música. Todo en un solo sitio.",
   intro: "La IP del servidor, mis redes y los enlaces de siempre. Sin registros, sin ruido, sin vueltas.",
-
-  /* Mensaje del user lacto: sale arriba y abajo de la descripción del hero. */
-  lacto: {
-    user: "lacto",
-    message: "que la chitió"
-  },
 
   /* Frase con sello propio: sale como pegatina en el hero y en la cinta de abajo.
      Si la dejas vacía ("") desaparecen las dos. */
