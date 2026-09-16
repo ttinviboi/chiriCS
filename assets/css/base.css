@@ -1,7 +1,6 @@
 /* ==========================================================================
-   litttin · base.css — estructura común a los dos temas
-   Los colores, tipografías y formas se definen en theme-apple.css
-   y theme-chan.css mediante variables CSS.
+   litttin · base.css — estructura común
+   Los colores, tipografías y formas van en theme.css mediante variables CSS.
    ========================================================================== */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -100,32 +99,6 @@ code { font-family: var(--font-mono); }
 }
 .nav a:hover { color: var(--text); background: var(--surface); }
 
-/* ---------- Botón de tema ---------- */
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px 6px 10px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  background: var(--surface);
-  color: var(--text);
-  font-size: .8rem;
-  font-weight: 500;
-  transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
-}
-.theme-toggle:hover { border-color: var(--line-strong); transform: translateY(-1px); }
-.theme-toggle:active { transform: translateY(0); }
-
-.tt-icon {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: inset 0 0 0 4px var(--bg), 0 0 0 1px var(--line);
-  transition: background-color .3s ease, box-shadow .3s ease;
-}
-
 /* ---------- Hero ---------- */
 .hero {
   padding: clamp(56px, 11vw, 130px) 0 clamp(40px, 7vw, 80px);
@@ -205,39 +178,56 @@ code { font-family: var(--font-mono); }
 .btn--icon.is-spinning { animation: spin 0.9s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ---------- Chips / metadatos ---------- */
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 34px 0 0;
-  padding: 0;
+/* ---------- Mensajes del Counter-Strike ---------- */
+.cs-chat {
+  display: grid;
+  gap: 3px;
+  max-width: 430px;
+  margin: 30px 0 0;
+  padding: 13px 16px;
   list-style: none;
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 13px;
-  font-size: .8rem;
-  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: .78rem;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
 }
-.chip-k {
-  font-size: .68rem;
+.cs-chat[hidden] { display: none; }
+
+.cs-line {
+  display: flex;
+  gap: 9px;
+}
+
+.cs-tag {
+  flex: none;
+  min-width: 56px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .1em;
+  letter-spacing: .06em;
   color: var(--text-faint);
 }
-.chip--ip code {
-  color: var(--text);
-  font-size: .82rem;
-  font-weight: 600;
+.cs-text { color: var(--text-dim); }
+
+.cs-line--radio .cs-text { color: var(--text); }
+.cs-line--server .cs-tag,
+.cs-line--server .cs-text { color: var(--cs-yellow, #ffd60a); }
+.cs-line--dead .cs-tag,
+.cs-line--dead .cs-text { color: var(--bad); }
+.cs-line--ct .cs-tag,
+.cs-line--ct .cs-text { color: var(--cs-ct, #4aa8ff); }
+.cs-line--t .cs-tag,
+.cs-line--t .cs-text { color: var(--cs-t, #ff6b4a); }
+
+/* ---------- Mensaje del user lacto ---------- */
+.quote {
+  margin: 18px 0 0;
+  font-family: var(--font-mono);
+  font-size: .86rem;
+  line-height: 1.5;
 }
+.quote-user { font-weight: 700; color: var(--accent); }
+.quote-sep { color: var(--text-faint); }
+.quote-text { color: var(--text); }
 
 /* ---------- Frase con sello propio: sello + cinta ---------- */
 .hero-top {
@@ -454,41 +444,6 @@ code { font-family: var(--font-mono); }
 .server-bedrock { margin: 12px 0 0; font-size: .82rem; color: var(--text-dim); }
 .server-bedrock code { color: var(--text); font-size: .84rem; }
 
-/* ---------- Pasos ---------- */
-.steps {
-  list-style: none;
-  margin: 26px 0 0;
-  padding: 22px 0 0;
-  border-top: 1px solid var(--line);
-  display: grid;
-  gap: 14px;
-  counter-reset: step;
-}
-
-.steps li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 12px;
-  align-items: start;
-}
-
-.steps .step-n {
-  display: grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  flex: none;
-  font-size: .78rem;
-  font-weight: 700;
-  color: var(--accent);
-  background: var(--surface-2);
-  border: 1px solid var(--line);
-  border-radius: 50%;
-}
-
-.steps .step-t { font-size: .9rem; font-weight: 600; }
-.steps .step-d { margin: 2px 0 0; font-size: .84rem; color: var(--text-dim); }
-
 /* ---------- Grid de redes ---------- */
 .grid {
   display: grid;
@@ -544,28 +499,6 @@ code { font-family: var(--font-mono); }
 
 .empty { font-size: .9rem; color: var(--text-dim); }
 
-/* ---------- Pie ---------- */
-.footer {
-  margin-top: clamp(60px, 10vw, 120px);
-  padding: 34px 0 46px;
-  border-top: 1px solid var(--line);
-}
-
-.footer-inner { display: grid; gap: 6px; }
-.footer-brand {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: var(--fw-display);
-  font-size: 1.05rem;
-}
-.footer-text, .footer-copy { margin: 0; font-size: .82rem; color: var(--text-dim); }
-.footer-copy { color: var(--text-faint); }
-.footer-repo { margin: 4px 0 0; font-size: .84rem; }
-.footer-repo a { color: var(--accent); }
-
-/* ---------- Cabecera de post (solo tema 4chan) ---------- */
-.post-header { display: none; }
-
 /* ---------- Toast ---------- */
 .toast {
   position: fixed;
@@ -590,7 +523,6 @@ code { font-family: var(--font-mono); }
 @media (max-width: 760px) {
   .nav { order: 3; margin-left: 0; width: 100%; padding-bottom: 8px; }
   .topbar-inner { flex-wrap: wrap; gap: 10px; padding-top: 10px; }
-  .theme-toggle { margin-left: auto; }
   .server-body { flex-direction: column; gap: 16px; }
   .server-visual { width: 64px; height: 64px; }
   .server-visual svg { width: 42px; height: 42px; }

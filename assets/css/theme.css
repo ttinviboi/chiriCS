@@ -1,0 +1,351 @@
+/* ==========================================================================
+   litttin · theme.css — imageboard / yotsuba
+   Fondo crema, serif, bordes duros, posts con "Anonymous" y No.
+   Es la única paleta del proyecto: base.css solo aporta la estructura.
+   ========================================================================== */
+
+html {
+  color-scheme: light;
+
+  --bg: #ffffee;
+  --surface: #f0e0d6;
+  --surface-2: #f5e9df;
+  --code-bg: #fffff5;
+  --topbar-bg: #ffe;
+  --line: #d6d1b8;
+  --line-strong: #bcb7a0;
+
+  --text: #000000;
+  --text-dim: #34345c;
+  --text-faint: #707070;
+
+  --accent: #0000ee;
+  --accent-hover: #34345c;
+  --accent-fg: #fffff5;
+
+  --ok: #117743;
+  --bad: #af0a0f;
+  --warn: #b8860b;
+
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-mono: "Courier New", Courier, monospace;
+  --font-ui: Verdana, Geneva, "DejaVu Sans", Tahoma, sans-serif;
+
+  --fs: 13.3px;
+  --ls: 0;
+  --ls-display: 0;
+  --ls-h2: 0;
+  --ls-brand: 0;
+  --fw-display: 700;
+  --fw-brand: 700;
+
+  --radius: 0px;
+  --radius-sm: 0px;
+  --radius-pill: 0px;
+
+  --shadow: none;
+  --blur: 0px;
+  --container: 980px;
+  --pad: 14px;
+  --gap: 12px;
+  --card-pad: 16px;
+  --topbar-h: 44px;
+
+  /* --- Escena anime: página de manga (trama de puntos, tintas sepia) --- */
+  --scene-sky: linear-gradient(180deg, #fffdf0 0%, #ffffee 52%, #f6f1d9 100%);
+  --scene-stars-op: 0;
+  --scene-orb: linear-gradient(180deg, #fff8dd, #ffeab4);
+  --scene-orb-glow: rgba(255, 226, 150, .35);
+  --scene-cloud: rgba(200, 180, 140, .22);
+  --scene-clouds-op: .35;
+  --scene-far: #e6d9bb;
+  --scene-near: #d3c3a1;
+  --scene-torii: #ab8a5f;
+  --scene-torii-dark: #9a7b52;
+  --scene-torii-op: .75;
+  --scene-halftone-op: 1;
+  --scene-halftone-dot: rgba(0, 0, 0, .11);
+  --scene-land-h: 28vh;
+  --petals-op: .45;
+  --petal-a: #ffd6e3;
+  --petal-b: #f5a8c4;
+  --jp-color: #af0a0f;
+}
+
+/* ---------- Enlaces clásicos ---------- */
+html a { color: #0000ee; text-decoration: none; }
+html a:hover { text-decoration: underline; }
+
+/* ---------- Barra superior tipo board list ---------- */
+html .topbar { border-bottom: 1px solid #d6d1b8; }
+html .topbar-inner { min-height: var(--topbar-h); }
+
+html .brand {
+  color: #af0a0f;
+  font-size: 15px;
+  text-shadow: none;
+}
+html .brand::before { content: "["; color: #af0a0f; }
+html .brand::after { content: "]"; color: #af0a0f; }
+
+html .nav { gap: 2px; }
+html .nav a {
+  padding: 2px 4px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 400;
+  color: #0000ee;
+  border-radius: 0;
+}
+html .nav a:hover {
+  background: transparent;
+  color: #af0a0f;
+  text-decoration: underline;
+}
+
+/* ---------- Hero / hilo ---------- */
+html .hero { padding: 26px 0 18px; }
+
+html .kicker {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 1px 6px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: #fffff5;
+  background: #af0a0f;
+}
+
+html .hero-title {
+  font-size: clamp(1.9rem, 7vw, 2.9rem);
+  line-height: 1.1;
+  color: #af0a0f;
+}
+
+html .hero-tagline {
+  margin-top: 10px;
+  max-width: 60ch;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+html .hero-intro { font-size: 13.3px; color: #000; }
+
+html .hero-actions { margin-top: 16px; gap: 8px; }
+
+/* ---------- Botones = botones de formulario ---------- */
+html .btn {
+  padding: 3px 9px;
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 400;
+  color: #000;
+  background: #fffff5;
+  border: 1px solid #aaa;
+  border-radius: 0;
+}
+html .btn:hover {
+  background: #f0e0d6;
+  border-color: #800000;
+  color: #800000;
+  transform: none;
+}
+html .btn--primary {
+  font-weight: 700;
+  color: #000;
+  background: #fffff5;
+  border-color: #aaa;
+}
+html .btn--ghost { background: #f0e0d6; }
+html .btn--icon { padding: 3px 7px; }
+
+/* ---------- Charla del Counter-Strike ---------- */
+html .cs-chat {
+  max-width: 430px;
+  margin-top: 16px;
+  padding: 8px 10px;
+  gap: 1px;
+  font-size: 11.5px;
+  background: #fffff5;
+  border: 1px solid #d6d1b8;
+}
+html .cs-tag { min-width: 52px; font-size: 10px; letter-spacing: .04em; }
+html .cs-line--radio .cs-text { color: #000; }
+html .cs-line--server .cs-tag,
+html .cs-line--server .cs-text { color: #8a6d00; }
+html .cs-line--ct .cs-tag,
+html .cs-line--ct .cs-text { color: #0000ee; }
+html .cs-line--t .cs-tag,
+html .cs-line--t .cs-text { color: #af0a0f; }
+
+/* ---------- Mensaje del user lacto ---------- */
+html .quote { margin-top: 12px; font-size: 12.5px; }
+html .quote-user { color: #117743; }
+html .quote-text { color: #000; }
+
+/* ---------- Secciones ---------- */
+html .section { padding: 26px 0 0; }
+html .section-head { gap: 10px; margin-bottom: 12px; }
+html .section-head h2 { font-size: 19px; color: #af0a0f; }
+html .section-head h2::before { content: "■ "; font-size: 12px; }
+html .section-sub { font-family: var(--font-ui); font-size: 10.5px; color: #707070; }
+
+html .section-icon {
+  width: 30px;
+  height: 30px;
+  color: #800000;
+  background: #f0e0d6;
+  border: 1px solid #d6d1b8;
+  border-radius: 0;
+}
+html .section-icon svg { width: 17px; height: 17px; }
+
+/* ---------- Cabecera de post (aquí sí se ve) ---------- */
+html .post-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0 0 10px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: #707070;
+}
+html .ph-name { color: #117743; font-weight: 700; }
+html .ph-no { color: #0000ee; }
+html .post-header--hero { margin-bottom: 12px; font-size: 11.5px; }
+
+/* ---------- Tarjetas = posts ---------- */
+html .card,
+html .net-card {
+  background: #f0e0d6;
+  border: 1px solid #d6d1b8;
+  border-radius: 0;
+  box-shadow: none;
+}
+html .net-card { gap: 8px; }
+html .net-card:hover {
+  background: #f5e9df;
+  border-color: #bcb7a0;
+  transform: none;
+}
+
+html .server-card { background: #f0e0d6; }
+
+html .server-visual {
+  width: 58px;
+  height: 58px;
+  background: #fffff5;
+  border: 1px solid #d6d1b8;
+  border-radius: 0;
+}
+html .server-visual svg { width: 38px; height: 38px; filter: none; }
+html .server-info h3 { font-size: 14px; }
+html .server-sub { font-family: var(--font-ui); font-size: 10.5px; color: #707070; }
+
+/* ---------- IP ---------- */
+html .ip {
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: #800000;
+  background: #fffff5;
+  border: 1px solid #aaa;
+  border-radius: 0;
+}
+html .ip:hover { border-color: #800000; background: #ffffe0; }
+html .ip-label {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  color: #707070;
+}
+
+html .server-status { font-family: var(--font-ui); font-size: 11px; gap: 6px; }
+html .dot { width: 7px; height: 7px; border-radius: 0; }
+html .server-players { color: #117743; }
+html .server-bedrock { font-family: var(--font-ui); font-size: 10.5px; }
+html .server-bedrock code { color: #800000; font-weight: 700; }
+
+/* ---------- Redes ---------- */
+html .grid { gap: 10px; }
+
+html .net-icon {
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: 0;
+  border-radius: 0;
+}
+html .net-icon svg { width: 22px; height: 22px; }
+html .net-name { font-size: 14px; }
+html .net-handle {
+  font-family: var(--font-ui);
+  font-size: 10.5px;
+  color: #117743;
+}
+html .net-desc { margin-top: 3px; font-size: 12.5px; color: #000; }
+
+html .net-cta {
+  padding-top: 2px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: #0000ee;
+  text-decoration: underline;
+}
+html .net-cta svg { display: none; }
+
+/* ---------- Toast ---------- */
+html .toast {
+  left: auto;
+  right: 16px;
+  bottom: 16px;
+  padding: 4px 10px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: #800000;
+  background: #fffff5;
+  border: 1px solid #aaa;
+  border-radius: 0;
+  box-shadow: none;
+  transform: translateY(14px);
+}
+html .toast.is-visible { transform: translateY(0); }
+
+/* ---------- Frase propia: sello y cinta de aviso ---------- */
+html .hero-top { margin-bottom: 10px; }
+html .motto {
+  padding: 2px 8px;
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #af0a0f;
+  background: #fffff5;
+  border: 1px solid #af0a0f;
+  border-radius: 0;
+  transform: none;
+}
+html .motto:hover { transform: none; }
+
+html .motto-strip {
+  margin-top: 26px;
+  padding: 6px 0;
+  background: #f0e0d6;
+  color: #af0a0f;
+  border-top: 1px dotted #af0a0f;
+  border-bottom: 1px dotted #af0a0f;
+}
+html .motto-track {
+  gap: 22px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: .12em;
+}
+html .motto-track span::after { content: "◆"; margin-left: 22px; }
+
+@media (max-width: 760px) {
+  html .nav { padding-bottom: 6px; }
+}

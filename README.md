@@ -4,21 +4,9 @@
 **Repositorio:** https://github.com/ttinviboi/chiriCS
 
 Página estática (solo front-end) con la IP del servidor de Minecraft, el canal de YouTube,
-Spotify y el resto de redes. Tres temas intercambiables, uno de ellos con estética anime,
-y fondo temático que cambia con cada tema.
-
-- **Apple** — minimalista oscuro, tipografía grande, cristal y blur.
-- **Yotsuba** — imageboard tipo 4chan, crema, serif, posts con `Anonymous` y `No.`
-- **Sakura** — anime diurno, pastel, con acento fucsia.
-
-El botón de arriba a la derecha (o la tecla **T**) rota entre los tres temas. La elección
-se recuerda en el navegador y también se puede forzar por URL:
-
-```
-index.html?theme=apple
-index.html?theme=chan
-index.html?theme=sakura
-```
+Spotify y el resto de redes. Estética única de imageboard (tipo 4chan / yotsuba): fondo crema,
+serif, bordes duros, posts con `Anonymous` y `No.`, más una escena anime de fondo con
+montañas, torii, pétalos de sakura y trama de puntos tipo manga.
 
 ## Ver en local
 
@@ -33,7 +21,7 @@ python3 -m http.server 8000
 ## Qué tienes que tocar
 
 **Un solo archivo: `config.js`.** Ahí están la IP, el nombre del servidor, la versión, los
-pasos de conexión, los textos y el dashboard de redes.
+textos, el mensaje del user lacto, la charla del Counter-Strike y el dashboard de redes.
 
 ```js
 server: {
@@ -47,15 +35,20 @@ Para añadir una red, copia una línea del array `networks` y quita las `//`. Lo
 disponibles son `youtube`, `spotify`, `discord`, `twitch`, `tiktok`, `x`, `instagram` y
 `github`; si pones otro, se usa un globo por defecto.
 
-También hay un `motto`, una frase con sello propio que aparece como pegatina junto a
-"SOPORTE OFICIAL" y en la cinta animada antes del pie. Si la dejas vacía (`motto: ""`),
-desaparecen las dos.
+Otras cosas que puedes editar en el mismo archivo:
+
+- `kicker` — el rótulo pequeño que va sobre el título.
+- `lacto` — el mensaje del user, que sale arriba y abajo de la descripción.
+- `motto` — frase con sello propio: pegatina junto al rótulo y cinta animada al final.
+  Si la dejas vacía (`motto: ""`), desaparecen las dos.
+- `csChat` — líneas de consola del Counter-Strike que van bajo los botones. El `tag`
+  (`RADIO`, `DEAD`, `CT`, `T`, `SERVER`) decide el color.
 
 ### Estado online/offline
 
 La sección del servidor consulta `api.mcsrvstat.us` desde el navegador y muestra si el
-servidor está online, la versión y los jugadores conectados. Si no la quieres, pon
-`checkStatus: false` en `config.js`.
+servidor está online, la versión y los jugadores conectados. Mientras la IP siga siendo la
+de ejemplo, esa línea no se muestra. Si no quieres la consulta, pon `checkStatus: false`.
 
 ## Estructura
 
@@ -65,12 +58,10 @@ litttin-web/
 ├── config.js                  ← todo lo editable
 ├── assets/
 │   ├── css/
-│   │   ├── base.css           estructura común
-│   │   ├── scene.css          escena anime (cielo, luna/sol, montañas, torii, pétalos, screentone)
-│   │   ├── theme-apple.css    paleta tema Apple
-│   │   ├── theme-chan.css     paleta tema Yotsuba
-│   │   └── theme-sakura.css   paleta tema Sakura
-│   ├── js/app.js              temas, copiar IP, estado del server, dashboard
+│   │   ├── base.css           estructura y estilos comunes
+│   │   ├── scene.css          escena anime (cielo, luna, montañas, torii, pétalos, screentone)
+│   │   └── theme.css          paleta y tipografía del tema (imageboard / yotsuba)
+│   ├── js/app.js              copiar IP, estado del server, redes, charla de CS, pétalos
 │   └── img/
 │       ├── favicon.svg        cara de creeper
 │       └── og.png             imagen de previsualización al compartir el enlace
@@ -79,6 +70,8 @@ litttin-web/
 ```
 
 ## Publicar en GitHub Pages
+
+Este repo ya está publicado: cualquier `git push` a `main` actualiza la web en 1-2 minutos.
 
 1. Crea un repositorio **público** en GitHub.
 2. Sube estos archivos a la rama `main` (raíz del repo).

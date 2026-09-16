@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="es" data-theme="apple">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>litttin — servidor de Minecraft, YouTube y Spotify</title>
 <meta name="description" content="Página de soporte de litttin: IP del servidor de Minecraft, canal de YouTube, Spotify y todas mis redes en un solo sitio.">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#FFFFEE">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="litttin — Minecraft, YouTube y música">
@@ -15,29 +15,9 @@
 <meta name="twitter:image" content="assets/img/og.png">
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/scene.css">
-<link rel="stylesheet" href="assets/css/theme-apple.css">
-<link rel="stylesheet" href="assets/css/theme-chan.css">
-<link rel="stylesheet" href="assets/css/theme-sakura.css">
-
-<script>
-  /* Tema antes del primer pintado: sin parpadeo al recargar o al compartir un enlace. */
-  (function () {
-    var t = null;
-    try {
-      var m = /[?&]theme=(apple|chan|sakura)\b/.exec(location.search);
-      if (m) t = m[1];
-      if (!t) t = localStorage.getItem("litttin-theme");
-    } catch (e) {}
-    if (t !== "apple" && t !== "chan" && t !== "sakura") t = "apple";
-    document.documentElement.dataset.theme = t;
-  })();
-</script>
+<link rel="stylesheet" href="assets/css/theme.css">
 </head>
 <body id="top">
 
@@ -74,11 +54,6 @@
       <a href="#youtube" data-nav-net="youtube">YouTube</a>
       <a href="#spotify" data-nav-net="spotify">Spotify</a>
     </nav>
-
-    <button id="themeToggle" class="theme-toggle" type="button" title="Cambiar tema (tecla T)">
-      <span class="tt-icon" aria-hidden="true"></span>
-      <span class="tt-label" id="themeLabel">Apple</span>
-    </button>
   </div>
 </header>
 
@@ -92,24 +67,31 @@
     </p>
 
     <div class="hero-top">
-      <p class="kicker" data-cfg="kicker">Soporte oficial</p>
+      <p class="kicker" data-cfg="kicker">Seguidor del Culto Del Toby</p>
       <p class="motto" data-cfg="motto" hidden></p>
     </div>
     <h1 class="hero-title" data-cfg="brand">litttin</h1>
     <span class="jp" aria-hidden="true">ようこそ</span>
+
+    <p class="quote">
+      <span class="quote-user" data-cfg="lacto.user">lacto</span><span class="quote-sep">:</span>
+      <span class="quote-text" data-cfg="lacto.message"></span>
+    </p>
+
     <p class="hero-tagline" data-cfg="tagline"></p>
     <p class="hero-intro" data-cfg="intro"></p>
+
+    <p class="quote">
+      <span class="quote-user" data-cfg="lacto.user">lacto</span><span class="quote-sep">:</span>
+      <span class="quote-text" data-cfg="lacto.message"></span>
+    </p>
 
     <div class="hero-actions">
       <a class="btn btn--primary" href="#servidor">Entrar al servidor</a>
       <a class="btn btn--ghost" href="#redes">Ver mis redes</a>
     </div>
 
-    <ul class="chips" id="heroChips">
-      <li class="chip chip--ip"><span class="chip-k">IP</span><code data-cfg="server.ip"></code></li>
-      <li class="chip"><span class="chip-k">Versión</span><span data-cfg="server.version"></span></li>
-      <li class="chip chip--status"><span class="dot" id="heroDot" aria-hidden="true"></span><span id="heroStatus">Consultando…</span></li>
-    </ul>
+    <ul class="cs-chat" id="csChat"></ul>
   </section>
 
   <section id="servidor" class="section wrap">
@@ -126,8 +108,7 @@
         </svg>
       </span>
       <div>
-        <h2>Servidor de Minecraft<span class="jp" aria-hidden="true">サーバー</span></h2>
-        <p class="section-sub">Zona aparte, solo para conectar. Copia la IP y a jugar.</p>
+        <h2>Servidor de Minecraft</h2>
       </div>
     </div>
 
@@ -176,8 +157,6 @@
           </p>
         </div>
       </div>
-
-      <ol class="steps" id="steps"></ol>
     </article>
   </section>
 
@@ -192,7 +171,7 @@
         </svg>
       </span>
       <div>
-        <h2>Dashboard de redes<span class="jp" aria-hidden="true">リンク集</span></h2>
+        <h2>El Culto Del Toby<span class="jp" aria-hidden="true">リンク集</span></h2>
         <p class="section-sub">Todo lo mío, a un clic.</p>
       </div>
     </div>
@@ -212,15 +191,6 @@
 <div class="motto-strip" id="mottoStrip" hidden aria-hidden="true">
   <div class="motto-track" id="mottoTrack"></div>
 </div>
-
-<footer class="footer wrap">
-  <div class="footer-inner">
-    <p class="footer-brand" data-cfg="brand">litttin</p>
-    <p class="footer-text" data-cfg="footer.text"></p>
-    <p class="footer-repo" id="footerRepo" hidden><a data-repo-link href="#" rel="noopener noreferrer" target="_blank">Ver el código en GitHub</a></p>
-    <p class="footer-copy">© <span id="year">2026</span> litttin · <span aria-hidden="true">またね</span></p>
-  </div>
-</footer>
 
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 

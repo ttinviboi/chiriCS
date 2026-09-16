@@ -78,25 +78,30 @@
       if (value !== undefined && value !== null) el.textContent = value;
     });
     document.title = (CFG.brand || "litttin") + " — servidor de Minecraft, YouTube y Spotify";
-    $("#year").textContent = new Date().getFullYear();
   }
 
-  /* ---------------- Pasos ---------------- */
-  function renderSteps() {
-    var list = $("#steps");
+  /* ---------------- Charla del Counter-Strike ---------------- */
+  var CS_TAGS = { RADIO: "radio", DEAD: "dead", CT: "ct", T: "t", SERVER: "server" };
+
+  function renderCsChat() {
+    var list = $("#csChat");
     if (!list) return;
-    var steps = Array.isArray(CFG.steps) ? CFG.steps : [];
-    list.innerHTML = steps.map(function (s, i) {
-      return '<li>' +
-        '<span class="step-n" aria-hidden="true">' + (i + 1) + '</span>' +
-        '<div><p class="step-t">' + esc(s.title) + '</p>' +
-        '<p class="step-d">' + esc(s.text) + '</p></div>' +
+
+    var lines = Array.isArray(CFG.csChat) ? CFG.csChat : [];
+
+    list.innerHTML = lines.map(function (line) {
+      var tag = String(line.tag || "SERVER").toUpperCase();
+      var cls = CS_TAGS[tag] || "server";
+      return '<li class="cs-line cs-line--' + cls + '">' +
+        '<span class="cs-tag">' + esc(tag) + '</span>' +
+        '<span class="cs-text">' + esc(line.text) + '</span>' +
         '</li>';
     }).join("");
-    list.hidden = steps.length === 0;
+
+    list.hidden = lines.length === 0;
   }
 
-  /* ---------------- Dashboard de redes ---------------- */
+  /* ---------------- El Culto Del Toby (redes) ---------------- */
   function renderNetworks() {
     var grid = $("#networkGrid");
     if (!grid) return;
@@ -181,18 +186,15 @@
   /* ---------------- Estado del servidor ---------------- */
   function setState(state, text, players) {
     var box = $("#serverStatus");
-    var chip = $(".chip--status");
-    var heroText = $("#heroStatus");
-    var playersEl = $(".server-players");
+    if (!box) return;
 
-    [box, chip].forEach(function (el) {
-      if (el) el.setAttribute("data-state", state);
-    });
+    box.hidden = false;
+    box.setAttribute("data-state", state);
 
-    var label = $("[data-status-text]", box) || null;
+    var label = $("[data-status-text]", box);
     if (label) label.textContent = text;
-    if (heroText) heroText.textContent = text;
 
+    var playersEl = $(".server-players");
     if (playersEl) {
       if (players) {
         playersEl.textContent = players.online + "/" + players.max + " jugando";
@@ -203,13 +205,19 @@
     }
   }
 
+  /* Si la IP todavía es la de ejemplo, la línea de estado no se muestra. */
+  function hideStatus() {
+    var box = $("#serverStatus");
+    if (box) box.hidden = true;
+  }
+
   function checkStatus() {
     var server = CFG.server || {};
     var ip = String(server.ip || "").trim();
     var btn = $("#refreshStatus");
 
     if (!ip || PLACEHOLDER.test(ip)) {
-      setState("", "IP sin configurar · edítala en config.js", null);
+      hideStatus();
       return Promise.resolve();
     }
     if (server.checkStatus === false) {
@@ -234,7 +242,10 @@
         setState("online", "Online · " + version, data.players);
         var motd = data.motd && data.motd.clean ? data.motd.clean.join(" ").trim() : "";
         var motdEl = $("#serverMotd");
-        if (motdEl && motd) motdEl.textContent = motd.slice(0, 90);
+        if (motdEl) {
+          motdEl.textContent = motd.slice(0, 90);
+          motdEl.hidden = !motd;
+        }
       })
       .catch(function () {
         setState("", "No se pudo comprobar el estado (revisa la IP o inténtalo de nuevo)", null);
@@ -254,68 +265,9 @@
     box.hidden = false;
   }
 
-  /* ---------------- Tema ---------------- */
-  var THEMES = { apple: "Apple", chan: "Yotsuba", sakura: "Sakura" };
-  var THEME_ORDER = ["apple", "chan", "sakura"];
-  var THEME_COLORS = { apple: "#000000", chan: "#FFFFEE", sakura: "#FFF6FA" };
-
-  function nextTheme(theme) {
-    var i = THEME_ORDER.indexOf(theme);
-    return THEME_ORDER[(i + 1) % THEME_ORDER.length];
-  }
-
-  function setTheme(theme, remember) {
-    if (!THEMES[theme]) theme = "apple";
-    document.documentElement.setAttribute("data-theme", theme);
-
-    var label = $("#themeLabel");
-    var btn = $("#themeToggle");
-    if (label) label.textContent = THEMES[theme];
-    if (btn) {
-      btn.setAttribute("title", "Cambiar a " + THEMES[nextTheme(theme)] + " (tecla T)");
-      btn.setAttribute("aria-label", "Tema actual: " + THEMES[theme] + ". Cambiar a " + THEMES[nextTheme(theme)]);
-    }
-
-    var meta = $('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", THEME_COLORS[theme] || "#000000");
-
+  /* ---------------- Fechas de los encabezados de post ---------------- */
+  function stampPosts() {
     $$("[data-post-date]").forEach(function (el) { el.textContent = chanStamp(); });
-
-    if (remember) {
-      try { localStorage.setItem("litttin-theme", theme); } catch (e) {}
-    }
-  }
-
-  function currentTheme() {
-    var t = document.documentElement.getAttribute("data-theme");
-    return THEMES[t] ? t : "apple";
-  }
-
-  function themeFromUrl() {
-    var match = /[?&]theme=(apple|chan|sakura)\b/.exec(window.location.search);
-    return match ? match[1] : null;
-  }
-
-  function setupTheme() {
-    var fromUrl = themeFromUrl();
-    if (fromUrl) setTheme(fromUrl, true);
-
-    var btn = $("#themeToggle");
-    if (btn) {
-      btn.addEventListener("click", function () {
-        setTheme(nextTheme(currentTheme()), true);
-      });
-    }
-
-    document.addEventListener("keydown", function (e) {
-      var tag = (e.target && e.target.tagName) || "";
-      if (/INPUT|TEXTAREA|SELECT/.test(tag) || e.metaKey || e.ctrlKey || e.altKey) return;
-      if (e.key === "t" || e.key === "T") {
-        setTheme(nextTheme(currentTheme()), true);
-      }
-    });
-
-    setTheme(currentTheme(), false);
   }
 
   /* ---------------- Pétalos de sakura ---------------- */
@@ -374,16 +326,6 @@
     }
   }
 
-  /* ---------------- Pie ---------------- */
-  function setupFooter() {
-    var repo = CFG.footer && CFG.footer.repo;
-    if (!repo) return;
-    var box = $("#footerRepo");
-    var link = $("[data-repo-link]", box);
-    if (link) link.setAttribute("href", repo);
-    box.hidden = false;
-  }
-
   /* ---------------- Sombra de la barra al hacer scroll ---------------- */
   function setupTopbar() {
     var bar = $("#topbar");
@@ -398,13 +340,12 @@
   /* ---------------- Arranque ---------------- */
   function init() {
     applyConfig();
-    renderSteps();
+    renderCsChat();
     renderNetworks();
     setupCopy();
     setupBedrock();
-    setupFooter();
     setupTopbar();
-    setupTheme();
+    stampPosts();
     setupPetals();
     setupMotto();
 

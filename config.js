@@ -10,9 +10,15 @@ window.LITTTIN_CONFIG = {
 
   /* ---------- Identidad ---------- */
   brand: "litttin",
-  kicker: "Soporte oficial",
+  kicker: "Seguidor del Culto Del Toby",
   tagline: "Minecraft, YouTube y música. Todo en un solo sitio.",
   intro: "La IP del servidor, mis redes y los enlaces de siempre. Sin registros, sin ruido, sin vueltas.",
+
+  /* Mensaje del user lacto: sale arriba y abajo de la descripción del hero. */
+  lacto: {
+    user: "lacto",
+    message: "que la chitió"
+  },
 
   /* Frase con sello propio: sale como pegatina en el hero y en la cinta de abajo.
      Si la dejas vacía ("") desaparecen las dos. */
@@ -27,14 +33,21 @@ window.LITTTIN_CONFIG = {
     checkStatus: true            // true = consulta online/offline automáticamente
   },
 
-  /* ---------- Cómo entrar (los pasos que se ven bajo la IP) ---------- */
-  steps: [
-    { title: "Abre Minecraft", text: "Entra en Multijugador y pulsa «Añadir servidor»." },
-    { title: "Pega la IP", text: "Pon la dirección de arriba en el campo Dirección del servidor." },
-    { title: "Dale a jugar", text: "Guarda, conéctate y nos vemos dentro." }
+  /* ---------- Referencias del Counter-Strike ----------
+     Sustituyen a los chips de IP y versión del hero. El "tag" le da el color
+     de la consola: RADIO, DEAD, CT, T o SERVER. */
+  csChat: [
+    { tag: "SERVER", text: "de_dust2 · 24/7" },
+    { tag: "RADIO", text: "Go go go!" },
+    { tag: "RADIO", text: "Rush B, no stop" },
+    { tag: "T", text: "Eco round, no compres" },
+    { tag: "RADIO", text: "Enemy spotted" },
+    { tag: "DEAD", text: "gg, ya fue" },
+    { tag: "RADIO", text: "Fire in the hole!" },
+    { tag: "SERVER", text: "Bomb has been planted" }
   ],
 
-  /* ---------- Dashboard de redes ----------
+  /* ---------- El Culto Del Toby (dashboard de redes) ----------
      Para añadir una red: copia una línea de abajo, cambia los datos y quita las //.
      Iconos disponibles: youtube, spotify, discord, tiktok, twitch, x, instagram, github.
      Si pones uno que no existe, se usa un globo por defecto. */
@@ -64,11 +77,5 @@ window.LITTTIN_CONFIG = {
     ,{ id:"instagram", name:"Instagram", handle:"@litttin", description:"Fotos y día a día.",           url:"https://instagram.com/litttin", cta:"Ver perfil" }
     ,{ id:"github",    name:"GitHub",    handle:"litttin", description:"Código y proyectos.",          url:"https://github.com/litttin", cta:"Ver repos" }
     */
-  ],
-
-  /* ---------- Pie de página ---------- */
-  footer: {
-    text: "Hecho a mano. Sin cookies, sin rastreadores, sin base de datos.",
-    repo: "https://github.com/ttinviboi/chiriCS"   // Si lo dejas vacío, no se muestra el enlace al código.
-  }
+  ]
 };

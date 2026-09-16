@@ -189,10 +189,6 @@
   letter-spacing: .26em;
 }
 
-/* En tema yotsuba los acentos van en rojo de cabecera */
-html[data-theme="chan"] .jp { color: #af0a0f; }
-html[data-theme="chan"] .hero-title + .jp { color: #af0a0f; }
-
 /* ---------- Movimiento reducido: sin pétalos ni parpadeo ---------- */
 @media (prefers-reduced-motion: reduce) {
   .scene-petals { display: none; }
