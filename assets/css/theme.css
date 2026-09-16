@@ -34,11 +34,8 @@ html {
 
   --fs: 13.3px;
   --ls: 0;
-  --ls-display: 0;
   --ls-h2: 0;
-  --ls-brand: 0;
   --fw-display: 700;
-  --fw-brand: 700;
 
   --radius: 0px;
   --radius-sm: 0px;
@@ -82,14 +79,6 @@ html a:hover { text-decoration: underline; }
 html .topbar { border-bottom: 1px solid #d6d1b8; }
 html .topbar-inner { min-height: var(--topbar-h); }
 
-html .brand {
-  color: #af0a0f;
-  font-size: 15px;
-  text-shadow: none;
-}
-html .brand::before { content: "["; color: #af0a0f; }
-html .brand::after { content: "]"; color: #af0a0f; }
-
 html .nav { gap: 2px; }
 html .nav a {
   padding: 2px 4px;
@@ -118,12 +107,6 @@ html .kicker {
   letter-spacing: .06em;
   color: #fffff5;
   background: #af0a0f;
-}
-
-html .hero-title {
-  font-size: clamp(1.9rem, 7vw, 2.9rem);
-  line-height: 1.1;
-  color: #af0a0f;
 }
 
 html .hero-tagline {

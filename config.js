@@ -9,7 +9,6 @@
 window.LITTTIN_CONFIG = {
 
   /* ---------- Identidad ---------- */
-  brand: "litttin",
   kicker: "Seguidor del Culto Del Toby",
   tagline: "Minecraft, YouTube y música. Todo en un solo sitio.",
   intro: "La IP del servidor, mis redes y los enlaces de siempre. Sin registros, sin ruido, sin vueltas.",

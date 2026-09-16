@@ -71,14 +71,6 @@ code { font-family: var(--font-mono); }
   min-height: var(--topbar-h);
 }
 
-.brand {
-  font-family: var(--font-display);
-  font-weight: var(--fw-brand);
-  font-size: 1.05rem;
-  letter-spacing: var(--ls-brand);
-  color: var(--text);
-}
-
 .nav {
   display: flex;
   gap: 4px;
@@ -112,15 +104,6 @@ code { font-family: var(--font-mono); }
   text-transform: uppercase;
   letter-spacing: .14em;
   color: var(--accent);
-}
-
-.hero-title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: var(--fw-display);
-  font-size: clamp(3.1rem, 12vw, 7.5rem);
-  line-height: .92;
-  letter-spacing: var(--ls-display);
 }
 
 .hero-tagline {

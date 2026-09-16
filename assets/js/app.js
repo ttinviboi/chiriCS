@@ -77,7 +77,6 @@
       var value = get(CFG, el.getAttribute("data-cfg"));
       if (value !== undefined && value !== null) el.textContent = value;
     });
-    document.title = (CFG.brand || "litttin") + " — servidor de Minecraft, YouTube y Spotify";
   }
 
   /* ---------------- Charla del Counter-Strike ---------------- */
