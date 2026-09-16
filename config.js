@@ -14,6 +14,10 @@ window.LITTTIN_CONFIG = {
   tagline: "Minecraft, YouTube y música. Todo en un solo sitio.",
   intro: "La IP del servidor, mis redes y los enlaces de siempre. Sin registros, sin ruido, sin vueltas.",
 
+  /* Frase con sello propio: sale como pegatina en el hero y en la cinta de abajo.
+     Si la dejas vacía ("") desaparecen las dos. */
+  motto: "cocino la chiri",
+
   /* ---------- Servidor de Minecraft ---------- */
   server: {
     name: "Servidor de litttin",
@@ -65,6 +69,6 @@ window.LITTTIN_CONFIG = {
   /* ---------- Pie de página ---------- */
   footer: {
     text: "Hecho a mano. Sin cookies, sin rastreadores, sin base de datos.",
-    repo: ""   // Opcional: "https://github.com/tu-usuario/tu-repo" para mostrar el enlace al código
+    repo: "https://github.com/ttinviboi/chiriCS"   // Si lo dejas vacío, no se muestra el enlace al código.
   }
 };

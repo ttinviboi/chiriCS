@@ -354,6 +354,26 @@
     host.innerHTML = html;
   }
 
+  /* ---------------- Frase con sello propio ---------------- */
+  function setupMotto() {
+    var motto = String(CFG.motto || "").trim();
+    var sticker = $(".motto");
+    var strip = $("#mottoStrip");
+    var track = $("#mottoTrack");
+
+    if (!motto) return;
+
+    if (sticker) sticker.hidden = false;
+
+    if (strip && track) {
+      var block = "";
+      for (var i = 0; i < 12; i++) block += "<span>" + esc(motto) + "</span>";
+      /* El contenido va duplicado: la animación mueve el track al 50% y el bucle no corta. */
+      track.innerHTML = block + block;
+      strip.hidden = false;
+    }
+  }
+
   /* ---------------- Pie ---------------- */
   function setupFooter() {
     var repo = CFG.footer && CFG.footer.repo;
@@ -386,6 +406,7 @@
     setupTopbar();
     setupTheme();
     setupPetals();
+    setupMotto();
 
     var refresh = $("#refreshStatus");
     if (refresh) refresh.addEventListener("click", function () { checkStatus(); });

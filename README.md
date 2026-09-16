@@ -1,5 +1,8 @@
 # litttin — página de soporte
 
+**Web en vivo:** https://ttinviboi.github.io/chiriCS/
+**Repositorio:** https://github.com/ttinviboi/chiriCS
+
 Página estática (solo front-end) con la IP del servidor de Minecraft, el canal de YouTube,
 Spotify y el resto de redes. Tres temas intercambiables, uno de ellos con estética anime,
 y fondo temático que cambia con cada tema.
@@ -43,6 +46,10 @@ server: {
 Para añadir una red, copia una línea del array `networks` y quita las `//`. Los iconos
 disponibles son `youtube`, `spotify`, `discord`, `twitch`, `tiktok`, `x`, `instagram` y
 `github`; si pones otro, se usa un globo por defecto.
+
+También hay un `motto`, una frase con sello propio que aparece como pegatina junto a
+"SOPORTE OFICIAL" y en la cinta animada antes del pie. Si la dejas vacía (`motto: ""`),
+desaparecen las dos.
 
 ### Estado online/offline
 
