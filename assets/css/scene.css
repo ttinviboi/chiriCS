@@ -1,0 +1,201 @@
+/* ==========================================================================
+   litttin · scene.css — fondo temático anime
+   Escena dibujada solo con CSS y SVG (cielo, luna/sol, montañas, torii,
+   pétalos de sakura y screentone). Cada tema define su paleta con variables,
+   así el fondo siempre es coherente con el resto de la página.
+   ========================================================================== */
+
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--scene-sky);
+  transition: background .6s ease;
+}
+
+/* ---------- Cielo estrellado ---------- */
+.scene-stars {
+  position: absolute;
+  inset: 0;
+  opacity: var(--scene-stars-op, 0);
+  transition: opacity .6s ease;
+  /* Patrón en mosaico: densidades distintas para que no se note la repetición. */
+  background-image:
+    radial-gradient(1.6px 1.6px at 22px 34px, #fff 40%, transparent 44%),
+    radial-gradient(1.3px 1.3px at 88px 12px, #fff 40%, transparent 44%),
+    radial-gradient(1.8px 1.8px at 140px 96px, #fff 40%, transparent 44%),
+    radial-gradient(1.2px 1.2px at 52px 150px, #fff 40%, transparent 44%),
+    radial-gradient(1.5px 1.5px at 196px 62px, #fff 40%, transparent 44%),
+    radial-gradient(1.2px 1.2px at 232px 168px, #fff 40%, transparent 44%),
+    radial-gradient(2.2px 2.2px at 318px 118px, #fff 40%, transparent 44%),
+    radial-gradient(1.4px 1.4px at 268px 236px, #fff 40%, transparent 44%),
+    radial-gradient(1.1px 1.1px at 34px 258px, #fff 40%, transparent 44%),
+    radial-gradient(1.6px 1.6px at 348px 276px, #fff 40%, transparent 44%);
+  background-size: 360px 300px;
+  animation: twinkle 7s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: calc(var(--scene-stars-op, 0) * .55); }
+  to { opacity: var(--scene-stars-op, 0); }
+}
+
+/* ---------- Luna / sol ---------- */
+.scene-orb {
+  position: absolute;
+  top: 12vh;
+  right: 11vw;
+  width: clamp(74px, 10vw, 132px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--scene-orb);
+  box-shadow: 0 0 70px 26px var(--scene-orb-glow), 0 0 160px 70px var(--scene-orb-glow);
+  opacity: var(--scene-orb-op, 1);
+  transition: background .6s ease, box-shadow .6s ease, opacity .6s ease;
+}
+
+/* ---------- Nubes ---------- */
+.scene-clouds {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 26vh;
+  height: 34vh;
+  opacity: var(--scene-clouds-op, .5);
+  transition: opacity .6s ease;
+}
+.scene-clouds::before,
+.scene-clouds::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background:
+    radial-gradient(38% 42% at 18% 38%, var(--scene-cloud) 0%, transparent 70%),
+    radial-gradient(30% 34% at 44% 62%, var(--scene-cloud) 0%, transparent 72%),
+    radial-gradient(34% 30% at 72% 34%, var(--scene-cloud) 0%, transparent 70%),
+    radial-gradient(26% 26% at 90% 58%, var(--scene-cloud) 0%, transparent 72%);
+}
+.scene-clouds::after {
+  transform: translateX(38%) scale(1.1);
+  opacity: .6;
+  animation: drift 90s linear infinite;
+}
+.scene-clouds::before { animation: drift 130s linear infinite; }
+
+@keyframes drift {
+  from { transform: translateX(6%) scale(1); }
+  to { transform: translateX(-16%) scale(1.06); }
+}
+
+/* ---------- Montañas / silueta de horizonte ---------- */
+.scene-land {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--scene-land-h, 34vh);
+  transition: fill .6s ease;
+}
+.scene-land .l-far { fill: var(--scene-far); opacity: .85; }
+.scene-land .l-near { fill: var(--scene-near); }
+
+/* ---------- Torii ---------- */
+.scene-torii {
+  position: absolute;
+  right: 8vw;
+  bottom: calc(var(--scene-land-h, 34vh) - 6vh);
+  width: clamp(78px, 9vw, 128px);
+  height: auto;
+  opacity: var(--scene-torii-op, .7);
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, .25));
+  transition: opacity .6s ease;
+}
+.scene-torii rect { fill: var(--scene-torii); transition: fill .6s ease; }
+.scene-torii .t-pillar { fill: var(--scene-torii-dark, var(--scene-torii)); }
+
+/* ---------- Screentone (manga) ---------- */
+.scene-halftone {
+  position: absolute;
+  inset: 0;
+  opacity: var(--scene-halftone-op, 0);
+  transition: opacity .6s ease;
+  background-image: radial-gradient(var(--scene-halftone-dot) 1px, transparent 1.2px);
+  background-size: 5px 5px;
+}
+
+/* ---------- Pétalos de sakura ---------- */
+.scene-petals {
+  position: absolute;
+  inset: 0;
+  opacity: var(--petals-op, 1);
+  transition: opacity .6s ease;
+}
+
+.petal {
+  position: absolute;
+  top: -8vh;
+  display: block;
+  animation-name: petal-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.petal i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 100% 0 100% 0;
+  background: linear-gradient(140deg, var(--petal-a), var(--petal-b));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+  animation: petal-sway var(--sway-dur, 3.6s) ease-in-out infinite alternate;
+}
+
+@keyframes petal-fall {
+  from { transform: translate3d(0, 0, 0) rotate(0deg); }
+  to { transform: translate3d(var(--drift, 40px), 122vh, 0) rotate(var(--spin, 420deg)); }
+}
+
+@keyframes petal-sway {
+  from { transform: translateX(calc(var(--sway, 26px) * -.5)) rotate(-18deg); }
+  to { transform: translateX(calc(var(--sway, 26px) * .5)) rotate(18deg); }
+}
+
+/* ---------- Acentos en japonés ---------- */
+.jp {
+  display: block;
+  margin-top: 4px;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", sans-serif;
+  font-size: .72em;
+  font-weight: 500;
+  letter-spacing: .22em;
+  color: var(--jp-color, var(--text-faint));
+  transition: color .45s ease;
+}
+
+.hero-title + .jp {
+  margin-top: 14px;
+  font-size: .82rem;
+  letter-spacing: .4em;
+}
+
+.section-head h2 .jp {
+  margin-top: 3px;
+  font-size: .46em;
+  letter-spacing: .26em;
+}
+
+/* En tema yotsuba los acentos van en rojo de cabecera */
+html[data-theme="chan"] .jp { color: #af0a0f; }
+html[data-theme="chan"] .hero-title + .jp { color: #af0a0f; }
+
+/* ---------- Movimiento reducido: sin pétalos ni parpadeo ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .scene-petals { display: none; }
+  .scene-stars { animation: none; }
+  .scene-clouds::before, .scene-clouds::after { animation: none; }
+}

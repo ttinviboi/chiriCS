@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es" data-theme="apple">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>litttin — servidor de Minecraft, YouTube y Spotify</title>
+<meta name="description" content="Página de soporte de litttin: IP del servidor de Minecraft, canal de YouTube, Spotify y todas mis redes en un solo sitio.">
+<meta name="theme-color" content="#000000">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="litttin — Minecraft, YouTube y música">
+<meta property="og:description" content="IP del servidor de Minecraft, canal de YouTube y Spotify en un solo sitio.">
+<meta property="og:image" content="assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="assets/img/og.png">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/scene.css">
+<link rel="stylesheet" href="assets/css/theme-apple.css">
+<link rel="stylesheet" href="assets/css/theme-chan.css">
+<link rel="stylesheet" href="assets/css/theme-sakura.css">
+
+<script>
+  /* Tema antes del primer pintado: sin parpadeo al recargar o al compartir un enlace. */
+  (function () {
+    var t = null;
+    try {
+      var m = /[?&]theme=(apple|chan|sakura)\b/.exec(location.search);
+      if (m) t = m[1];
+      if (!t) t = localStorage.getItem("litttin-theme");
+    } catch (e) {}
+    if (t !== "apple" && t !== "chan" && t !== "sakura") t = "apple";
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+</head>
+<body id="top">
+
+<div class="scene" aria-hidden="true">
+  <div class="scene-stars"></div>
+  <div class="scene-orb"></div>
+  <div class="scene-clouds"></div>
+  <svg class="scene-land" viewBox="0 0 1440 340" preserveAspectRatio="none" aria-hidden="true">
+    <path class="l-far" d="M0 236 L150 148 L268 214 L400 126 L520 216 L660 148 L800 226 L950 160 L1090 236 L1230 172 L1340 232 L1440 196 L1440 340 L0 340 Z"/>
+    <path class="l-near" d="M0 282 L120 232 L250 292 L400 240 L540 296 L700 244 L850 300 L1000 250 L1150 300 L1300 256 L1440 292 L1440 340 L0 340 Z"/>
+  </svg>
+  <svg class="scene-torii" viewBox="0 0 120 104" aria-hidden="true">
+    <rect class="t-pillar" x="26" y="20" width="10" height="82"/>
+    <rect class="t-pillar" x="84" y="20" width="10" height="82"/>
+    <rect x="2" y="12" width="116" height="10" rx="3"/>
+    <rect x="16" y="32" width="88" height="8"/>
+    <rect x="57" y="40" width="6" height="28"/>
+    <rect class="t-pillar" x="18" y="94" width="26" height="6"/>
+    <rect class="t-pillar" x="76" y="94" width="26" height="6"/>
+  </svg>
+  <div class="scene-halftone"></div>
+  <div class="scene-petals" id="petals"></div>
+</div>
+
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<header class="topbar" id="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top" data-cfg="brand">litttin</a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="#servidor">Servidor</a>
+      <a href="#redes">Redes</a>
+      <a href="#youtube" data-nav-net="youtube">YouTube</a>
+      <a href="#spotify" data-nav-net="spotify">Spotify</a>
+    </nav>
+
+    <button id="themeToggle" class="theme-toggle" type="button" title="Cambiar tema (tecla T)">
+      <span class="tt-icon" aria-hidden="true"></span>
+      <span class="tt-label" id="themeLabel">Apple</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero wrap">
+    <p class="post-header post-header--hero" aria-hidden="true">
+      <span class="ph-name">Anonymous</span>
+      <span class="ph-date" data-post-date>--/--/--</span>
+      <span class="ph-no">No.<span data-post-no>1000001</span></span>
+    </p>
+
+    <p class="kicker" data-cfg="kicker">Soporte oficial</p>
+    <h1 class="hero-title" data-cfg="brand">litttin</h1>
+    <span class="jp" aria-hidden="true">ようこそ</span>
+    <p class="hero-tagline" data-cfg="tagline"></p>
+    <p class="hero-intro" data-cfg="intro"></p>
+
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="#servidor">Entrar al servidor</a>
+      <a class="btn btn--ghost" href="#redes">Ver mis redes</a>
+    </div>
+
+    <ul class="chips" id="heroChips">
+      <li class="chip chip--ip"><span class="chip-k">IP</span><code data-cfg="server.ip"></code></li>
+      <li class="chip"><span class="chip-k">Versión</span><span data-cfg="server.version"></span></li>
+      <li class="chip chip--status"><span class="dot" id="heroDot" aria-hidden="true"></span><span id="heroStatus">Consultando…</span></li>
+    </ul>
+  </section>
+
+  <section id="servidor" class="section wrap">
+    <div class="section-head">
+      <span class="section-icon section-icon--creeper" aria-hidden="true">
+        <svg viewBox="0 0 8 8" shape-rendering="crispEdges" role="img" aria-label="Minecraft">
+          <rect width="8" height="8" fill="#5a9e3d"/>
+          <rect x="1" y="2" width="2" height="2" fill="#101c0c"/>
+          <rect x="5" y="2" width="2" height="2" fill="#101c0c"/>
+          <rect x="3" y="4" width="2" height="2" fill="#101c0c"/>
+          <rect x="2" y="5" width="4" height="1" fill="#101c0c"/>
+          <rect x="2" y="6" width="1" height="1" fill="#101c0c"/>
+          <rect x="5" y="6" width="1" height="1" fill="#101c0c"/>
+        </svg>
+      </span>
+      <div>
+        <h2>Servidor de Minecraft<span class="jp" aria-hidden="true">サーバー</span></h2>
+        <p class="section-sub">Zona aparte, solo para conectar. Copia la IP y a jugar.</p>
+      </div>
+    </div>
+
+    <article class="card server-card">
+      <p class="post-header" aria-hidden="true">
+        <span class="ph-name">Anonymous</span>
+        <span class="ph-date" data-post-date>--/--/--</span>
+        <span class="ph-no">No.<span data-post-no>1000002</span></span>
+      </p>
+
+      <div class="server-body">
+        <div class="server-visual" aria-hidden="true">
+          <svg viewBox="0 0 8 8" shape-rendering="crispEdges">
+            <rect width="8" height="8" fill="#5a9e3d"/>
+            <rect x="1" y="2" width="2" height="2" fill="#101c0c"/>
+            <rect x="5" y="2" width="2" height="2" fill="#101c0c"/>
+            <rect x="3" y="4" width="2" height="2" fill="#101c0c"/>
+            <rect x="2" y="5" width="4" height="1" fill="#101c0c"/>
+            <rect x="2" y="6" width="1" height="1" fill="#101c0c"/>
+            <rect x="5" y="6" width="1" height="1" fill="#101c0c"/>
+          </svg>
+        </div>
+
+        <div class="server-info">
+          <h3 data-cfg="server.name">Servidor</h3>
+          <p class="server-sub">
+            <span data-cfg="server.version"></span>
+            <span id="serverMotd"></span>
+          </p>
+
+          <div class="ip-row">
+            <span class="ip-label">IP</span>
+            <code class="ip" id="serverIp" data-cfg="server.ip" tabindex="0" title="Clic para copiar"></code>
+            <button class="btn btn--primary btn--copy" id="copyIp" type="button">Copiar IP</button>
+            <button class="btn btn--icon" id="refreshStatus" type="button" title="Volver a comprobar el estado" aria-label="Volver a comprobar el estado">↻</button>
+          </div>
+
+          <p class="server-status" id="serverStatus" aria-live="polite">
+            <span class="dot" aria-hidden="true"></span>
+            <span data-status-text>Consultando estado…</span>
+            <span class="server-players" data-players hidden></span>
+          </p>
+
+          <p class="server-bedrock" data-bedrock hidden>
+            Bedrock: <code data-bedrock-ip></code>
+          </p>
+        </div>
+      </div>
+
+      <ol class="steps" id="steps"></ol>
+    </article>
+  </section>
+
+  <section id="redes" class="section wrap">
+    <div class="section-head">
+      <span class="section-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+          <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+          <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+          <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+        </svg>
+      </span>
+      <div>
+        <h2>Dashboard de redes<span class="jp" aria-hidden="true">リンク集</span></h2>
+        <p class="section-sub">Todo lo mío, a un clic.</p>
+      </div>
+    </div>
+
+    <div class="grid" id="networkGrid"></div>
+
+    <noscript>
+      <p class="empty">Activa JavaScript para ver el dashboard, o entra directo:
+        <a href="https://www.youtube.com/@litttin">YouTube</a> ·
+        <a href="https://open.spotify.com/user/21qtzdifs5uvqoiujqji4246q">Spotify</a>
+      </p>
+    </noscript>
+  </section>
+
+</main>
+
+<footer class="footer wrap">
+  <div class="footer-inner">
+    <p class="footer-brand" data-cfg="brand">litttin</p>
+    <p class="footer-text" data-cfg="footer.text"></p>
+    <p class="footer-repo" id="footerRepo" hidden><a data-repo-link href="#" rel="noopener noreferrer" target="_blank">Ver el código en GitHub</a></p>
+    <p class="footer-copy">© <span id="year">2026</span> litttin · <span aria-hidden="true">またね</span></p>
+  </div>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="config.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
