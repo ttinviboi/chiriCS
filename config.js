@@ -34,17 +34,14 @@ window.LITTTIN_CONFIG = {
      en la cabecera del archivo y "imgAlt" con el texto alternativo.
      Ejemplo: { user: "anonymous", img: "assets/img/mi-foto.jpg", text: "..." } */
   posts: [
-    { user: "matu", text: "banco el server, banco el de_mirage, banco el mate a la mañana" },
-    { user: "pedrao", text: ">entrar al server\n>ping 200 a Miami\n>tirar una molotov al spawn\n>prender fuego todo el mapa\n>gg" },
+    { user: "lacto", text: "banco el server, banco el de_mirage y banco el completo italiano al paso" },
+    { user: "cr0hno", text: ">entrar al server\n>ping 200\n>no dar un tiro\n>culpar al ping\n>gg, ya fue po" },
     { user: "Anonymous", img: "assets/img/gato-1.jpg", imgMeta: "(86 KB, 608x1080)", imgAlt: "Gato mirando fijo a la cámara", text: ">entrar al server del chiri\n>el gato me mira fijo\n>no me atrevo a hacer rush B\n>subida random, no pregunten" },
-    { user: "gonza", text: "el que dice rush B y se queda en el spawn campeando con AWP no cuenta, y menos si después culpa al ping" },
+    { user: "Dem", text: "el que dice rush B y se queda en el spawn campeando con AWP es un fome, wn" },
     { user: "Anonymous", img: "assets/img/gato-2.jpg", imgMeta: "(74 KB, 608x1080)", imgAlt: "Gato sorprendido con los ojos muy abiertos", text: ">cuando el gato ve que ganamos el eco round\n>cara de bananirou casteando el server" },
-    { user: "joao", text: ">campear con AWP\n>no dar un tiro\n>culpar al ping del server de Brasil\n>gg" },
-    { user: "fede", text: ">mirar un clip de coldzera en Mirage\n>intentar el jumping AWP\n>caer al vacío\n>morir con cuchillo" },
-    { user: "brunao", text: ">ver la demo de FalleN\n>creerme FalleN\n>errar los 3 awps\n>entrar a la B con pistola\n>gg" },
-    { user: "vapo", text: "VAMO FURIA, que el arT ya gritó el rush antes de comprar" },
-    { user: "tomi", text: "9z te está buscando para el squad, cerrá el server" },
-    { user: "lucho", text: "ARG vs BR en el chat es el verdadero Major" }
+    { user: "KaspitalSin", text: ">mirar un clip de coldzera en Mirage\n>intentar el jumping AWP\n>caer al vacío\n>morir con cuchillo\n>igual la raja el intento" },
+    { user: "remiinis", text: ">ver la demo de FalleN\n>creerme FalleN\n>errar los 3 awps\n>entrar a la B con pistola\n>gg po" },
+    { user: "KaspitalSin", text: "más chileno que el terremoto: comprar AWP en de_mirage y no dar ni un tiro" }
   ],
 
   /* ---------- Referencias del Counter-Strike ----------
