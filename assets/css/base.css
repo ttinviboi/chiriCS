@@ -482,6 +482,31 @@ code { font-family: var(--font-mono); }
 
 .greentext { color: var(--greentext, #789922); }
 
+/* ---------- Posts con imagen ---------- */
+.post-file {
+  margin: 0 0 8px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+.post-file-name { color: var(--accent); }
+.post-file-meta { color: var(--text-faint); }
+
+.post-img {
+  display: block;
+  margin: 0 0 10px;
+  border: 1px solid var(--line-strong);
+  background: var(--code-bg);
+}
+.post-img img {
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
+  transition: opacity .25s ease;
+}
+.post-img:hover img { opacity: .9; }
+
 /* ---------- Toast ---------- */
 .toast {
   position: fixed;

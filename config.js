@@ -9,7 +9,7 @@
 window.LITTTIN_CONFIG = {
 
   /* ---------- Identidad ---------- */
-  kicker: "Seguidor del Culto Del Toby",
+  kicker: "Seguidor de El Culto De Chiri",
   intro: "La IP del servidor, mis redes y los enlaces de siempre. Sin registros, sin ruido, sin vueltas.",
 
   /* Frase con sello propio: sale como pegatina en el hero y en la cinta de abajo.
@@ -27,13 +27,21 @@ window.LITTTIN_CONFIG = {
 
   /* ---------- El hilo: posts de los del culto ----------
      Cada post es { user, text }. Si una línea del texto empieza con ">"
-     se pinta en verde, como en los imageboards. */
+     se pinta en verde, como en los imageboards.
+
+     Para publicar una imagen (estilo 4chan) añade la clave "img" con la ruta
+     del archivo dentro de la web. Opcional: "imgMeta" con el tamaño que sale
+     en la cabecera del archivo y "imgAlt" con el texto alternativo.
+     Ejemplo: { user: "anonymous", img: "assets/img/mi-foto.jpg", text: "..." } */
   posts: [
     { user: "lacto", text: "banco el server, banco el dust2, banco todo" },
     { user: "cr0hno", text: ">cambiar el nick a cr0hno\n>entrar a dust2\n>morir en 4 segundos\n>gg" },
+    { user: "anonymous", img: "assets/img/gato-1.jpg", imgMeta: "(86 KB, 608x1080)", imgAlt: "Gato mirando fijo a la cámara", text: ">entrar al server del chiri\n>el gato me mira fijo\n>no me atrevo a hacer rush B" },
     { user: "remiinis", text: "el que dice rush B y se queda en el spawn no cuenta" },
+    { user: "lacto", img: "assets/img/gato-2.jpg", imgMeta: "(74 KB, 608x1080)", imgAlt: "Gato sorprendido con los ojos muy abiertos", text: ">cuando el gato ve que ganamos el eco round\n>cara de bananirou casteando el server" },
     { user: "lacto", text: "el awp del que campea no se toca, banco" },
-    { user: "remiinis", text: ">comprar awp\n>fallar los 3 tiros\n>morir con cuchillo" }
+    { user: "remiinis", text: ">ver un clip de s1mple\n>intentar el mismo flick\n>fallar los 3 tiros\n>morir con cuchillo" },
+    { user: "cr0hno", text: ">mirar la demo de s1mple\n>creerme s1mple\n>quedarme en el spawn\n>gg" }
   ],
 
   /* ---------- Referencias del Counter-Strike ----------
@@ -50,7 +58,7 @@ window.LITTTIN_CONFIG = {
     { tag: "SERVER", text: "Bomb has been planted" }
   ],
 
-  /* ---------- El Culto Del Toby (dashboard de redes) ----------
+  /* ---------- El Culto De Chiri (dashboard de redes) ----------
      Para añadir una red: copia una línea de abajo, cambia los datos y quita las //.
      Iconos disponibles: youtube, spotify, discord, tiktok, twitch, x, instagram, github.
      Si pones uno que no existe, se usa un globo por defecto. */

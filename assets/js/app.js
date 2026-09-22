@@ -113,7 +113,19 @@
         return "<p" + (green ? ' class="greentext"' : "") + ">" + esc(line) + "</p>";
       }).join("");
 
-      return '<article class="post">' +
+      var file = "";
+      if (post.img) {
+        var name = String(post.img).split("/").pop();
+        file = '<p class="post-file">File: <span class="post-file-name">' + esc(name) + '</span>' +
+          (post.imgMeta ? ' <span class="post-file-meta">' + esc(post.imgMeta) + '</span>' : '') +
+          '</p>' +
+          '<a class="post-img" href="' + esc(post.img) + '" target="_blank" rel="noopener noreferrer">' +
+          '<img src="' + esc(post.img) + '" alt="' + esc(post.imgAlt || name) + '" loading="lazy" decoding="async">' +
+          '</a>';
+      }
+
+      return '<article class="post' + (post.img ? ' post--with-file' : '') + '">' +
+        file +
         '<p class="post-header">' +
         '<span class="ph-name">' + esc(post.user) + '</span>' +
         '<span class="ph-date">' + chanStamp() + '</span>' +
@@ -126,7 +138,7 @@
     host.hidden = posts.length === 0;
   }
 
-  /* ---------------- El Culto Del Toby (redes) ---------------- */
+  /* ---------------- El Culto De Chiri (redes) ---------------- */
   function renderNetworks() {
     var grid = $("#networkGrid");
     if (!grid) return;
