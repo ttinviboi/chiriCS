@@ -188,7 +188,7 @@ window.LITTTIN_CONFIG = {
      chibiProfile-> muñeco de la ventana PROFILE.
      Si un archivo no existe, se oculta y no rompe nada. */
   deco: {
-    gifs: ["assets/img/mayuri.gif", "assets/img/anime-girl.gif"],
+    gifs: ["assets/img/mayuri-banner.jpg", "assets/img/anime-girl.gif"],
     rotateSeconds: 7,
     chibi: "assets/img/mayuri-chibi.webp",
     chibiProfile: "assets/img/mayuri-profile.png"
