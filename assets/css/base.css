@@ -73,19 +73,17 @@ code { font-family: var(--font-mono); }
 
 .nav {
   display: flex;
-  gap: 4px;
-  margin-left: auto;
-  overflow-x: auto;
-  scrollbar-width: none;
+  flex-direction: column;
+  gap: 2px;
 }
-.nav::-webkit-scrollbar { display: none; }
 
 .nav a {
-  padding: 7px 11px;
+  display: block;
+  padding: 7px 10px;
   font-size: .84rem;
   font-weight: 500;
   color: var(--text-dim);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   white-space: nowrap;
   transition: color .2s ease, background-color .2s ease;
 }
@@ -682,8 +680,7 @@ code { font-family: var(--font-mono); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 760px) {
-  .nav { order: 3; margin-left: 0; width: 100%; padding-bottom: 8px; }
-  .topbar-inner { flex-wrap: wrap; gap: 10px; padding-top: 10px; }
+  .topbar-inner { flex-wrap: wrap; gap: 10px; padding: 8px 0; }
   .server-body { flex-direction: column; gap: 16px; }
   .server-visual { width: 64px; height: 64px; }
   .server-visual svg { width: 42px; height: 42px; }
@@ -698,4 +695,226 @@ code { font-family: var(--font-mono); }
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
+}
+
+/* ==========================================================================
+   Ventanas retro (layout tipo escritorio)
+   ========================================================================== */
+
+.deco-gif {
+  display: flex;
+  justify-content: center;
+  padding: 10px var(--pad) 0;
+  cursor: pointer;
+}
+.deco-gif[hidden] { display: none; }
+.deco-gif img { width: min(440px, 78vw); height: auto; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: var(--gap);
+  align-items: start;
+  padding-top: 20px;
+}
+
+.col-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  position: sticky;
+  top: 12px;
+}
+.col-main { min-width: 0; }
+
+.win {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  box-shadow: 3px 3px 0 var(--win-shadow, rgba(0, 0, 0, .2));
+  overflow: hidden;
+}
+.win + .win { margin-top: var(--gap); }
+.col-side .win + .win { margin-top: 0; }
+
+.win-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  background: var(--win-bar, #444);
+  color: var(--win-bar-fg, #fff);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: lowercase;
+}
+.win-title { font-weight: 700; }
+.win-title i { margin-left: 2px; font-style: normal; opacity: .55; }
+
+.win-x {
+  flex: none;
+  margin-left: auto;
+  width: 17px;
+  height: 17px;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  line-height: 1;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+}
+.win-x:hover { background: color-mix(in srgb, currentColor 28%, transparent); }
+
+.win.is-collapsed .win-body { display: none; }
+.win-body { padding: var(--card-pad); }
+
+/* El hero y las secciones ya viven dentro de una ventana */
+.win-body .hero { padding: 0; }
+.win-body .section { padding: 0; }
+
+/* ---------- Barra superior ---------- */
+.brand {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+/* ---------- Ecualizador / analizador ---------- */
+.eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 60px;
+  padding: 6px 8px;
+  background: var(--code-bg);
+  border: 1px solid var(--line);
+  opacity: .3;
+  transition: opacity .4s ease;
+}
+.eq--mini { height: 18px; gap: 1px; margin-left: auto; padding: 2px 4px; }
+.eq--music { margin-bottom: var(--gap); }
+.eq[hidden] { display: none; }
+
+.eq span {
+  flex: 1 1 0;
+  min-width: 2px;
+  height: 100%;
+  background: var(--eq-bar, #8fd6ff);
+  transform: scaleY(.1);
+  transform-origin: bottom;
+}
+.eq span:nth-child(3n + 2) { background: var(--eq-bar-2, #4f9fd6); }
+
+@keyframes eq-bounce {
+  0%, 100% { transform: scaleY(.1); }
+  50% { transform: scaleY(1); }
+}
+
+/* El ecualizador solo se mueve con la música: se activa al sonar y se
+   queda quieto cuando la reproducción para. */
+.is-playing .eq { opacity: 1; }
+.is-playing .eq span { animation: eq-bounce 1s ease-in-out infinite; }
+
+/* ---------- Chibi ---------- */
+.hero { position: relative; }
+.chibi {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 2;
+  width: clamp(84px, 13vw, 132px);
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .25));
+}
+.chibi[hidden] { display: none; }
+@media (min-width: 720px) {
+  .win--welcome .hero { padding-right: 140px; }
+}
+
+/* ---------- Profile ---------- */
+.win--profile { margin-top: var(--gap); }
+.profile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+.profile-info { flex: 1 1 auto; min-width: 0; }
+.profile-chibi {
+  flex: none;
+  width: clamp(72px, 12vw, 120px);
+  height: auto;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, .5));
+}
+.profile-chibi[hidden] { display: none; }
+.profile-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: var(--fw-display);
+}
+.profile-tag {
+  margin: 3px 0 0;
+  font-size: .74rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.profile-bio {
+  margin: 8px 0 0;
+  max-width: 56ch;
+  font-size: .9rem;
+  color: var(--text-dim);
+}
+.profile-links { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.profile-ig {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  font-weight: 600;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  transition: border-color .2s ease, color .2s ease;
+}
+.profile-ig:hover { border-color: var(--accent); color: var(--accent); }
+.profile-ig svg { width: 18px; height: 18px; }
+
+/* ---------- Frase (quote) ---------- */
+.quote {
+  max-width: 52ch;
+  margin: 18px 0 0;
+  padding: 2px 0 2px 14px;
+  border-left: 3px solid var(--accent);
+}
+.quote-text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+.quote-src {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-ui);
+  font-size: .74rem;
+  font-style: normal;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---------- Responsive del layout ---------- */
+@media (max-width: 880px) {
+  .layout { grid-template-columns: 1fr; }
+  .col-side { position: static; }
+  .nav { flex-direction: row; flex-wrap: wrap; }
+  .nav a { padding: 6px 9px; }
+  .eq--mini { display: none; }
 }

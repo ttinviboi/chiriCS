@@ -44,213 +44,286 @@
 
 <a class="skip" href="#main">Saltar al contenido</a>
 
-<header class="topbar" id="topbar">
-  <div class="wrap topbar-inner">
-    <nav class="nav" role="tablist" aria-label="Secciones">
-      <a class="nav-tab" role="tab" href="#servidor" data-tab="servidor" aria-selected="true">Servidor</a>
-      <a class="nav-tab" role="tab" href="#hilo" data-tab="hilo" aria-selected="false">Hilo</a>
-      <a class="nav-tab" role="tab" href="#redes" data-tab="redes" aria-selected="false">Redes</a>
-      <a class="nav-tab" role="tab" href="#monumentos" data-tab="monumentos" aria-selected="false">Monumentos</a>
-      <a class="nav-tab" role="tab" href="#youtube" data-tab="youtube" aria-selected="false">YouTube</a>
-      <a class="nav-tab" role="tab" href="#spotify" data-tab="spotify" aria-selected="false">Spotify</a>
-    </nav>
-  </div>
-</header>
+<div class="deco-gif" id="gifBanner" hidden>
+  <img class="deco-img" id="gifImg" alt="" decoding="async">
+</div>
 
-<main id="main">
+<div class="layout wrap">
 
-  <section class="hero wrap">
-    <p class="post-header post-header--hero" aria-hidden="true">
-      <span class="ph-name">Anonymous</span>
-      <span class="ph-date" data-post-date>--/--/--</span>
-      <span class="ph-no">No.<span data-post-no>1000001</span></span>
-    </p>
-
-    <div class="hero-top">
-      <p class="kicker" data-cfg="kicker">Seguidor de El Culto De Chiri</p>
-      <p class="motto" data-cfg="motto" hidden></p>
-    </div>
-    <span class="jp jp--hero" aria-hidden="true">ようこそ</span>
-
-    <p class="hero-intro" data-cfg="intro"></p>
-
-    <div class="hero-actions">
-      <a class="btn btn--primary" href="#servidor">Entrar al servidor</a>
-      <a class="btn btn--ghost" href="#redes">Ver mis redes</a>
-    </div>
-
-    <div class="live-bar" id="liveBar" hidden></div>
-
-    <ul class="cs-chat" id="csChat"></ul>
-  </section>
-
-  <section id="servidor" class="section wrap" data-panel="servidor">
-    <div class="section-head">
-      <span class="section-icon section-icon--creeper" aria-hidden="true">
-        <svg viewBox="0 0 8 8" shape-rendering="crispEdges" role="img" aria-label="Minecraft">
-          <rect width="8" height="8" fill="#5a9e3d"/>
-          <rect x="1" y="2" width="2" height="2" fill="#101c0c"/>
-          <rect x="5" y="2" width="2" height="2" fill="#101c0c"/>
-          <rect x="3" y="4" width="2" height="2" fill="#101c0c"/>
-          <rect x="2" y="5" width="4" height="1" fill="#101c0c"/>
-          <rect x="2" y="6" width="1" height="1" fill="#101c0c"/>
-          <rect x="5" y="6" width="1" height="1" fill="#101c0c"/>
-        </svg>
-      </span>
-      <div>
-        <h2>Servidor de Minecraft</h2>
+  <aside class="col-side">
+    <div class="win" id="winNav">
+      <div class="win-bar">
+        <span class="win-title">nAVI<i>cs</i></span>
+        <button class="win-x" type="button" data-collapse aria-label="Minimizar">×</button>
+      </div>
+      <div class="win-body">
+        <nav class="nav" role="tablist" aria-label="Secciones">
+          <a class="nav-tab" role="tab" href="#servidor" data-tab="servidor" aria-selected="true">Servidor</a>
+          <a class="nav-tab" role="tab" href="#hilo" data-tab="hilo" aria-selected="false">Hilo</a>
+          <a class="nav-tab" role="tab" href="#redes" data-tab="redes" aria-selected="false">Redes</a>
+          <a class="nav-tab" role="tab" href="#monumentos" data-tab="monumentos" aria-selected="false">Monumentos</a>
+          <a class="nav-tab" role="tab" href="#youtube" data-tab="youtube" aria-selected="false">YouTube</a>
+          <a class="nav-tab" role="tab" href="#spotify" data-tab="spotify" aria-selected="false">Spotify</a>
+        </nav>
+        <div class="eq eq--mini" id="eqTop" aria-hidden="true"></div>
       </div>
     </div>
 
-    <article class="card server-card">
-      <p class="post-header" aria-hidden="true">
-        <span class="ph-name">Anonymous</span>
-        <span class="ph-date" data-post-date>--/--/--</span>
-        <span class="ph-no">No.<span data-post-no>1000002</span></span>
-      </p>
+    <div class="win" id="winStatus">
+      <div class="win-bar">
+        <span class="win-title">STATUS</span>
+        <button class="win-x" type="button" data-collapse aria-label="Minimizar">×</button>
+      </div>
+      <div class="win-body">
+        <div class="live-bar" id="liveBar" hidden></div>
+      </div>
+    </div>
+  </aside>
 
-      <div class="server-body">
-        <div class="server-visual" aria-hidden="true">
-          <svg viewBox="0 0 8 8" shape-rendering="crispEdges">
-            <rect width="8" height="8" fill="#5a9e3d"/>
-            <rect x="1" y="2" width="2" height="2" fill="#101c0c"/>
-            <rect x="5" y="2" width="2" height="2" fill="#101c0c"/>
-            <rect x="3" y="4" width="2" height="2" fill="#101c0c"/>
-            <rect x="2" y="5" width="4" height="1" fill="#101c0c"/>
-            <rect x="2" y="6" width="1" height="1" fill="#101c0c"/>
-            <rect x="5" y="6" width="1" height="1" fill="#101c0c"/>
-          </svg>
-        </div>
+  <main class="col-main" id="main">
+    <div class="win win--welcome">
+      <div class="win-bar">
+        <span class="win-title">welcome</span>
+        <button class="win-x" type="button" data-collapse aria-label="Minimizar">×</button>
+      </div>
+      <div class="win-body">
+        <div class="hero">
+          <img class="chibi deco-img" id="chibiImg" alt="" decoding="async">
 
-        <div class="server-info">
-          <h3 data-cfg="server.name">El Living de la chiri</h3>
-          <p class="server-sub">
-            <span data-cfg="server.version"></span>
-            <span id="serverMotd"></span>
+          <p class="post-header post-header--hero" aria-hidden="true">
+            <span class="ph-name">Anonymous</span>
+            <span class="ph-date" data-post-date>--/--/--</span>
+            <span class="ph-no">No.<span data-post-no>1000001</span></span>
           </p>
 
-          <div class="ip-row">
-            <span class="ip-label">IP</span>
-            <code class="ip" id="serverIp" data-cfg="server.ip" tabindex="0" title="Clic para copiar"></code>
-            <button class="btn btn--primary btn--copy" id="copyIp" type="button">Copiar IP</button>
-            <button class="btn btn--icon" id="refreshStatus" type="button" title="Volver a comprobar el estado" aria-label="Volver a comprobar el estado">↻</button>
+          <div class="hero-top">
+            <p class="kicker" data-cfg="kicker">Seguidor de El Culto De Chiri</p>
+            <p class="motto" data-cfg="motto" hidden></p>
+          </div>
+          <span class="jp jp--hero" aria-hidden="true">ようこそ</span>
+
+          <p class="hero-intro" data-cfg="intro"></p>
+
+          <div class="hero-actions">
+            <a class="btn btn--primary" href="#servidor">Entrar al servidor</a>
+            <a class="btn btn--ghost" href="#redes">Ver mis redes</a>
           </div>
 
-          <p class="server-status" id="serverStatus" aria-live="polite">
-            <span class="dot" aria-hidden="true"></span>
-            <span data-status-text>Consultando estado…</span>
-            <span class="server-players" data-players hidden></span>
-          </p>
+          <blockquote class="quote">
+            <p class="quote-text" data-cfg="quote.text"></p>
+            <cite class="quote-src" data-cfg="quote.source"></cite>
+          </blockquote>
 
-          <p class="server-bedrock" data-bedrock hidden>
-            Bedrock: <code data-bedrock-ip></code>
-          </p>
+          <ul class="cs-chat" id="csChat"></ul>
         </div>
       </div>
-    </article>
-  </section>
-
-  <section id="hilo" class="section wrap" data-panel="hilo">
-    <div class="section-head">
-      <span class="section-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-6.5A8 8 0 0 1 11 4h2a8 8 0 0 1 8 8Z"/>
-        </svg>
-      </span>
-      <div>
-        <h2>El hilo<span class="jp" aria-hidden="true">スレ</span></h2>
-        <p class="section-sub">Postean los del culto.</p>
-      </div>
     </div>
 
-    <div class="thread" id="postList"></div>
-  </section>
+    <div class="win win--content">
+      <div class="win-bar">
+        <span class="win-title" id="winTitle">Servidor</span>
+        <button class="win-x" type="button" data-collapse aria-label="Minimizar">×</button>
+      </div>
+      <div class="win-body">
 
-  <section id="redes" class="section wrap" data-panel="redes">
-    <div class="section-head">
-      <span class="section-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="7" height="7" rx="1.5"/>
-          <rect x="14" y="3" width="7" height="7" rx="1.5"/>
-          <rect x="3" y="14" width="7" height="7" rx="1.5"/>
-          <rect x="14" y="14" width="7" height="7" rx="1.5"/>
-        </svg>
-      </span>
-      <div>
-        <h2>El Culto De Chiri<span class="jp" aria-hidden="true">リンク集</span></h2>
-        <p class="section-sub">Todo lo mío, a un clic.</p>
+        <section id="servidor" class="section" data-panel="servidor">
+          <div class="section-head">
+            <span class="section-icon section-icon--creeper" aria-hidden="true">
+              <svg viewBox="0 0 8 8" shape-rendering="crispEdges" role="img" aria-label="Minecraft">
+                <rect width="8" height="8" fill="#5a9e3d"/>
+                <rect x="1" y="2" width="2" height="2" fill="#101c0c"/>
+                <rect x="5" y="2" width="2" height="2" fill="#101c0c"/>
+                <rect x="3" y="4" width="2" height="2" fill="#101c0c"/>
+                <rect x="2" y="5" width="4" height="1" fill="#101c0c"/>
+                <rect x="2" y="6" width="1" height="1" fill="#101c0c"/>
+                <rect x="5" y="6" width="1" height="1" fill="#101c0c"/>
+              </svg>
+            </span>
+            <div>
+              <h2>Servidor de Minecraft</h2>
+            </div>
+          </div>
+
+          <article class="card server-card">
+            <p class="post-header" aria-hidden="true">
+              <span class="ph-name">Anonymous</span>
+              <span class="ph-date" data-post-date>--/--/--</span>
+              <span class="ph-no">No.<span data-post-no>1000002</span></span>
+            </p>
+
+            <div class="server-body">
+              <div class="server-visual" aria-hidden="true">
+                <svg viewBox="0 0 8 8" shape-rendering="crispEdges">
+                  <rect width="8" height="8" fill="#5a9e3d"/>
+                  <rect x="1" y="2" width="2" height="2" fill="#101c0c"/>
+                  <rect x="5" y="2" width="2" height="2" fill="#101c0c"/>
+                  <rect x="3" y="4" width="2" height="2" fill="#101c0c"/>
+                  <rect x="2" y="5" width="4" height="1" fill="#101c0c"/>
+                  <rect x="2" y="6" width="1" height="1" fill="#101c0c"/>
+                  <rect x="5" y="6" width="1" height="1" fill="#101c0c"/>
+                </svg>
+              </div>
+
+              <div class="server-info">
+                <h3 data-cfg="server.name">El Living de la chiri</h3>
+                <p class="server-sub">
+                  <span data-cfg="server.version"></span>
+                  <span id="serverMotd"></span>
+                </p>
+
+                <div class="ip-row">
+                  <span class="ip-label">IP</span>
+                  <code class="ip" id="serverIp" data-cfg="server.ip" tabindex="0" title="Clic para copiar"></code>
+                  <button class="btn btn--primary btn--copy" id="copyIp" type="button">Copiar IP</button>
+                  <button class="btn btn--icon" id="refreshStatus" type="button" title="Volver a comprobar el estado" aria-label="Volver a comprobar el estado">↻</button>
+                </div>
+
+                <p class="server-status" id="serverStatus" aria-live="polite">
+                  <span class="dot" aria-hidden="true"></span>
+                  <span data-status-text>Consultando estado…</span>
+                  <span class="server-players" data-players hidden></span>
+                </p>
+
+                <p class="server-bedrock" data-bedrock hidden>
+                  Bedrock: <code data-bedrock-ip></code>
+                </p>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section id="hilo" class="section" data-panel="hilo">
+          <div class="section-head">
+            <span class="section-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-6.5A8 8 0 0 1 11 4h2a8 8 0 0 1 8 8Z"/>
+              </svg>
+            </span>
+            <div>
+              <h2>El hilo<span class="jp" aria-hidden="true">スレ</span></h2>
+              <p class="section-sub">Postean los del culto.</p>
+            </div>
+          </div>
+
+          <div class="thread" id="postList"></div>
+        </section>
+
+        <section id="redes" class="section" data-panel="redes">
+          <div class="section-head">
+            <span class="section-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+                <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+                <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+                <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+              </svg>
+            </span>
+            <div>
+              <h2>El Culto De Chiri<span class="jp" aria-hidden="true">リンク集</span></h2>
+              <p class="section-sub">Todo lo mío, a un clic.</p>
+            </div>
+          </div>
+
+          <div class="grid" id="networkGrid"></div>
+
+          <noscript>
+            <p class="empty">Activa JavaScript para ver el dashboard, o entra directo:
+              <a href="https://www.youtube.com/@litttin">YouTube</a> ·
+              <a href="https://open.spotify.com/user/21qtzdifs5uvqoiujqji4246q">Spotify</a>
+            </p>
+          </noscript>
+        </section>
+
+        <section id="monumentos" class="section" data-panel="monumentos">
+          <div class="section-head">
+            <span class="section-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="5" width="18" height="14" rx="1.5"/>
+                <circle cx="8.5" cy="10" r="1.6"/>
+                <path d="m3 17 5-5 4 4 3-3 6 6"/>
+              </svg>
+            </span>
+            <div>
+              <h2>Monumentos de la chiri<span class="jp" aria-hidden="true">記念碑</span></h2>
+              <p class="section-sub">Las reliquias del culto, todas en un solo lugar.</p>
+            </div>
+          </div>
+
+          <div class="monuments" id="monumentList"></div>
+        </section>
+
+        <section id="youtube" class="section" data-panel="youtube">
+          <div class="section-head">
+            <span class="section-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2.5" y="5" width="19" height="14" rx="3"/>
+                <path d="M10 9.2v5.6l5-2.8z"/>
+              </svg>
+            </span>
+            <div>
+              <h2>YouTube<span class="jp" aria-hidden="true">動画</span></h2>
+              <p class="section-sub">Directos, clips y los vídeos del server.</p>
+            </div>
+          </div>
+
+          <div class="now-playing" id="liveYoutube" hidden></div>
+
+          <div class="feature" data-featured-net="youtube"></div>
+        </section>
+
+        <section id="spotify" class="section" data-panel="spotify">
+          <div class="section-head">
+            <span class="section-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M7 9.5c3-.9 6-.6 8.6 1"/>
+                <path d="M7.6 12.6c2.4-.6 4.9-.3 7 .9"/>
+                <path d="M8.3 15.4c1.7-.4 3.4-.2 4.9.7"/>
+              </svg>
+            </span>
+            <div>
+              <h2>Spotify<span class="jp" aria-hidden="true">音楽</span></h2>
+              <p class="section-sub">Mis playlists y lo que se escucha en directo.</p>
+            </div>
+          </div>
+
+          <div class="eq eq--music" id="eqMusic" aria-hidden="true"></div>
+
+          <div class="now-playing" id="liveMusic" hidden></div>
+
+          <div class="feature" data-featured-net="spotify"></div>
+        </section>
+
       </div>
     </div>
+  </main>
+</div>
 
-    <div class="grid" id="networkGrid"></div>
-
-    <noscript>
-      <p class="empty">Activa JavaScript para ver el dashboard, o entra directo:
-        <a href="https://www.youtube.com/@litttin">YouTube</a> ·
-        <a href="https://open.spotify.com/user/21qtzdifs5uvqoiujqji4246q">Spotify</a>
-      </p>
-    </noscript>
-  </section>
-
-  <section id="monumentos" class="section wrap" data-panel="monumentos">
-    <div class="section-head">
-      <span class="section-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="5" width="18" height="14" rx="1.5"/>
-          <circle cx="8.5" cy="10" r="1.6"/>
-          <path d="m3 17 5-5 4 4 3-3 6 6"/>
-        </svg>
-      </span>
-      <div>
-        <h2>Monumentos de la chiri<span class="jp" aria-hidden="true">記念碑</span></h2>
-        <p class="section-sub">Las reliquias del culto, todas en un solo lugar.</p>
+<div class="wrap">
+  <div class="win win--profile" id="winProfile">
+    <div class="win-bar">
+      <span class="win-title" data-cfg="profile.title">PROFILE</span>
+      <button class="win-x" type="button" data-collapse aria-label="Minimizar">×</button>
+    </div>
+    <div class="win-body">
+      <div class="profile">
+        <img class="profile-chibi deco-img" id="profileChibi" alt="" decoding="async">
+        <div class="profile-info">
+          <p class="profile-name" data-cfg="profile.name">chiri</p>
+          <p class="profile-tag" data-cfg="profile.tagline">El Culto De Chiri</p>
+          <p class="profile-bio" data-cfg="profile.bio"></p>
+        </div>
+        <div class="profile-links">
+          <a class="profile-ig" id="profileIg" href="https://instagram.com/lilttin" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.1" cy="6.9" r="1.1" fill="currentColor" stroke="none"/></svg>
+            <span class="ig-handle">@lilttin</span>
+          </a>
+          <a class="btn btn--ghost" href="#redes">Ver todas mis redes</a>
+        </div>
       </div>
     </div>
-
-    <div class="monuments" id="monumentList"></div>
-  </section>
-
-  <section id="youtube" class="section wrap" data-panel="youtube">
-    <div class="section-head">
-      <span class="section-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2.5" y="5" width="19" height="14" rx="3"/>
-          <path d="M10 9.2v5.6l5-2.8z"/>
-        </svg>
-      </span>
-      <div>
-        <h2>YouTube<span class="jp" aria-hidden="true">動画</span></h2>
-        <p class="section-sub">Directos, clips y los vídeos del server.</p>
-      </div>
-    </div>
-
-    <div class="now-playing" id="liveYoutube" hidden></div>
-
-    <div class="feature" data-featured-net="youtube"></div>
-  </section>
-
-  <section id="spotify" class="section wrap" data-panel="spotify">
-    <div class="section-head">
-      <span class="section-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="9"/>
-          <path d="M7 9.5c3-.9 6-.6 8.6 1"/>
-          <path d="M7.6 12.6c2.4-.6 4.9-.3 7 .9"/>
-          <path d="M8.3 15.4c1.7-.4 3.4-.2 4.9.7"/>
-        </svg>
-      </span>
-      <div>
-        <h2>Spotify<span class="jp" aria-hidden="true">音楽</span></h2>
-        <p class="section-sub">Mis playlists y lo que se escucha en directo.</p>
-      </div>
-    </div>
-
-    <div class="now-playing" id="liveMusic" hidden></div>
-
-    <div class="feature" data-featured-net="spotify"></div>
-  </section>
-
-</main>
+  </div>
+</div>
 
 <div class="motto-strip" id="mottoStrip" hidden aria-hidden="true">
   <div class="motto-track" id="mottoTrack"></div>

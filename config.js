@@ -68,6 +68,48 @@ window.LITTTIN_CONFIG = {
       meta: "(74 KB, 608x1080)",
       alt: "Gato sorprendido con los ojos muy abiertos",
       text: "Cara de la chiri cuando ganamos con pistolas."
+    },
+    {
+      img: "assets/img/monumento-1.jpg",
+      title: "Siesta de la chiri",
+      alt: "Gato durmiendo acurrucado en una manta gris",
+      text: "Modo ahorro de energía activado."
+    },
+    {
+      img: "assets/img/monumento-2.jpg",
+      title: "La chiri te mira",
+      alt: "Gato carey mirando fijo a la cámara",
+      text: "Ojos abiertos: te está evaluando."
+    },
+    {
+      img: "assets/img/monumento-3.jpg",
+      title: "Jefa de obra",
+      alt: "Gato carey sentado en el suelo de madera entre escombros",
+      text: "Supervisando la construcción desde el suelo."
+    },
+    {
+      img: "assets/img/monumento-4.jpg",
+      title: "Ojos en la penumbra",
+      alt: "Gato con ojos brillantes en una habitación oscura",
+      text: "De noche solo se ven dos linternas amarillas."
+    },
+    {
+      img: "assets/img/monumento-5.jpg",
+      title: "Mirando el cielo",
+      alt: "Gato carey mirando hacia arriba tras una puerta de vidrio",
+      text: "Esperando a que le abran la puerta."
+    },
+    {
+      img: "assets/img/monumento-6.jpg",
+      title: "Cabeza arriba",
+      alt: "Primer plano de un gato mirando hacia arriba",
+      text: "Le hacen cariño y mira al techo."
+    },
+    {
+      img: "assets/img/monumento-7.jpg",
+      title: "Retrato oficial",
+      alt: "Primer plano de un gato atigrado de ojos amarillos",
+      text: "La foto de perfil del culto."
     }
   ],
 
@@ -106,6 +148,14 @@ window.LITTTIN_CONFIG = {
       url: "https://open.spotify.com/user/21qtzdifs5uvqoiujqji4246q",
       cta: "Abrir perfil"
     }
+    ,{
+      id: "instagram",
+      name: "Instagram",
+      handle: "@lilttin",
+      description: "Fotos y el día a día del culto.",
+      url: "https://instagram.com/lilttin",
+      cta: "Ver perfil"
+    }
 
     /* Ejemplos listos para rellenar:
     ,{ id:"discord",   name:"Discord",   handle:"litttin", description:"La comunidad del servidor.", url:"https://discord.gg/XXXXXXXX", cta:"Unirse" }
@@ -129,5 +179,35 @@ window.LITTTIN_CONFIG = {
   live: {
     discordId: "1491080690173870241",
     pollSeconds: 20    // cada cuántos segundos se refresca el estado
+  },
+
+  /* ---------- Imágenes decorativas ----------
+     gifs        -> banner de arriba. Si pones varios, van alternándose solos
+                    (y puedes hacer clic para pasar al siguiente).
+     chibi       -> muñeco al frente del texto principal.
+     chibiProfile-> muñeco de la ventana PROFILE.
+     Si un archivo no existe, se oculta y no rompe nada. */
+  deco: {
+    gifs: ["assets/img/mayuri.gif", "assets/img/anime-girl.gif"],
+    rotateSeconds: 7,
+    chibi: "assets/img/mayuri-chibi.webp",
+    chibiProfile: "assets/img/mayuri-profile.png"
+  },
+
+  /* ---------- Frase junto al chibi ----------
+     Cita corta de Steins;Gate o Code Geass. Cámbiala por la que prefieras. */
+  quote: {
+    text: "Solo quienes están preparados para morir tienen derecho a matar.",
+    source: "Code Geass — Lelouch"
+  },
+
+  /* ---------- Profile (ventana de abajo) ---------- */
+  profile: {
+    title: "PROFILE",
+    name: "chiri",
+    tagline: "El Culto De Chiri",
+    instagram: "@lilttin",
+    instagramUrl: "https://instagram.com/lilttin",
+    bio: "Streamer, jugador de CS, LoL y Geometry Dash. Este es mi rincón digital."
   }
 };

@@ -58,6 +58,14 @@ puente público (API sin autenticación y con CORS, así que se lee directo desd
 sin backend). Para activarlo solo hay que poner tu **ID de Discord** en `config.js` → `live.discordId`.
 El paso a paso completo está en **[PASO-A-PASO.md](./PASO-A-PASO.md)**.
 
+**En tiempo real:** el panel se conecta al **WebSocket de Lanyard**, así que la canción, el
+juego y los cambios de estado llegan al instante (no espera al refresco). Si el WebSocket falla,
+cae solo a la consulta REST cada `live.pollSeconds` segundos.
+
+> El ecualizador **se activa cuando hay música sonando y se detiene cuando para**. Es
+> decorativo: el navegador no puede leer el audio del reproductor de Spotify incrustado
+> (está en otro dominio), así que no es un analizador de espectro real.
+
 Si `live.discordId` está vacío, los carteles de "en vivo" **no se muestran** (así la web no
 queda rota mientras no lo configures).
 

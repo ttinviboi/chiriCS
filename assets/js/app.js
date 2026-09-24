@@ -365,7 +365,7 @@
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) { host.hidden = true; return; }
 
-    var count = window.innerWidth < 720 ? 8 : (window.innerWidth < 1200 ? 12 : 18);
+    var count = window.innerWidth < 720 ? 16 : (window.innerWidth < 1200 ? 26 : 38);
     var html = "";
 
     for (var i = 0; i < count; i++) {
@@ -428,6 +428,7 @@
      Lee la presencia pública (juegos, Spotify, directos) desde
      https://api.lanyard.rest y la pinta en el hero y en las pestañas. */
   var LANYARD_API = "https://api.lanyard.rest/v1/users/";
+  var LANYARD_SOCKET = "wss://api.lanyard.rest/socket";
   var spotifyTimes = null;
 
   function fmtClock(ms) {
@@ -590,6 +591,13 @@
     renderLiveBar(data);
     renderLiveMusic(data);
     renderLiveYoutube(data);
+
+    /* El ecualizador se anima más fuerte cuando hay algo sonando */
+    var acts = data && Array.isArray(data.activities) ? data.activities : [];
+    document.documentElement.classList.toggle(
+      "is-playing",
+      !!(data && (data.listening_to_spotify || acts.length))
+    );
   }
 
   function setupLive() {
@@ -597,35 +605,162 @@
     var id = String(live.discordId || "").trim();
     if (!id || live.enabled === false) return;
 
-    var pollMs = Math.max(5, Number(live.pollSeconds) || 20) * 1000;
+    var pollMs = Math.max(10, Number(live.pollSeconds) || 20) * 1000;
     var timer = null;
+    var socket = null;
+    var heartbeat = null;
+    var socketOk = false;
 
+    /* Respaldo: se consulta la API si no hay WebSocket (o mientras conecta). */
     function tick() {
       fetch(LANYARD_API + encodeURIComponent(id))
         .then(function (res) { return res.json(); })
         .then(function (json) {
           renderLive(json && json.success === true ? json.data : null);
         })
-        .catch(function () { renderLive(null); });
+        .catch(function () { if (!socketOk) renderLive(null); });
     }
 
-    function start() {
+    function startPolling() {
+      if (timer) return;
       tick();
-      if (timer) clearInterval(timer);
       timer = setInterval(tick, pollMs);
     }
-
-    function stop() {
+    function stopPolling() {
       if (timer) { clearInterval(timer); timer = null; }
     }
 
+    /* WebSocket de Lanyard: los cambios llegan al instante (canción nueva,
+       pausa, cambio de juego…) sin esperar al siguiente refresco. */
+    function connectSocket() {
+      if (typeof WebSocket === "undefined") { startPolling(); return; }
+
+      try { socket = new WebSocket(LANYARD_SOCKET); }
+      catch (err) { startPolling(); return; }
+
+      socket.onmessage = function (event) {
+        var msg;
+        try { msg = JSON.parse(event.data); } catch (err) { return; }
+
+        if (msg.op === 1) {
+          socketOk = true;
+          stopPolling();
+          if (heartbeat) clearInterval(heartbeat);
+          heartbeat = setInterval(function () {
+            if (socket && socket.readyState === 1) socket.send(JSON.stringify({ op: 3 }));
+          }, msg.d.heartbeat_interval);
+          socket.send(JSON.stringify({ op: 2, d: { subscribe_to_id: id } }));
+          return;
+        }
+
+        if (msg.op === 0) {
+          var d = msg.d;
+          if (msg.t === "INIT_STATE" && d) {
+            var presence = null;
+            if (d.discord_user) presence = d;
+            else {
+              for (var k in d) {
+                if (Object.prototype.hasOwnProperty.call(d, k)) { presence = d[k]; break; }
+              }
+            }
+            if (presence) renderLive(presence);
+          } else if (msg.t === "PRESENCE_UPDATE" && d) {
+            renderLive(d);
+          }
+        }
+      };
+
+      socket.onerror = function () { socketOk = false; startPolling(); };
+
+      socket.onclose = function () {
+        socketOk = false;
+        if (heartbeat) { clearInterval(heartbeat); heartbeat = null; }
+        startPolling();
+        setTimeout(connectSocket, 10000);   // reintenta el socket
+      };
+    }
+
     document.addEventListener("visibilitychange", function () {
-      if (document.hidden) stop();
-      else start();
+      if (document.hidden) stopPolling();
+      else if (socketOk) tick();
+      else startPolling();
     });
 
-    start();
+    connectSocket();
+    startPolling();                 // primer pintado inmediato + respaldo
     setInterval(updateProgress, 1000);
+  }
+
+  /* ---------------- Ventanas, ecualizador, movimiento e imágenes ---------------- */
+  function setupEq() {
+    $$(".eq").forEach(function (host) {
+      if (host.childElementCount) return;
+      var n = host.classList.contains("eq--mini") ? 16 : 36;
+      var html = "";
+      for (var i = 0; i < n; i++) {
+        var dur = (0.55 + Math.random() * 0.9).toFixed(2);
+        var delay = (-Math.random() * 1.2).toFixed(2);
+        html += '<span style="animation-duration:' + dur + 's;animation-delay:' + delay + 's"></span>';
+      }
+      host.innerHTML = html;
+    });
+  }
+
+  function setupWindows() {
+    $$("[data-collapse]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var win = btn.closest(".win");
+        if (win) win.classList.toggle("is-collapsed");
+      });
+    });
+  }
+
+  /* Las imágenes decorativas son opcionales: si no están, se ocultan solas. */
+  function setupDeco() {
+    var deco = CFG.deco || {};
+
+    /* Banner de arriba: alterna entre los gifs (clic para pasar al siguiente). */
+    var gif = $("#gifImg");
+    var banner = $("#gifBanner");
+    var list = Array.isArray(deco.gifs) ? deco.gifs.slice() : (deco.gif ? [deco.gif] : []);
+
+    if (gif && list.length) {
+      var idx = 0;
+      gif.addEventListener("load", function () { if (banner) banner.hidden = false; });
+      gif.addEventListener("error", function () { if (banner) banner.hidden = true; });
+      gif.src = list[0];
+
+      var next = function () {
+        idx = (idx + 1) % list.length;
+        gif.src = list[idx];
+      };
+
+      if (list.length > 1) {
+        setInterval(next, Math.max(2, Number(deco.rotateSeconds) || 7) * 1000);
+        if (banner) banner.addEventListener("click", next);
+      }
+    }
+
+    function optional(selector, src) {
+      var img = $(selector);
+      if (!img || !src) return;
+      img.hidden = true;
+      img.addEventListener("load", function () { img.hidden = false; });
+      img.addEventListener("error", function () { img.remove(); });
+      img.src = src;
+    }
+
+    optional("#chibiImg", deco.chibi);
+    optional("#profileChibi", deco.chibiProfile);
+  }
+
+  function renderProfile() {
+    var p = CFG.profile || {};
+    var ig = $("#profileIg");
+    if (!ig) return;
+    ig.setAttribute("href", p.instagramUrl || "#");
+    var handle = $(".ig-handle", ig);
+    if (handle) handle.textContent = p.instagram || "@tu_instagram";
   }
 
   /* ---------------- Pestañas: cada una con su apartado ---------------- */
@@ -641,6 +776,10 @@
         var on = t.getAttribute("data-tab") === id;
         t.setAttribute("aria-selected", on ? "true" : "false");
         t.tabIndex = on ? 0 : -1;
+        if (on) {
+          var wt = $("#winTitle");
+          if (wt) wt.textContent = t.textContent.trim();
+        }
       });
 
       var active = null;
@@ -703,6 +842,10 @@
     renderFeatured();
     setupTabs();
     setupLive();
+    setupWindows();
+    setupEq();
+    setupDeco();
+    renderProfile();
     setupCopy();
     setupBedrock();
     setupTopbar();

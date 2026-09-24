@@ -1,31 +1,31 @@
 /* ==========================================================================
-   litttin · theme.css — imageboard / yotsuba
-   Fondo crema, serif, bordes duros, posts con "Anonymous" y No.
-   Es la única paleta del proyecto: base.css solo aporta la estructura.
+   litttin · theme.css — colores de Shiina Mayuri
+   Noche azul + celeste/blanco: fondos azul noche, ventanas con barra celeste
+   y luna celeste. Pétalos rosados cayendo. base.css aporta la estructura.
    ========================================================================== */
 
 html {
-  color-scheme: light;
+  color-scheme: dark;
 
-  --bg: #ffffee;
-  --surface: #f0e0d6;
-  --surface-2: #f5e9df;
-  --code-bg: #fffff5;
-  --topbar-bg: #ffe;
-  --line: #d6d1b8;
-  --line-strong: #bcb7a0;
+  --bg: #060a14;
+  --surface: #0f1726;
+  --surface-2: #141f33;
+  --code-bg: #0a1120;
+  --topbar-bg: #060a14;
+  --line: #22304a;
+  --line-strong: #33456a;
 
-  --text: #000000;
-  --text-dim: #34345c;
-  --text-faint: #707070;
+  --text: #eef4ff;
+  --text-dim: #b7c6e0;
+  --text-faint: #7f8fb0;
 
-  --accent: #0000ee;
-  --accent-hover: #34345c;
-  --accent-fg: #fffff5;
+  --accent: #8fd6ff;
+  --accent-hover: #6cc4f7;
+  --accent-fg: #05101c;
 
-  --ok: #117743;
-  --bad: #af0a0f;
-  --warn: #b8860b;
+  --ok: #5ad1a0;
+  --bad: #ff7a90;
+  --warn: #ffcf70;
 
   --font-body: Georgia, "Times New Roman", serif;
   --font-display: Georgia, "Times New Roman", serif;
@@ -49,60 +49,103 @@ html {
   --card-pad: 16px;
   --topbar-h: 44px;
 
-  /* --- Escena anime: página de manga (trama de puntos, tintas sepia) --- */
-  --scene-sky: linear-gradient(180deg, #fffdf0 0%, #ffffee 52%, #f6f1d9 100%);
-  --scene-stars-op: 0;
-  --scene-orb: linear-gradient(180deg, #fff8dd, #ffeab4);
-  --scene-orb-glow: rgba(255, 226, 150, .35);
-  --scene-cloud: rgba(200, 180, 140, .22);
+  /* --- Ventanas retro + ecualizador --- */
+  --win-bar: #8fd6ff;
+  --win-bar-fg: #062033;
+  --win-shadow: rgba(0, 0, 0, .5);
+  --eq-bar: #8fd6ff;
+  --eq-bar-2: #4f9fd6;
+
+  /* --- Escena: noche azul con luna celeste --- */
+  --scene-sky: linear-gradient(180deg, #04060e 0%, #08122a 55%, #0e1c3a 100%);
+  --scene-stars-op: 1;
+  --scene-orb: radial-gradient(circle at 35% 32%, #f2fbff, #a9dcff 55%, #5aa9e6);
+  --scene-orb-glow: rgba(143, 214, 255, .55);
+  --scene-cloud: rgba(120, 160, 230, .16);
   --scene-clouds-op: .35;
-  --scene-far: #e6d9bb;
-  --scene-near: #d3c3a1;
-  --scene-torii: #ab8a5f;
-  --scene-torii-dark: #9a7b52;
-  --scene-torii-op: .75;
+  --scene-far: #101c33;
+  --scene-near: #0a1322;
+  --scene-torii: #1f3358;
+  --scene-torii-dark: #182848;
+  --scene-torii-op: .8;
   --scene-halftone-op: 1;
-  --scene-halftone-dot: rgba(0, 0, 0, .11);
+  --scene-halftone-dot: rgba(255, 255, 255, .05);
   --scene-land-h: 28vh;
-  --petals-op: .45;
-  --petal-a: #ffd6e3;
-  --petal-b: #f5a8c4;
-  --jp-color: #af0a0f;
-  --greentext: #789922;
+  --petals-op: .85;
+  --petal-a: #ffd6e6;
+  --petal-b: #ff9ec4;
+  --jp-color: #8fd6ff;
+  --greentext: #86c46a;
 }
 
-/* ---------- Enlaces clásicos ---------- */
-html a { color: #0000ee; text-decoration: none; }
+/* ---------- Enlaces ---------- */
+html a { color: #8fd6ff; text-decoration: none; }
 html a:hover { text-decoration: underline; }
 
-/* ---------- Barra superior tipo board list ---------- */
-html .topbar { border-bottom: 1px solid #d6d1b8; }
-html .topbar-inner { min-height: var(--topbar-h); }
-
-html .nav { gap: 2px; }
+/* ---------- Nav vertical (board list) ---------- */
+html .nav { flex-direction: column; gap: 0; }
 html .nav a {
-  padding: 2px 4px;
+  display: block;
+  padding: 5px 8px;
   font-family: var(--font-ui);
   font-size: 11px;
   font-weight: 400;
-  color: #0000ee;
+  color: #8fd6ff;
   border-radius: 0;
+  border-bottom: 1px dotted #22304a;
 }
 html .nav a:hover {
-  background: transparent;
-  color: #af0a0f;
-  text-decoration: underline;
+  background: #141f33;
+  color: #6cc4f7;
+  text-decoration: none;
 }
 html .nav a[aria-selected="true"] {
-  background: transparent;
-  color: #af0a0f;
+  color: #062033;
   font-weight: 700;
-  text-decoration: none;
-  box-shadow: inset 0 -2px 0 #af0a0f;
+  background: #8fd6ff;
+  box-shadow: none;
 }
 
-/* ---------- Hero / hilo ---------- */
-html .hero { padding: 26px 0 18px; }
+/* ---------- Ventanas retro ---------- */
+html .win {
+  background: #0f1726;
+  border: 1px solid #33456a;
+  border-radius: 0;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, .5);
+}
+html .win-bar {
+  padding: 4px 7px;
+  background: #8fd6ff;
+  color: #062033;
+  font-family: var(--font-ui);
+  font-size: 10.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+html .win-x { border-radius: 0; }
+html .win-body { padding: 12px; }
+html .win-body .hero,
+html .win-body .section { padding: 0; }
+
+/* ---------- Ecualizador ---------- */
+html .eq { background: #0a1120; border: 1px solid #22304a; border-radius: 0; }
+html .eq span { background: #8fd6ff; border-radius: 0; }
+html .eq span:nth-child(3n + 2) { background: #4f9fd6; }
+
+/* ---------- Profile ---------- */
+html .profile-name { color: #cfeaff; }
+html .profile-tag { font-family: var(--font-ui); font-size: 10px; color: #8fd6ff; }
+html .profile-bio { font-size: 12.5px; color: #b7c6e0; }
+html .profile-ig { border-color: #33456a; border-radius: 0; color: #8fd6ff; }
+html .profile-ig:hover { border-color: #8fd6ff; color: #cfeaff; }
+
+/* ---------- Frase (quote) ---------- */
+html .quote { border-left: 3px solid #8fd6ff; }
+html .quote-text { color: #dbe9f7; }
+html .quote-src { color: #8fd6ff; }
+
+/* ---------- Hero ---------- */
+html .hero { padding: 0; }
 
 html .kicker {
   display: inline-block;
@@ -112,11 +155,11 @@ html .kicker {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: .06em;
-  color: #fffff5;
-  background: #af0a0f;
+  color: #062033;
+  background: #8fd6ff;
 }
 
-html .hero-intro { font-size: 13.3px; color: #000; }
+html .hero-intro { font-size: 13.3px; color: #eef4ff; }
 
 html .hero-actions { margin-top: 16px; gap: 8px; }
 
@@ -126,24 +169,24 @@ html .btn {
   font-family: var(--font-ui);
   font-size: 11.5px;
   font-weight: 400;
-  color: #000;
-  background: #fffff5;
-  border: 1px solid #aaa;
+  color: #eef4ff;
+  background: #0a1120;
+  border: 1px solid #33456a;
   border-radius: 0;
 }
 html .btn:hover {
-  background: #f0e0d6;
-  border-color: #800000;
-  color: #800000;
+  background: #141f33;
+  border-color: #8fd6ff;
+  color: #cfeaff;
   transform: none;
 }
 html .btn--primary {
   font-weight: 700;
-  color: #000;
-  background: #fffff5;
-  border-color: #aaa;
+  color: #062033;
+  background: #8fd6ff;
+  border-color: #8fd6ff;
 }
-html .btn--ghost { background: #f0e0d6; }
+html .btn--ghost { background: #0f1726; }
 html .btn--icon { padding: 3px 7px; }
 
 /* ---------- Charla del Counter-Strike ---------- */
@@ -153,36 +196,36 @@ html .cs-chat {
   padding: 8px 10px;
   gap: 1px;
   font-size: 11.5px;
-  background: #fffff5;
-  border: 1px solid #d6d1b8;
+  background: #0a1120;
+  border: 1px solid #22304a;
 }
 html .cs-tag { min-width: 52px; font-size: 10px; letter-spacing: .04em; }
-html .cs-line--radio .cs-text { color: #000; }
+html .cs-line--radio .cs-text { color: #eef4ff; }
 html .cs-line--server .cs-tag,
-html .cs-line--server .cs-text { color: #8a6d00; }
+html .cs-line--server .cs-text { color: #ffcf70; }
 html .cs-line--ct .cs-tag,
-html .cs-line--ct .cs-text { color: #0000ee; }
+html .cs-line--ct .cs-text { color: #8fd6ff; }
 html .cs-line--t .cs-tag,
-html .cs-line--t .cs-text { color: #af0a0f; }
+html .cs-line--t .cs-text { color: #ff7a90; }
 
 /* ---------- Secciones ---------- */
-html .section { padding: 26px 0 0; }
+html .section { padding: 0; }
 html .section-head { gap: 10px; margin-bottom: 12px; }
-html .section-head h2 { font-size: 19px; color: #af0a0f; }
-html .section-head h2::before { content: "■ "; font-size: 12px; }
-html .section-sub { font-family: var(--font-ui); font-size: 10.5px; color: #707070; }
+html .section-head h2 { font-size: 19px; color: #cfeaff; }
+html .section-head h2::before { content: "❀ "; font-size: 13px; color: #8fd6ff; }
+html .section-sub { font-family: var(--font-ui); font-size: 10.5px; color: #7f8fb0; }
 
 html .section-icon {
   width: 30px;
   height: 30px;
-  color: #800000;
-  background: #f0e0d6;
-  border: 1px solid #d6d1b8;
+  color: #8fd6ff;
+  background: #0a1120;
+  border: 1px solid #22304a;
   border-radius: 0;
 }
 html .section-icon svg { width: 17px; height: 17px; }
 
-/* ---------- Cabecera de post (aquí sí se ve) ---------- */
+/* ---------- Cabecera de post ---------- */
 html .post-header {
   display: flex;
   flex-wrap: wrap;
@@ -191,39 +234,39 @@ html .post-header {
   margin: 0 0 10px;
   font-family: var(--font-ui);
   font-size: 11px;
-  color: #707070;
+  color: #7f8fb0;
 }
-html .ph-name { color: #117743; font-weight: 700; }
-html .ph-no { color: #0000ee; }
+html .ph-name { color: #86c46a; font-weight: 700; }
+html .ph-no { color: #8fd6ff; }
 html .post-header--hero { margin-bottom: 12px; font-size: 11.5px; }
 
 /* ---------- Tarjetas = posts ---------- */
 html .card,
 html .net-card {
-  background: #f0e0d6;
-  border: 1px solid #d6d1b8;
+  background: #141f33;
+  border: 1px solid #22304a;
   border-radius: 0;
   box-shadow: none;
 }
 html .net-card { gap: 8px; }
 html .net-card:hover {
-  background: #f5e9df;
-  border-color: #bcb7a0;
+  background: #182642;
+  border-color: #33456a;
   transform: none;
 }
 
-html .server-card { background: #f0e0d6; }
+html .server-card { background: #141f33; }
 
 html .server-visual {
   width: 58px;
   height: 58px;
-  background: #fffff5;
-  border: 1px solid #d6d1b8;
+  background: #0a1120;
+  border: 1px solid #22304a;
   border-radius: 0;
 }
 html .server-visual svg { width: 38px; height: 38px; filter: none; }
-html .server-info h3 { font-size: 14px; }
-html .server-sub { font-family: var(--font-ui); font-size: 10.5px; color: #707070; }
+html .server-info h3 { font-size: 14px; color: #cfeaff; }
+html .server-sub { font-family: var(--font-ui); font-size: 10.5px; color: #7f8fb0; }
 
 /* ---------- IP ---------- */
 html .ip {
@@ -231,23 +274,23 @@ html .ip {
   font-family: var(--font-mono);
   font-size: 16px;
   font-weight: 700;
-  color: #800000;
-  background: #fffff5;
-  border: 1px solid #aaa;
+  color: #8fd6ff;
+  background: #0a1120;
+  border: 1px solid #33456a;
   border-radius: 0;
 }
-html .ip:hover { border-color: #800000; background: #ffffe0; }
+html .ip:hover { border-color: #8fd6ff; background: #0f1726; }
 html .ip-label {
   font-family: var(--font-ui);
   font-size: 10px;
-  color: #707070;
+  color: #7f8fb0;
 }
 
 html .server-status { font-family: var(--font-ui); font-size: 11px; gap: 6px; }
 html .dot { width: 7px; height: 7px; border-radius: 0; }
-html .server-players { color: #117743; }
+html .server-players { color: #8fd6ff; }
 html .server-bedrock { font-family: var(--font-ui); font-size: 10.5px; }
-html .server-bedrock code { color: #800000; font-weight: 700; }
+html .server-bedrock code { color: #8fd6ff; font-weight: 700; }
 
 /* ---------- Redes ---------- */
 html .grid { gap: 10px; }
@@ -260,19 +303,19 @@ html .net-icon {
   border-radius: 0;
 }
 html .net-icon svg { width: 22px; height: 22px; }
-html .net-name { font-size: 14px; }
+html .net-name { font-size: 14px; color: #cfeaff; }
 html .net-handle {
   font-family: var(--font-ui);
   font-size: 10.5px;
-  color: #117743;
+  color: #8fd6ff;
 }
-html .net-desc { margin-top: 3px; font-size: 12.5px; color: #000; }
+html .net-desc { margin-top: 3px; font-size: 12.5px; color: #eef4ff; }
 
 html .net-cta {
   padding-top: 2px;
   font-family: var(--font-ui);
   font-size: 11px;
-  color: #0000ee;
+  color: #8fd6ff;
   text-decoration: underline;
 }
 html .net-cta svg { display: none; }
@@ -281,21 +324,21 @@ html .net-cta svg { display: none; }
 html .thread { gap: 10px; }
 html .post { padding: 14px; }
 html .post-body p { font-size: 13.3px; }
-html .post-body .greentext { color: #789922; }
+html .post-body .greentext { color: #86c46a; }
 
 /* ---------- Monumentos de la chiri ---------- */
 html .monuments { gap: 10px; }
 html .monument {
-  background: #f0e0d6;
-  border: 1px solid #d6d1b8;
+  background: #141f33;
+  border: 1px solid #22304a;
   border-radius: 0;
   box-shadow: none;
 }
 html .monument-img img { height: 240px; }
 html .monument:hover .monument-img img { transform: none; }
-html .monument-cap { font-family: var(--font-ui); font-size: 11px; color: #707070; }
-html .monument-name { color: #800000; font-weight: 700; }
-html .monument-text { font-size: 12.5px; color: #000; }
+html .monument-cap { font-family: var(--font-ui); font-size: 11px; color: #7f8fb0; }
+html .monument-name { color: #cfeaff; font-weight: 700; }
+html .monument-text { font-size: 12.5px; color: #eef4ff; }
 html .feature { max-width: 460px; }
 
 /* ---------- En vivo (Discord + Lanyard) ---------- */
@@ -304,18 +347,20 @@ html .live-bar {
   font-family: var(--font-ui);
   font-size: 11px;
   padding: 4px 10px 4px 4px;
+  background: #141f33;
+  border: 1px solid #22304a;
 }
 html .live-avatar { border-radius: 0; width: 22px; height: 22px; }
 html .live-dot { border-radius: 0; }
 html .live-link { text-decoration: underline; }
 html .now-playing { margin-bottom: 10px; }
-html .np { background: #f0e0d6; border: 1px solid #d6d1b8; border-radius: 0; }
-html .np-art { border: 1px solid #d6d1b8; border-radius: 0; }
-html .np-kicker { font-family: var(--font-ui); font-size: 10px; color: #800000; }
-html .np-title { font-size: 14px; color: #800000; }
-html .np-artist { font-size: 12.5px; }
-html .np-progress { background: #fffff5; border: 1px solid #d6d1b8; border-radius: 0; }
-html .np-progress span { background: #117743; }
+html .np { background: #141f33; border: 1px solid #22304a; border-radius: 0; }
+html .np-art { border: 1px solid #22304a; border-radius: 0; }
+html .np-kicker { font-family: var(--font-ui); font-size: 10px; color: #8fd6ff; }
+html .np-title { font-size: 14px; color: #cfeaff; }
+html .np-artist { font-size: 12.5px; color: #b7c6e0; }
+html .np-progress { background: #0a1120; border: 1px solid #22304a; border-radius: 0; }
+html .np-progress span { background: #8fd6ff; }
 
 /* ---------- Toast ---------- */
 html .toast {
@@ -325,9 +370,9 @@ html .toast {
   padding: 4px 10px;
   font-family: var(--font-ui);
   font-size: 11px;
-  color: #800000;
-  background: #fffff5;
-  border: 1px solid #aaa;
+  color: #062033;
+  background: #8fd6ff;
+  border: 1px solid #6cc4f7;
   border-radius: 0;
   box-shadow: none;
   transform: translateY(14px);
@@ -341,9 +386,9 @@ html .motto {
   font-family: var(--font-ui);
   font-size: 11.5px;
   font-weight: 700;
-  color: #af0a0f;
-  background: #fffff5;
-  border: 1px solid #af0a0f;
+  color: #8fd6ff;
+  background: #0a1120;
+  border: 1px solid #22304a;
   border-radius: 0;
   transform: none;
 }
@@ -352,10 +397,10 @@ html .motto:hover { transform: none; }
 html .motto-strip {
   margin-top: 26px;
   padding: 6px 0;
-  background: #f0e0d6;
-  color: #af0a0f;
-  border-top: 1px dotted #af0a0f;
-  border-bottom: 1px dotted #af0a0f;
+  background: #0f1726;
+  color: #8fd6ff;
+  border-top: 1px dotted #8fd6ff;
+  border-bottom: 1px dotted #8fd6ff;
 }
 html .motto-track {
   gap: 22px;
@@ -363,8 +408,8 @@ html .motto-track {
   font-size: 11px;
   letter-spacing: .12em;
 }
-html .motto-track span::after { content: "◆"; margin-left: 22px; }
+html .motto-track span::after { content: "❀"; margin-left: 22px; }
 
-@media (max-width: 760px) {
+@media (max-width: 880px) {
   html .nav { padding-bottom: 6px; }
 }
