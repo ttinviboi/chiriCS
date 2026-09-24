@@ -691,7 +691,18 @@
     setInterval(updateProgress, 1000);
   }
 
-  /* ---------------- Ventanas, ecualizador, movimiento e imágenes ---------------- */
+  /* ---------------- Día / noche: un clic en el fondo ---------------- */
+  function setupThemeToggle() {
+    var IGNORE = ".win, a, button, input, textarea, select, code, img, .eq, .deco-gif, .motto-strip, .toast";
+
+    document.addEventListener("click", function (e) {
+      if (e.target.closest && e.target.closest(IGNORE)) return;
+      var day = document.documentElement.classList.toggle("is-day");
+      toast(day ? "Modo día" : "Modo noche");
+    });
+  }
+
+  /* ---------------- Ventanas, ecualizador e imágenes ---------------- */
   function setupEq() {
     $$(".eq").forEach(function (host) {
       if (host.childElementCount) return;
@@ -843,6 +854,7 @@
     setupTabs();
     setupLive();
     setupWindows();
+    setupThemeToggle();
     setupEq();
     setupDeco();
     renderProfile();
