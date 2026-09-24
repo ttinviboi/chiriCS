@@ -698,6 +698,7 @@
     document.addEventListener("click", function (e) {
       if (e.target.closest && e.target.closest(IGNORE)) return;
       var day = document.documentElement.classList.toggle("is-day");
+      document.dispatchEvent(new Event("themechange"));
       toast(day ? "Modo día" : "Modo noche");
     });
   }
@@ -730,28 +731,6 @@
   function setupDeco() {
     var deco = CFG.deco || {};
 
-    /* Banner de arriba: alterna entre los gifs (clic para pasar al siguiente). */
-    var gif = $("#gifImg");
-    var banner = $("#gifBanner");
-    var list = Array.isArray(deco.gifs) ? deco.gifs.slice() : (deco.gif ? [deco.gif] : []);
-
-    if (gif && list.length) {
-      var idx = 0;
-      gif.addEventListener("load", function () { if (banner) banner.hidden = false; });
-      gif.addEventListener("error", function () { if (banner) banner.hidden = true; });
-      gif.src = list[0];
-
-      var next = function () {
-        idx = (idx + 1) % list.length;
-        gif.src = list[idx];
-      };
-
-      if (list.length > 1) {
-        setInterval(next, Math.max(2, Number(deco.rotateSeconds) || 7) * 1000);
-        if (banner) banner.addEventListener("click", next);
-      }
-    }
-
     function optional(selector, src) {
       var img = $(selector);
       if (!img || !src) return;
@@ -763,6 +742,44 @@
 
     optional("#chibiImg", deco.chibi);
     optional("#profileChibi", deco.chibiProfile);
+
+    /* Banner de arriba: una imagen cambia con día/noche y otra es fija. */
+    var banner = $("#gifBanner");
+    var modeImg = $("#gifMode");
+    var alwaysImg = $("#gifAlways");
+
+    var modeSrc = function () {
+      return document.documentElement.classList.contains("is-day")
+        ? deco.bannerDay
+        : deco.bannerNight;
+    };
+
+    var updateMode = function () {
+      if (modeImg && modeSrc()) modeImg.src = modeSrc();
+    };
+
+    if (modeImg && (deco.bannerDay || deco.bannerNight)) {
+      modeImg.hidden = true;
+      modeImg.addEventListener("load", function () {
+        modeImg.hidden = false;
+        if (banner) banner.hidden = false;
+      });
+      modeImg.addEventListener("error", function () { modeImg.hidden = true; });
+      updateMode();
+    }
+
+    if (alwaysImg && deco.bannerAlways) {
+      alwaysImg.hidden = true;
+      alwaysImg.addEventListener("load", function () {
+        alwaysImg.hidden = false;
+        if (banner) banner.hidden = false;
+      });
+      alwaysImg.addEventListener("error", function () { alwaysImg.remove(); });
+      alwaysImg.src = deco.bannerAlways;
+    }
+
+    /* Cuando cambia día/noche, se cambia la imagen del banner */
+    document.addEventListener("themechange", updateMode);
   }
 
   function renderProfile() {

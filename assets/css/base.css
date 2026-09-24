@@ -703,12 +703,15 @@ code { font-family: var(--font-mono); }
 
 .deco-gif {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  gap: 12px;
   padding: 10px var(--pad) 0;
-  cursor: pointer;
 }
 .deco-gif[hidden] { display: none; }
-.deco-gif img { width: min(440px, 78vw); height: auto; }
+.deco-gif img { width: min(300px, 40vw); height: auto; }
+.deco-gif img[hidden] { display: none; }
 
 .layout {
   display: grid;

@@ -182,14 +182,16 @@ window.LITTTIN_CONFIG = {
   },
 
   /* ---------- Imágenes decorativas ----------
-     gifs        -> banner de arriba. Si pones varios, van alternándose solos
-                    (y puedes hacer clic para pasar al siguiente).
-     chibi       -> muñeco al frente del texto principal.
-     chibiProfile-> muñeco de la ventana PROFILE.
+     bannerDay    -> imagen de arriba cuando la web está en modo DÍA.
+     bannerNight  -> imagen de arriba cuando está en modo NOCHE.
+     bannerAlways -> imagen que aparece siempre, junto a la de día/noche.
+     chibi        -> muñeco al frente del texto principal.
+     chibiProfile -> muñeco de la ventana PROFILE.
      Si un archivo no existe, se oculta y no rompe nada. */
   deco: {
-    gifs: ["assets/img/mayuri-banner.jpg", "assets/img/anime-girl.gif"],
-    rotateSeconds: 7,
+    bannerDay: "assets/img/mayuri-banner.jpg",
+    bannerNight: "assets/img/mayuri-chibi.webp",
+    bannerAlways: "assets/img/anime-girl.gif",
     chibi: "assets/img/mayuri-chibi.webp",
     chibiProfile: "assets/img/mayuri-profile.png"
   },
