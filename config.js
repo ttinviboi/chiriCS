@@ -127,7 +127,7 @@ window.LITTTIN_CONFIG = {
        4) Pega ese número en discordId.
      Si lo dejas vacío (""), los carteles de "en vivo" no aparecen en la web. */
   live: {
-    discordId: "",
+    discordId: "1491080690173870241",
     pollSeconds: 20    // cada cuántos segundos se refresca el estado
   }
 };
