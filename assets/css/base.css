@@ -90,6 +90,10 @@ code { font-family: var(--font-mono); }
   transition: color .2s ease, background-color .2s ease;
 }
 .nav a:hover { color: var(--text); background: var(--surface); }
+.nav a[aria-selected="true"] {
+  color: var(--accent);
+  background: var(--surface-2);
+}
 
 /* ---------- Hero ---------- */
 .hero {
@@ -254,6 +258,7 @@ code { font-family: var(--font-mono); }
 .section {
   padding: clamp(44px, 8vw, 90px) 0 0;
 }
+.section[hidden] { display: none; }
 
 .section-head {
   display: flex;
@@ -506,6 +511,39 @@ code { font-family: var(--font-mono); }
   transition: opacity .25s ease;
 }
 .post-img:hover img { opacity: .9; }
+
+/* ---------- Monumentos de la chiri ---------- */
+.monuments {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: var(--gap);
+}
+
+.monument {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.monument-img { display: block; }
+.monument-img img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+.monument:hover .monument-img img { transform: scale(1.03); }
+
+.monument-cap { padding: 10px 12px; font-size: .84rem; color: var(--text-dim); }
+.monument-name { font-weight: 600; color: var(--text); }
+.monument-meta { color: var(--text-faint); }
+.monument-text { margin: 6px 0 0; font-size: .82rem; color: var(--text-dim); }
+
+/* ---------- Pestaña de una sola red ---------- */
+.feature { max-width: 460px; }
 
 /* ---------- Toast ---------- */
 .toast {

@@ -138,43 +138,93 @@
     host.hidden = posts.length === 0;
   }
 
+  /* ---------------- Monumentos de la chiri ---------------- */
+  function renderMonuments() {
+    var host = $("#monumentList");
+    if (!host) return;
+
+    var items = Array.isArray(CFG.monuments) ? CFG.monuments : [];
+
+    host.innerHTML = items.map(function (m) {
+      var name = String(m.img || "").split("/").pop();
+      var text = m.text ? '<p class="monument-text">' + esc(m.text).replace(/\n/g, "<br>") + "</p>" : "";
+      return '<figure class="monument">' +
+        '<a class="monument-img" href="' + esc(m.img) + '" target="_blank" rel="noopener noreferrer">' +
+        '<img src="' + esc(m.img) + '" alt="' + esc(m.alt || name) + '" loading="lazy" decoding="async">' +
+        '</a>' +
+        '<figcaption class="monument-cap">' +
+        '<span class="monument-name">' + esc(m.title || name) + '</span>' +
+        (m.meta ? ' <span class="monument-meta">' + esc(m.meta) + '</span>' : '') +
+        text +
+        '</figcaption>' +
+        '</figure>';
+    }).join("");
+
+    if (!items.length) {
+      host.innerHTML = '<p class="empty">Todavía no hay monumentos. Añádelos en el archivo <code>config.js</code>.</p>';
+    }
+  }
+
   /* ---------------- El Culto De Chiri (redes) ---------------- */
+  function getNets() {
+    return (Array.isArray(CFG.networks) ? CFG.networks : []).filter(function (n) {
+      return n && n.url;
+    });
+  }
+
+  function netCardHTML(n, i) {
+    var icon = ICONS[n.id] || ICONS.globe;
+    return '<a class="net-card" data-net="' + esc(n.id) + '"' +
+      ' href="' + esc(n.url) + '" target="_blank" rel="noopener noreferrer">' +
+      '<span class="post-header" aria-hidden="true"><span class="ph-name">Anonymous</span>' +
+      '<span class="ph-date">' + chanStamp() + '</span>' +
+      '<span class="ph-no">No.' + (1000001 + (i || 0) * 137) + '</span></span>' +
+      '<span class="net-icon">' + icon + '</span>' +
+      '<span class="net-body">' +
+      '<span class="net-name">' + esc(n.name) + '</span>' +
+      '<span class="net-handle">' + esc(n.handle || "") + '</span>' +
+      '<span class="net-desc">' + esc(n.description || "") + '</span>' +
+      '</span>' +
+      '<span class="net-cta">' + esc(n.cta || "Abrir") + ARROW + '</span>' +
+      '</a>';
+  }
+
   function renderNetworks() {
     var grid = $("#networkGrid");
     if (!grid) return;
 
-    var nets = (Array.isArray(CFG.networks) ? CFG.networks : []).filter(function (n) {
-      return n && n.url;
-    });
-
-    grid.innerHTML = nets.map(function (n, i) {
-      var icon = ICONS[n.id] || ICONS.globe;
-      return '<a class="net-card" id="' + esc(n.id) + '" data-net="' + esc(n.id) + '"' +
-        ' href="' + esc(n.url) + '" target="_blank" rel="noopener noreferrer">' +
-        '<span class="post-header" aria-hidden="true"><span class="ph-name">Anonymous</span>' +
-        '<span class="ph-date">' + chanStamp() + '</span>' +
-        '<span class="ph-no">No.' + (1000001 + i * 137) + '</span></span>' +
-        '<span class="net-icon">' + icon + '</span>' +
-        '<span class="net-body">' +
-        '<span class="net-name">' + esc(n.name) + '</span>' +
-        '<span class="net-handle">' + esc(n.handle || "") + '</span>' +
-        '<span class="net-desc">' + esc(n.description || "") + '</span>' +
-        '</span>' +
-        '<span class="net-cta">' + esc(n.cta || "Abrir") + ARROW + '</span>' +
-        '</a>';
-    }).join("");
+    var nets = getNets();
+    grid.innerHTML = nets.map(netCardHTML).join("");
 
     if (!nets.length) {
       grid.innerHTML = '<p class="empty">Todavía no hay redes. Añádelas en el archivo <code>config.js</code>.</p>';
     }
+  }
 
-    /* Los enlaces del menú (YouTube / Spotify...) apuntan a su tarjeta.
-       Si una red no existe en config.js, el enlace se oculta. */
-    $$("[data-nav-net]").forEach(function (link) {
-      var id = link.getAttribute("data-nav-net");
-      var exists = nets.some(function (n) { return String(n.id) === id; });
-      if (exists) link.setAttribute("href", "#" + id);
-      else link.hidden = true;
+  /* Cada pestaña con data-featured-net muestra su propia tarjeta.
+     Si la red no existe en config.js, se oculta la pestaña. */
+  function renderFeatured() {
+    var nets = getNets();
+
+    $$("[data-featured-net]").forEach(function (host) {
+      var id = host.getAttribute("data-featured-net");
+      var idx = -1;
+      var net = null;
+
+      nets.forEach(function (n, i) {
+        if (String(n.id) === id) { net = n; idx = i; }
+      });
+
+      if (!net) {
+        var tab = $('[data-tab="' + id + '"]');
+        if (tab) tab.hidden = true;
+        var panel = $('[data-panel="' + id + '"]');
+        if (panel) panel.hidden = true;
+        host.innerHTML = "";
+        return;
+      }
+
+      host.innerHTML = netCardHTML(net, idx);
     });
   }
 
@@ -374,12 +424,80 @@
     onScroll();
   }
 
+  /* ---------------- Pestañas: cada una con su apartado ---------------- */
+  function setupTabs() {
+    var tabs = $$("[data-tab]");
+    if (!tabs.length) return;
+
+    function activate(id, scroll) {
+      var exists = tabs.some(function (t) { return t.getAttribute("data-tab") === id; });
+      if (!exists) id = tabs[0].getAttribute("data-tab");
+
+      tabs.forEach(function (t) {
+        var on = t.getAttribute("data-tab") === id;
+        t.setAttribute("aria-selected", on ? "true" : "false");
+        t.tabIndex = on ? 0 : -1;
+      });
+
+      var active = null;
+      $$("[data-panel]").forEach(function (p) {
+        var on = p.getAttribute("data-panel") === id;
+        p.hidden = !on;
+        if (on) active = p;
+      });
+
+      if (location.hash.slice(1) !== id) {
+        history.replaceState(null, "", "#" + id);
+      }
+
+      if (scroll && active) {
+        var top = active.getBoundingClientRect().top + window.scrollY - 56;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      }
+    }
+
+    tabs.forEach(function (t) {
+      t.addEventListener("click", function (e) {
+        e.preventDefault();
+        activate(t.getAttribute("data-tab"), true);
+      });
+      t.addEventListener("keydown", function (e) {
+        var dir = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!dir) return;
+        e.preventDefault();
+        var i = tabs.indexOf(t);
+        var next = tabs[(i + dir + tabs.length) % tabs.length];
+        next.focus();
+        activate(next.getAttribute("data-tab"), false);
+      });
+    });
+
+    /* Los botones del hero (Entrar al servidor / Ver mis redes) también cambian de pestaña. */
+    $$('a[href^="#"]').forEach(function (a) {
+      if (a.hasAttribute("data-tab")) return;
+      var id = a.getAttribute("href").slice(1);
+      if (!tabs.some(function (t) { return t.getAttribute("data-tab") === id; })) return;
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        activate(id, true);
+      });
+    });
+
+    activate(location.hash.slice(1) || tabs[0].getAttribute("data-tab"), false);
+    window.addEventListener("hashchange", function () {
+      activate(location.hash.slice(1) || tabs[0].getAttribute("data-tab"), false);
+    });
+  }
+
   /* ---------------- Arranque ---------------- */
   function init() {
     applyConfig();
     renderCsChat();
     renderPosts();
+    renderMonuments();
     renderNetworks();
+    renderFeatured();
+    setupTabs();
     setupCopy();
     setupBedrock();
     setupTopbar();

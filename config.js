@@ -18,7 +18,7 @@ window.LITTTIN_CONFIG = {
 
   /* ---------- Servidor de Minecraft ---------- */
   server: {
-    name: "Servidor de litttin",
+    name: "El Living de la chiri",
     ip: "play.tuservidor.net",   // ←←← CAMBIA ESTO POR TU IP (ej: 123.45.67.89:25565)
     version: "Java 1.21.x",
     bedrockPort: "",             // Si tienes Bedrock pon el puerto aquí (ej: "19132"). Si no, déjalo vacío.
@@ -34,14 +34,41 @@ window.LITTTIN_CONFIG = {
      en la cabecera del archivo y "imgAlt" con el texto alternativo.
      Ejemplo: { user: "anonymous", img: "assets/img/mi-foto.jpg", text: "..." } */
   posts: [
-    { user: "lacto", text: "banco el server, banco el de_mirage y banco el completo italiano al paso" },
-    { user: "cr0hno", text: ">entrar al server\n>ping 200\n>no dar un tiro\n>culpar al ping\n>gg, ya fue po" },
-    { user: "Anonymous", img: "assets/img/gato-1.jpg", imgMeta: "(86 KB, 608x1080)", imgAlt: "Gato mirando fijo a la cámara", text: ">entrar al server del chiri\n>el gato me mira fijo\n>no me atrevo a hacer rush B\n>subida random, no pregunten" },
-    { user: "Dem", text: "el que dice rush B y se queda en el spawn campeando con AWP es un fome, wn" },
-    { user: "Anonymous", img: "assets/img/gato-2.jpg", imgMeta: "(74 KB, 608x1080)", imgAlt: "Gato sorprendido con los ojos muy abiertos", text: ">cuando el gato ve que ganamos el eco round\n>cara de bananirou casteando el server" },
-    { user: "KaspitalSin", text: ">mirar un clip de coldzera en Mirage\n>intentar el jumping AWP\n>caer al vacío\n>morir con cuchillo\n>igual la raja el intento" },
-    { user: "remiinis", text: ">ver la demo de FalleN\n>creerme FalleN\n>errar los 3 awps\n>entrar a la B con pistola\n>gg po" },
-    { user: "KaspitalSin", text: "más chileno que el terremoto: comprar AWP en de_mirage y no dar ni un tiro" }
+    { user: "lacto", text: ">entrar al living de la chiri\n>no hay nadie\n>la chiri está afk\n>igual me quedo a webear un rato\n>buena comunidad la del culto, wn" },
+    { user: "cr0hno", text: ">de_mirage 24/7\n>compro AWP como FalleN\n>me cruzan por mid\n>muero sin apretar el gatillo\n>200 de ping al server de Sao Paulo\n>culpa del ping, nunca mía" },
+    { user: "Dem", text: "el que grita 'rush B' y se queda campeando en spawn con la AWP merece ban de la comunidad, po" },
+    { user: "remiinis", text: ">mirar el clip de coldzera en Mirage\n>intentar el jumping AWP\n>caer al vacío con el cuchillo afuera\n>el team me reporta por trolo\n>gg, ya fue po" },
+    { user: "KaspitalSin", text: ">intentando Bloodbath en modo práctica\n>llego al 97%\n>me mato en el último spike\n>cierro el juego\n>lo abro a los 5 minutos otra vez\n>es un vicio, no tengo remedio" },
+    { user: "Anonymous", text: ">creo un nivel en Geometry Dash\n>lo verifico con harta paciencia\n>me lo pasan en el primer intento\n>lo nerfean porque 'está muy fácil'\n>ahora nadie lo aprueba\n>el GD y sus dramas, wn" },
+    { user: "remiinis", text: ">esperar el update 2.2 de Geometry Dash\n>años esperando\n>por fin sale\n>ahora toca esperar el 2.3\n>el GD y el Half-Life 3 compitiendo a ver quién se demora más" },
+    { user: "Anonymous", text: ">comentar 'el que lee es weón' en Instagram Chile\n>me responden como 300 personas\n>una tía me manda la cadenita de los buenos días\n>me llega el aviso de cuenta restringida\n>el algoritmo me tiene de punto, cachai" },
+    { user: "Dem", text: "resumen de Instagram Chile: mitad memes robados sin crédito, mitad reels de señoras bailando mal. y el comentario fijo de siempre: 'sígueme y te sigo'" },
+    { user: "lacto", text: ">subo el clip del ace en Mirage\n>4 likes\n>subo una foto de la once\n>300 likes\n>IG Chile tiene las prioridades claras, po" },
+    { user: "checopete", text: ">entrar a la soloq\n>me toca autofill jungla\n>me acuerdo del corxea\n>me convenzo de que soy el mejor jungla de Chile\n>no gankeo ni una línea\n>0/9 al minuto 20\n>ff 15, ya fue" },
+    { user: "checopete", text: ">el corxea dice que es winnable\n>vamos 5 kills a 28\n>el nexo ya está en llamas\n>'confía en el late game'\n>confío\n>perdemos en 3 minutos\n>gracias, corxea" },
+    { user: "checopete", text: "el LoL es el único juego donde el jungla te dice 'estoy farmeando' por 30 minutos y tú lo dejas pasar, po. puro corxea mental, wn" },
+    { user: "checopete", text: ">buscar duo rankeds en LAS\n>'soy main jungla, nivel challenger'\n>es un smurf que feedea y culpa al ping\n>el corxea tiene como 5 cuentas y todas baneadas" }
+  ],
+
+  /* ---------- Monumentos de la chiri ----------
+     Las reliquias del culto. Cada entrada es { img, title, text }.
+     Opcional: "meta" con el peso/tamaño que sale junto al título y "alt"
+     con el texto alternativo de la imagen. */
+  monuments: [
+    {
+      img: "assets/img/gato-1.jpg",
+      title: "La chiri mira fijo",
+      meta: "(86 KB, 608x1080)",
+      alt: "Gato mirando fijo a la cámara",
+      text: "No pestañea hasta que ganes el eco round."
+    },
+    {
+      img: "assets/img/gato-2.jpg",
+      title: "La chiri reacciona",
+      meta: "(74 KB, 608x1080)",
+      alt: "Gato sorprendido con los ojos muy abiertos",
+      text: "Cara de la chiri cuando ganamos con pistolas."
+    }
   ],
 
   /* ---------- Referencias del Counter-Strike ----------

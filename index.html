@@ -46,12 +46,13 @@
 
 <header class="topbar" id="topbar">
   <div class="wrap topbar-inner">
-    <nav class="nav" aria-label="Navegación principal">
-      <a href="#servidor">Servidor</a>
-      <a href="#hilo">Hilo</a>
-      <a href="#redes">Redes</a>
-      <a href="#youtube" data-nav-net="youtube">YouTube</a>
-      <a href="#spotify" data-nav-net="spotify">Spotify</a>
+    <nav class="nav" role="tablist" aria-label="Secciones">
+      <a class="nav-tab" role="tab" href="#servidor" data-tab="servidor" aria-selected="true">Servidor</a>
+      <a class="nav-tab" role="tab" href="#hilo" data-tab="hilo" aria-selected="false">Hilo</a>
+      <a class="nav-tab" role="tab" href="#redes" data-tab="redes" aria-selected="false">Redes</a>
+      <a class="nav-tab" role="tab" href="#monumentos" data-tab="monumentos" aria-selected="false">Monumentos</a>
+      <a class="nav-tab" role="tab" href="#youtube" data-tab="youtube" aria-selected="false">YouTube</a>
+      <a class="nav-tab" role="tab" href="#spotify" data-tab="spotify" aria-selected="false">Spotify</a>
     </nav>
   </div>
 </header>
@@ -81,7 +82,7 @@
     <ul class="cs-chat" id="csChat"></ul>
   </section>
 
-  <section id="servidor" class="section wrap">
+  <section id="servidor" class="section wrap" data-panel="servidor">
     <div class="section-head">
       <span class="section-icon section-icon--creeper" aria-hidden="true">
         <svg viewBox="0 0 8 8" shape-rendering="crispEdges" role="img" aria-label="Minecraft">
@@ -120,7 +121,7 @@
         </div>
 
         <div class="server-info">
-          <h3 data-cfg="server.name">Servidor</h3>
+          <h3 data-cfg="server.name">El Living de la chiri</h3>
           <p class="server-sub">
             <span data-cfg="server.version"></span>
             <span id="serverMotd"></span>
@@ -147,7 +148,7 @@
     </article>
   </section>
 
-  <section id="hilo" class="section wrap">
+  <section id="hilo" class="section wrap" data-panel="hilo">
     <div class="section-head">
       <span class="section-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -163,7 +164,7 @@
     <div class="thread" id="postList"></div>
   </section>
 
-  <section id="redes" class="section wrap">
+  <section id="redes" class="section wrap" data-panel="redes">
     <div class="section-head">
       <span class="section-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -187,6 +188,60 @@
         <a href="https://open.spotify.com/user/21qtzdifs5uvqoiujqji4246q">Spotify</a>
       </p>
     </noscript>
+  </section>
+
+  <section id="monumentos" class="section wrap" data-panel="monumentos">
+    <div class="section-head">
+      <span class="section-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="5" width="18" height="14" rx="1.5"/>
+          <circle cx="8.5" cy="10" r="1.6"/>
+          <path d="m3 17 5-5 4 4 3-3 6 6"/>
+        </svg>
+      </span>
+      <div>
+        <h2>Monumentos de la chiri<span class="jp" aria-hidden="true">記念碑</span></h2>
+        <p class="section-sub">Las reliquias del culto, todas en un solo lugar.</p>
+      </div>
+    </div>
+
+    <div class="monuments" id="monumentList"></div>
+  </section>
+
+  <section id="youtube" class="section wrap" data-panel="youtube">
+    <div class="section-head">
+      <span class="section-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2.5" y="5" width="19" height="14" rx="3"/>
+          <path d="M10 9.2v5.6l5-2.8z"/>
+        </svg>
+      </span>
+      <div>
+        <h2>YouTube<span class="jp" aria-hidden="true">動画</span></h2>
+        <p class="section-sub">Directos, clips y los vídeos del server.</p>
+      </div>
+    </div>
+
+    <div class="feature" data-featured-net="youtube"></div>
+  </section>
+
+  <section id="spotify" class="section wrap" data-panel="spotify">
+    <div class="section-head">
+      <span class="section-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M7 9.5c3-.9 6-.6 8.6 1"/>
+          <path d="M7.6 12.6c2.4-.6 4.9-.3 7 .9"/>
+          <path d="M8.3 15.4c1.7-.4 3.4-.2 4.9.7"/>
+        </svg>
+      </span>
+      <div>
+        <h2>Spotify<span class="jp" aria-hidden="true">音楽</span></h2>
+        <p class="section-sub">Mis playlists y lo que se escucha en directo.</p>
+      </div>
+    </div>
+
+    <div class="feature" data-featured-net="spotify"></div>
   </section>
 
 </main>
