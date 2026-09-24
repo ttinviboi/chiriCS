@@ -115,5 +115,19 @@ window.LITTTIN_CONFIG = {
     ,{ id:"instagram", name:"Instagram", handle:"@litttin", description:"Fotos y día a día.",           url:"https://instagram.com/litttin", cta:"Ver perfil" }
     ,{ id:"github",    name:"GitHub",    handle:"litttin", description:"Código y proyectos.",          url:"https://github.com/litttin", cta:"Ver repos" }
     */
-  ]
+  ],
+
+  /* ---------- En vivo (Discord + Lanyard) ----------
+     Muestra en la web lo que estoy jugando o escuchando, en tiempo real.
+     Solo necesita tu ID de Discord; los datos se leen de https://api.lanyard.rest
+     (público, sin backend). Pasos:
+       1) Entra al Discord de Lanyard: https://discord.gg/lanyard
+       2) Activa el "Modo desarrollador" en Discord (Ajustes > Avanzado).
+       3) Clic derecho sobre tu nombre > "Copiar ID de usuario".
+       4) Pega ese número en discordId.
+     Si lo dejas vacío (""), los carteles de "en vivo" no aparecen en la web. */
+  live: {
+    discordId: "",
+    pollSeconds: 20    // cada cuántos segundos se refresca el estado
+  }
 };

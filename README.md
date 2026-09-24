@@ -1,114 +1,146 @@
-# litttin — página de soporte
+# El Living de la chiri — web del server
 
 **Web en vivo:** https://ttinviboi.github.io/chiriCS/
 **Repositorio:** https://github.com/ttinviboi/chiriCS
 
-Página estática (solo front-end) con la IP del servidor de Minecraft, el canal de YouTube,
-Spotify y el resto de redes. Estética única de imageboard (tipo 4chan / yotsuba): fondo crema,
-serif, bordes duros, posts con `Anonymous` y `No.`, más una escena anime de fondo con
-montañas, torii, pétalos de sakura y trama de puntos tipo manga.
+Página estática (solo front-end, sin backend) con la IP del server de Minecraft, las redes,
+un hilo estilo imageboard (tipo 4chan / yotsuba) donde "postea" la comunidad, una galería de
+**Monumentos de la chiri** y un panel **En vivo** que muestra en tiempo real qué estoy jugando
+o escuchando.
 
-## Ver en local
+> ¿Primera vez con el proyecto? Lee **[PASO-A-PASO.md](./PASO-A-PASO.md)**: es la guía
+> detallada, con todo el "cómo" explicado desde cero.
 
-Con abrir `index.html` en el navegador ya funciona. Si prefieres un servidor local:
+---
 
-```bash
-cd litttin-web
-python3 -m http.server 8000
-# abre http://localhost:8000
-```
+## Qué hay ahora en la web
+
+### Pestañas (cada una con su apartado)
+La barra de arriba ya no baja por una página larga: son **pestañas**. Al abrir una se muestra
+solo esa sección y se ocultan las demás.
+
+| Pestaña | Qué muestra |
+|---|---|
+| **Servidor** | IP del server de Minecraft, versión, estado online/offline y jugadores |
+| **Hilo** | Los posts de la comunidad (estilo imageboard) |
+| **Redes** | Todas las redes (YouTube, Spotify, etc.) en tarjetas |
+| **Monumentos** | La galería *Monumentos de la chiri* |
+| **YouTube** | Tarjeta de YouTube + lo que estoy viendo/transmitiendo en vivo |
+| **Spotify** | Tarjeta de Spotify + la canción que estoy escuchando ahora |
+
+Detalles técnicos:
+- Cada pestaña se puede enlazar directo con el hash de la URL (`#hilo`, `#monumentos`, `#spotify`...).
+- Se cambia de pestaña con clic y también con las flechas ← → del teclado.
+- Los botones del hero ("Entrar al servidor" / "Ver mis redes") también cambian de pestaña.
+- Si una red no existe en `config.js`, su pestaña se oculta sola.
+
+### Monumentos de la chiri
+Galería con las fotos de la chiri. Se rellena desde la clave `monuments` de `config.js`
+(cada una con `img`, `title`, `text` y, opcional, `meta` y `alt`).
+
+### El hilo (posts)
+Los comentarios se pintan desde la clave `posts` de `config.js`. Cada post es `{ user, text }`.
+Las líneas que empiezan con `>` se pintan en verde, como en los imageboards. El humor está
+ambientado en las comunidades de Counter-Strike, Geometry Dash, Instagram Chile y LoL
+(con el usuario `checopete` y sus tallas del **corxea**).
+
+### En vivo (Discord + Lanyard)
+Muestra, en tiempo real, qué juego / qué canción / qué directo tengo abierto:
+
+- **Barra en el hero**: avatar + estado + un resumen ("Jugando: CS2", "Escuchando: …").
+- **Pestaña Spotify**: carátula, canción, artista, álbum, **barra de progreso** y un
+  **reproductor de Spotify incrustado** para escuchar esa canción ahí mismo. El reproductor
+  solo se recarga cuando cambia la canción (no en cada refresco).
+- **Pestaña YouTube**: si estoy en directo o viendo YouTube; si no, un aviso amable.
+
+Funciona con **Discord** como fuente y **[Lanyard](https://github.com/Phineas/lanyard)** como
+puente público (API sin autenticación y con CORS, así que se lee directo desde el navegador,
+sin backend). Para activarlo solo hay que poner tu **ID de Discord** en `config.js` → `live.discordId`.
+El paso a paso completo está en **[PASO-A-PASO.md](./PASO-A-PASO.md)**.
+
+Si `live.discordId` está vacío, los carteles de "en vivo" **no se muestran** (así la web no
+queda rota mientras no lo configures).
+
+---
 
 ## Qué tienes que tocar
 
-**Un solo archivo: `config.js`.** Ahí están la IP, el nombre del servidor, la versión, los
-textos, la charla del Counter-Strike y el dashboard de redes.
+**Un solo archivo: `config.js`.** Ahí está todo lo editable:
 
-```js
-server: {
-  ip: "play.tuservidor.net",   // ← tu IP real
-  version: "Java 1.21.x",
-  bedrockPort: ""              // si tienes Bedrock, ej: "19132"
-}
+| Clave | Para qué sirve |
+|---|---|
+| `kicker` | Rótulo pequeño sobre la descripción del hero |
+| `intro` | Frase de presentación del hero |
+| `motto` | Frase con sello propio (pegatina + cinta animada). Vacía (`""`) = desaparecen |
+| `server.name` | Nombre del server (ahora: **El Living de la chiri**) |
+| `server.ip` | IP del server de Minecraft |
+| `server.version` | Versión de Minecraft |
+| `server.bedrockPort` | Puerto de Bedrock (o `""` si no usas) |
+| `server.checkStatus` | `true` = consulta online/offline automáticamente |
+| `posts` | Posts del **Hilo**: `{ user, text }` (y opcional `img`, `imgMeta`, `imgAlt`) |
+| `monuments` | Galería **Monumentos de la chiri**: `{ img, title, text }` |
+| `csChat` | Líneas de consola del Counter-Strike (`tag`: `RADIO`, `DEAD`, `CT`, `T`, `SERVER`) |
+| `networks` | Redes del dashboard (YouTube, Spotify, etc.) |
+| `live.discordId` | Tu ID de Discord para el panel **En vivo** |
+| `live.pollSeconds` | Cada cuántos segundos se refresca el "en vivo" |
+
+---
+
+## Ver en local
+
+Con abrir `index.html` en el navegador ya funciona. Si prefieres un servidor local
+(recomendado, así el panel "En vivo" y las imágenes cargan igual que en GitHub):
+
+```bash
+python -m http.server 8000
+# abre http://localhost:8000
 ```
 
-Para añadir una red, copia una línea del array `networks` y quita las `//`. Los iconos
-disponibles son `youtube`, `spotify`, `discord`, `twitch`, `tiktok`, `x`, `instagram` y
-`github`; si pones otro, se usa un globo por defecto.
+En Windows también sirve:
 
-Otras cosas que puedes editar en el mismo archivo:
-
-- `kicker` — el rótulo pequeño que va sobre la descripción.
-- `intro` — la frase de presentación del hero.
-- `motto` — frase con sello propio: pegatina junto al rótulo y cinta animada al final.
-  Si la dejas vacía (`motto: ""`), desaparecen las dos.
-- `csChat` — líneas de consola del Counter-Strike que van bajo los botones. El `tag`
-  (`RADIO`, `DEAD`, `CT`, `T`, `SERVER`) decide el color.
-- `posts` — los posts de la sección **El hilo**: `{ user, text }`. Las líneas que empiezan
-  con `>` se pintan en verde, como en los imageboards.
-
-### Estado online/offline
-
-La sección del servidor consulta `api.mcsrvstat.us` desde el navegador y muestra si el
-servidor está online, la versión y los jugadores conectados. Mientras la IP siga siendo la
-de ejemplo, esa línea no se muestra. Si no quieres la consulta, pon `checkStatus: false`.
-
-## Estructura
-
+```powershell
+py -m http.server 8000
 ```
-litttin-web/
-├── index.html                 página completa
-├── config.js                  ← todo lo editable
-├── assets/
-│   ├── css/
-│   │   ├── base.css           estructura y estilos comunes
-│   │   ├── scene.css          escena anime (cielo, luna, montañas, torii, pétalos, screentone)
-│   │   └── theme.css          paleta y tipografía del tema (imageboard / yotsuba)
-│   ├── js/app.js              copiar IP, estado del server, redes, charla de CS, pétalos
-│   └── img/
-│       ├── favicon.svg        cara de creeper
-│       └── og.png             imagen de previsualización al compartir el enlace
-├── .nojekyll                  evita el procesado de Jekyll en GitHub Pages
-└── .gitignore
-```
+
+---
 
 ## Publicar en GitHub Pages
 
 Este repo ya está publicado: cualquier `git push` a `main` actualiza la web en 1-2 minutos.
+El detalle está en [PASO-A-PASO.md](./PASO-A-PASO.md#parte-e--subir-los-cambios-a-github).
 
-1. Crea un repositorio **público** en GitHub.
-2. Sube estos archivos a la rama `main` (raíz del repo).
-3. En el repo: **Settings → Pages → Source: Deploy from a branch → Branch: `main` / `(root)` → Save**.
-4. En un par de minutos la página queda en:
+---
 
-```
-https://TU-USUARIO.github.io/NOMBRE-DEL-REPO/
-```
-
-### Si quieres que la dirección sea de tipo `chiriCS`
-
-Hay tres maneras, de más simple a más corta:
-
-| Opción | Qué se necesita | Dirección resultante |
-|---|---|---|
-| Repo llamado `chiriCS` en tu cuenta | nada extra | `https://tu-usuario.github.io/chiriCS/` |
-| Cuenta/organización llamada `chiriCS` y repo `chiriCS.github.io` | la cuenta debe llamarse así | `https://chirics.github.io/` |
-| Dominio propio (ej. `chirics.cl`) | comprar el dominio y apuntar los DNS a GitHub Pages | `https://chirics.cl/` |
-
-Para el dominio propio, en GitHub Pages se pone el dominio en **Custom domain** y se crean
-estos registros DNS:
+## Estructura
 
 ```
-A     @    185.199.108.153
-A     @    185.199.109.153
-A     @    185.199.110.153
-A     @    185.199.111.153
-CNAME www  tu-usuario.github.io
+chiriCS/
+├── index.html              página completa (pestañas + apartados)
+├── config.js               ← TODO lo editable
+├── README.md               este archivo
+├── PASO-A-PASO.md          guía detallada
+├── assets/
+│   ├── css/
+│   │   ├── base.css        estructura y estilos comunes
+│   │   ├── scene.css       escena anime (cielo, luna, montañas, torii, pétalos)
+│   │   └── theme.css       paleta y tipografía (imageboard / yotsuba)
+│   ├── js/
+│   │   └── app.js          pestañas, hilo, monumentos, redes, "en vivo", pétalos
+│   └── img/
+│       ├── favicon.svg     cara de creeper
+│       ├── og.png          imagen de previsualización al compartir
+│       ├── gato-1.jpg      Monumento de la chiri
+│       └── gato-2.jpg      Monumento de la chiri
+├── .nojekyll               evita el procesado de Jekyll en GitHub Pages
+└── .gitignore
 ```
 
-Marca **Enforce HTTPS** y listo. GitHub emite el certificado solo.
+---
 
 ## Notas
 
 - Todo es estático: sin backend, sin cookies, sin base de datos, sin rastreadores.
+- El panel "En vivo" lee datos **públicos** de tu presencia de Discord a través de Lanyard.
+  Mientras esté activado, cualquiera con tu ID puede ver qué juegas/escuchas.
 - El fondo es una escena dibujada con CSS y SVG (nada de imágenes externas ni derechos de autor).
 - Respeta `prefers-reduced-motion`: si el sistema pide menos movimiento, los pétalos se desactivan.

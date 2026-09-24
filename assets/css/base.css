@@ -545,6 +545,121 @@ code { font-family: var(--font-mono); }
 /* ---------- Pestaña de una sola red ---------- */
 .feature { max-width: 460px; }
 
+/* ---------- En vivo (Discord + Lanyard) ---------- */
+.live-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 7px 14px 7px 7px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: .82rem;
+}
+.live-bar[hidden] { display: none; }
+
+.live-avatar {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--code-bg);
+}
+.live-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.live-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-faint);
+}
+.live-dot[data-state="online"] { background: var(--ok); }
+.live-dot[data-state="music"] { background: #1db954; }
+.live-dot[data-state="playing"] { background: #5865f2; }
+.live-dot[data-state="streaming"] { background: #ff0000; }
+.live-dot[data-state="watching"] { background: #ff0000; }
+.live-dot[data-state="idle"] { background: var(--warn); }
+.live-dot[data-state="dnd"] { background: var(--bad); }
+
+.live-text { color: var(--text-dim); }
+.live-link { color: var(--accent); font-weight: 600; }
+
+.now-playing { margin-bottom: var(--gap); }
+.now-playing[hidden] { display: none; }
+
+.np {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: var(--card-pad);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.np-art {
+  flex: none;
+  width: 84px;
+  height: 84px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--code-bg);
+}
+.np-art img { width: 100%; height: 100%; object-fit: cover; }
+.np--stack { flex-direction: column; align-items: stretch; }
+.np-top { display: flex; align-items: center; gap: 14px; }
+.np-embed {
+  display: block;
+  width: 100%;
+  height: 80px;
+  margin-top: 12px;
+  border: 0;
+}
+.np-info { flex: 1; min-width: 0; }
+.np-kicker {
+  margin: 0 0 4px;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.np-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: var(--fw-display);
+}
+.np-artist { margin: 2px 0 0; font-size: .88rem; color: var(--text-dim); }
+.np-album { margin: 2px 0 0; font-size: .78rem; color: var(--text-faint); }
+.np-empty { margin: 0; font-size: .88rem; color: var(--text-dim); }
+
+.np-progress {
+  margin-top: 10px;
+  height: 4px;
+  background: var(--code-bg);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.np-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--accent);
+  transition: width 1s linear;
+}
+.np-times {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0 0;
+  font-size: .7rem;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
 /* ---------- Toast ---------- */
 .toast {
   position: fixed;

@@ -424,6 +424,210 @@
     onScroll();
   }
 
+  /* ---------------- En vivo: Discord + Lanyard ----------------
+     Lee la presencia pública (juegos, Spotify, directos) desde
+     https://api.lanyard.rest y la pinta en el hero y en las pestañas. */
+  var LANYARD_API = "https://api.lanyard.rest/v1/users/";
+  var spotifyTimes = null;
+
+  function fmtClock(ms) {
+    var total = Math.max(0, Math.floor(ms / 1000));
+    var m = Math.floor(total / 60);
+    var s = total % 60;
+    return m + ":" + (s < 10 ? "0" : "") + s;
+  }
+
+  function avatarUrl(user) {
+    if (user && user.avatar) {
+      return "https://cdn.discordapp.com/avatars/" + user.id + "/" + user.avatar + ".png?size=80";
+    }
+    return "https://cdn.discordapp.com/embed/avatars/0.png";
+  }
+
+  function activityImage(act) {
+    var img = (act.assets && act.assets.large_image) || "";
+    if (!img) return "";
+    if (img.indexOf("mp:") === 0) return "https://media.discordapp.net/" + img.slice(3);
+    if (img.indexOf("spotify:") === 0) return "https://i.scdn.co/image/" + img.slice(8);
+    if (act.application_id) {
+      return "https://cdn.discordapp.com/app-assets/" + act.application_id + "/" + img + ".png";
+    }
+    return "";
+  }
+
+  function isYouTube(act) {
+    return /youtube/i.test(act.name || "") || /youtube/i.test(act.details || "");
+  }
+
+  function updateProgress() {
+    var bar = $("[data-live-progress]");
+    if (!bar || !spotifyTimes || !spotifyTimes.start || !spotifyTimes.end) return;
+    var total = spotifyTimes.end - spotifyTimes.start;
+    var done = Date.now() - spotifyTimes.start;
+    var pct = Math.max(0, Math.min(100, (done / total) * 100));
+    bar.style.width = pct.toFixed(2) + "%";
+    var el = $("[data-live-elapsed]");
+    if (el) el.textContent = fmtClock(done);
+    var tt = $("[data-live-total]");
+    if (tt) tt.textContent = fmtClock(total);
+  }
+
+  function renderLiveBar(data) {
+    var bar = $("#liveBar");
+    if (!bar) return;
+
+    if (!data) {
+      bar.hidden = false;
+      bar.innerHTML = '<span class="live-dot" data-state="offline"></span>' +
+        '<span class="live-text">En vivo no disponible</span>';
+      return;
+    }
+
+    var user = data.discord_user || {};
+    var status = data.discord_status || "offline";
+    var acts = Array.isArray(data.activities) ? data.activities : [];
+    var streaming = acts.filter(function (a) { return a.type === 1; })[0];
+    var playing = acts.filter(function (a) { return a.type === 0 && !isYouTube(a) && a.name !== "Spotify"; })[0];
+    var watching = acts.filter(function (a) { return a.type === 3; })[0];
+    var spotify = data.listening_to_spotify && data.spotify ? data.spotify : null;
+
+    var state = status;
+    var label = "Conectado a Discord";
+
+    if (streaming) { state = "streaming"; label = "En directo: " + (streaming.details || streaming.name); }
+    else if (spotify) { state = "music"; label = "Escuchando: " + spotify.song + " — " + spotify.artist; }
+    else if (playing) { state = "playing"; label = "Jugando: " + playing.name; }
+    else if (watching) { state = "watching"; label = "Viendo: " + watching.name; }
+    else if (status === "offline") { state = "offline"; label = "Desconectado"; }
+    else if (status === "idle") { label = "Ausente"; }
+    else if (status === "dnd") { label = "No molestar"; }
+
+    bar.hidden = false;
+    bar.innerHTML =
+      '<span class="live-avatar"><img src="' + esc(avatarUrl(user)) + '" alt="" loading="lazy" decoding="async"></span>' +
+      '<span class="live-dot" data-state="' + esc(state) + '"></span>' +
+      '<span class="live-text">' + esc(label) + '</span>' +
+      '<a class="live-link" href="https://discord.com/users/' + esc(user.id || "") + '" target="_blank" rel="noopener noreferrer">@' + esc(user.username || "yo") + '</a>';
+  }
+
+  var liveMusicKey = null;
+
+  function renderLiveMusic(data) {
+    var box = $("#liveMusic");
+    if (!box) return;
+
+    var spotify = data && data.listening_to_spotify && data.spotify ? data.spotify : null;
+    var key = spotify ? String(spotify.track_id) : "";
+    box.hidden = false;
+
+    /* Si suena la misma canción, no se reconstruye nada: así el reproductor
+       embebido no se reinicia cuando llega el siguiente refresco. */
+    if (key === liveMusicKey) {
+      if (spotify) { spotifyTimes = spotify.timestamps || spotifyTimes; updateProgress(); }
+      return;
+    }
+    liveMusicKey = key;
+
+    if (!spotify) {
+      spotifyTimes = null;
+      box.innerHTML = '<p class="np-empty">Ahora mismo no estoy escuchando música en Spotify.</p>';
+      return;
+    }
+
+    spotifyTimes = spotify.timestamps || null;
+    box.innerHTML =
+      '<div class="np np--stack">' +
+      '<div class="np-top">' +
+      '<a class="np-art" href="https://open.spotify.com/track/' + esc(spotify.track_id) + '" target="_blank" rel="noopener noreferrer">' +
+      '<img src="' + esc(spotify.album_art_url) + '" alt="' + esc(spotify.album || "") + '" loading="lazy" decoding="async">' +
+      '</a>' +
+      '<div class="np-info">' +
+      '<p class="np-kicker">Escuchando ahora en Spotify</p>' +
+      '<p class="np-title">' + esc(spotify.song) + '</p>' +
+      '<p class="np-artist">' + esc(spotify.artist) + '</p>' +
+      (spotify.album ? '<p class="np-album">' + esc(spotify.album) + '</p>' : '') +
+      '<div class="np-progress"><span data-live-progress></span></div>' +
+      '<p class="np-times"><span data-live-elapsed>0:00</span><span data-live-total>0:00</span></p>' +
+      '</div>' +
+      '</div>' +
+      '<iframe class="np-embed" src="https://open.spotify.com/embed/track/' + esc(spotify.track_id) + '?utm_source=generator&theme=0" width="100%" height="80" frameborder="0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="Reproductor de Spotify"></iframe>' +
+      '</div>';
+    updateProgress();
+  }
+
+  function renderLiveYoutube(data) {
+    var box = $("#liveYoutube");
+    if (!box) return;
+
+    var acts = data && Array.isArray(data.activities) ? data.activities : [];
+    var streaming = acts.filter(function (a) { return a.type === 1; })[0];
+    var yt = acts.filter(isYouTube)[0];
+    var act = streaming || yt;
+    box.hidden = false;
+
+    if (!act) {
+      var playing = acts.filter(function (a) { return a.type === 0 && a.name !== "Spotify"; })[0];
+      box.innerHTML = '<p class="np-empty">' +
+        (playing ? "Ahora mismo estoy jugando a " + esc(playing.name) + ", no estoy en YouTube."
+                 : "Ahora mismo no estoy en YouTube.") + '</p>';
+      return;
+    }
+
+    var img = activityImage(act);
+    box.innerHTML =
+      '<div class="np">' +
+      (img ? '<span class="np-art"><img src="' + esc(img) + '" alt="" loading="lazy" decoding="async"></span>' : '') +
+      '<div class="np-info">' +
+      '<p class="np-kicker">' + (act.type === 1 ? "En directo" : "Viendo YouTube") + '</p>' +
+      '<p class="np-title">' + esc(act.details || act.name) + '</p>' +
+      (act.state ? '<p class="np-artist">' + esc(act.state) + '</p>' : '') +
+      (act.url ? '<p class="np-album"><a href="' + esc(act.url) + '" target="_blank" rel="noopener noreferrer">Abrir en YouTube →</a></p>' : '') +
+      '</div>' +
+      '</div>';
+  }
+
+  function renderLive(data) {
+    renderLiveBar(data);
+    renderLiveMusic(data);
+    renderLiveYoutube(data);
+  }
+
+  function setupLive() {
+    var live = CFG.live || {};
+    var id = String(live.discordId || "").trim();
+    if (!id || live.enabled === false) return;
+
+    var pollMs = Math.max(5, Number(live.pollSeconds) || 20) * 1000;
+    var timer = null;
+
+    function tick() {
+      fetch(LANYARD_API + encodeURIComponent(id))
+        .then(function (res) { return res.json(); })
+        .then(function (json) {
+          renderLive(json && json.success === true ? json.data : null);
+        })
+        .catch(function () { renderLive(null); });
+    }
+
+    function start() {
+      tick();
+      if (timer) clearInterval(timer);
+      timer = setInterval(tick, pollMs);
+    }
+
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stop();
+      else start();
+    });
+
+    start();
+    setInterval(updateProgress, 1000);
+  }
+
   /* ---------------- Pestañas: cada una con su apartado ---------------- */
   function setupTabs() {
     var tabs = $$("[data-tab]");
@@ -498,6 +702,7 @@
     renderNetworks();
     renderFeatured();
     setupTabs();
+    setupLive();
     setupCopy();
     setupBedrock();
     setupTopbar();
