@@ -187,14 +187,6 @@ html .eq { background: var(--code-bg); border: 1px solid var(--line); border-rad
 html .eq span { background: var(--eq-bar); border-radius: 0; }
 html .eq span:nth-child(3n + 2) { background: var(--eq-bar-2); }
 
-/* ---------- Aviso del fondo ---------- */
-html .hint {
-  margin: 8px 0 0;
-  font-family: var(--font-ui);
-  font-size: 10px;
-  color: var(--text-faint);
-}
-
 /* ---------- Profile ---------- */
 html .profile-name { color: var(--heading); }
 html .profile-tag { font-family: var(--font-ui); font-size: 10px; color: var(--accent); }

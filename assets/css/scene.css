@@ -10,7 +10,9 @@
   inset: 0;
   z-index: -1;
   overflow: hidden;
-  pointer-events: none;
+  /* El fondo es clicable: alterna día / noche desde app.js */
+  pointer-events: auto;
+  cursor: pointer;
   background: var(--scene-sky);
   transition: background .6s ease;
 }
