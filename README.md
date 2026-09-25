@@ -69,6 +69,12 @@ cae solo a la consulta REST cada `live.pollSeconds` segundos.
 Si `live.discordId` está vacío, los carteles de "en vivo" **no se muestran** (así la web no
 queda rota mientras no lo configures).
 
+### Hero y profile
+- **Hero**: la imagen de Shiina Mayuri (arriba a la derecha) y, debajo, la **letra de la canción**
+  que se edita en `lyrics` de `config.js`.
+- **Banner de arriba**: una sola imagen o GIF (`deco.banner`).
+- **Profile**: los datos de `profile` más las **especificaciones del PC** (`profile.specs`).
+
 ---
 
 ## Qué tienes que tocar
@@ -87,10 +93,12 @@ queda rota mientras no lo configures).
 | `server.checkStatus` | `true` = consulta online/offline automáticamente |
 | `posts` | Posts del **Hilo**: `{ user, text }` (y opcional `img`, `imgMeta`, `imgAlt`) |
 | `monuments` | Galería **Monumentos de la chiri**: `{ img, title, text }` |
-| `csChat` | Líneas de consola del Counter-Strike (`tag`: `RADIO`, `DEAD`, `CT`, `T`, `SERVER`) |
+| `lyrics` | Letra de la canción que sale en el hero (un string por línea) |
 | `networks` | Redes del dashboard (YouTube, Spotify, etc.) |
 | `live.discordId` | Tu ID de Discord para el panel **En vivo** |
 | `live.pollSeconds` | Cada cuántos segundos se refresca el "en vivo" |
+| `profile.specs` | Las piezas del PC en la ventana **PROFILE**: `{ k, v }` |
+| `deco` | Imágenes: `banner` (arriba), `chibi` (hero) y `chibiProfile` |
 
 ---
 
@@ -130,8 +138,8 @@ chiriCS/
 ├── assets/
 │   ├── css/
 │   │   ├── base.css        estructura y estilos comunes
-│   │   ├── scene.css       escena anime (cielo, luna, montañas, torii, pétalos)
-│   │   └── theme.css       paleta y tipografía (imageboard / yotsuba)
+│   │   ├── scene.css       fondo: cielo, sol, montañas, cerezo en pixel art, torii y pétalos
+│   │   └── theme.css       paleta blanco + celeste (Shiina Mayuri), pestañas y botones
 │   ├── js/
 │   │   └── app.js          pestañas, hilo, monumentos, redes, "en vivo", pétalos
 │   └── img/
@@ -150,5 +158,6 @@ chiriCS/
 - Todo es estático: sin backend, sin cookies, sin base de datos, sin rastreadores.
 - El panel "En vivo" lee datos **públicos** de tu presencia de Discord a través de Lanyard.
   Mientras esté activado, cualquiera con tu ID puede ver qué juegas/escuchas.
-- El fondo es una escena dibujada con CSS y SVG (nada de imágenes externas ni derechos de autor).
+- El fondo es una escena dibujada con CSS y SVG (cielo, montañas, torii y un cerezo en pixel art),
+  sin imágenes con derechos de autor.
 - Respeta `prefers-reduced-motion`: si el sistema pide menos movimiento, los pétalos se desactivan.

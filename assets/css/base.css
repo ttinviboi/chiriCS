@@ -154,45 +154,17 @@ code { font-family: var(--font-mono); }
 .btn--icon.is-spinning { animation: spin 0.9s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ---------- Mensajes del Counter-Strike ---------- */
-.cs-chat {
+/* ---------- Letra de la canción (hero) ---------- */
+.lyrics {
   display: grid;
   gap: 3px;
-  max-width: 430px;
   margin: 30px 0 0;
-  padding: 13px 16px;
+  padding: 0;
   list-style: none;
-  font-family: var(--font-mono);
-  font-size: .78rem;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
 }
-.cs-chat[hidden] { display: none; }
+.lyrics[hidden] { display: none; }
 
-.cs-line {
-  display: flex;
-  gap: 9px;
-}
-
-.cs-tag {
-  flex: none;
-  min-width: 56px;
-  font-weight: 700;
-  letter-spacing: .06em;
-  color: var(--text-faint);
-}
-.cs-text { color: var(--text-dim); }
-
-.cs-line--radio .cs-text { color: var(--text); }
-.cs-line--server .cs-tag,
-.cs-line--server .cs-text { color: var(--cs-yellow, #ffd60a); }
-.cs-line--dead .cs-tag,
-.cs-line--dead .cs-text { color: var(--bad); }
-.cs-line--ct .cs-tag,
-.cs-line--ct .cs-text { color: var(--cs-ct, #4aa8ff); }
-.cs-line--t .cs-tag,
-.cs-line--t .cs-text { color: var(--cs-t, #ff6b4a); }
+.lyric-line { margin: 0; }
 
 /* ---------- Frase con sello propio: sello + cinta ---------- */
 .hero-top {
@@ -701,17 +673,19 @@ code { font-family: var(--font-mono); }
    Ventanas retro (layout tipo escritorio)
    ========================================================================== */
 
-.deco-gif {
+.deco-banner {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
   justify-content: center;
-  gap: 12px;
   padding: 10px var(--pad) 0;
 }
-.deco-gif[hidden] { display: none; }
-.deco-gif img { width: min(300px, 40vw); height: auto; }
-.deco-gif img[hidden] { display: none; }
+.deco-banner[hidden] { display: none; }
+.deco-banner img {
+  width: min(520px, 92vw);
+  height: auto;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+}
+.deco-banner img[hidden] { display: none; }
 
 .layout {
   display: grid;
@@ -825,17 +799,17 @@ code { font-family: var(--font-mono); }
 .hero { position: relative; }
 .chibi {
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 0;
+  right: 0;
   z-index: 2;
-  width: clamp(84px, 13vw, 132px);
+  width: clamp(130px, 20vw, 230px);
   height: auto;
   pointer-events: none;
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .25));
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .25));
 }
 .chibi[hidden] { display: none; }
 @media (min-width: 720px) {
-  .win--welcome .hero { padding-right: 140px; }
+  .win--welcome .hero { padding-right: 250px; }
 }
 
 /* ---------- Profile ---------- */
@@ -887,6 +861,16 @@ code { font-family: var(--font-mono); }
 }
 .profile-ig:hover { border-color: var(--accent); color: var(--accent); }
 .profile-ig svg { width: 18px; height: 18px; }
+
+/* ---------- Especificaciones del PC ---------- */
+.profile-specs {
+  display: grid;
+  gap: 2px;
+  max-width: 52ch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
 /* ---------- Frase (quote) ---------- */
 .quote {

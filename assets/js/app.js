@@ -1,7 +1,7 @@
 /* ==========================================================================
    litttin · app.js
    Pinta los textos desde config.js, genera el dashboard de redes, copia la
-   IP, comprueba el estado del servidor y cambia entre los dos temas.
+   IP y comprueba el estado del servidor.
    No hace falta tocar este archivo.
    ========================================================================== */
 
@@ -79,22 +79,15 @@
     });
   }
 
-  /* ---------------- Charla del Counter-Strike ---------------- */
-  var CS_TAGS = { RADIO: "radio", DEAD: "dead", CT: "ct", T: "t", SERVER: "server" };
-
-  function renderCsChat() {
-    var list = $("#csChat");
+  /* ---------------- Letra de la canción (hero) ---------------- */
+  function renderLyrics() {
+    var list = $("#lyrics");
     if (!list) return;
 
-    var lines = Array.isArray(CFG.csChat) ? CFG.csChat : [];
+    var lines = Array.isArray(CFG.lyrics) ? CFG.lyrics : [];
 
     list.innerHTML = lines.map(function (line) {
-      var tag = String(line.tag || "SERVER").toUpperCase();
-      var cls = CS_TAGS[tag] || "server";
-      return '<li class="cs-line cs-line--' + cls + '">' +
-        '<span class="cs-tag">' + esc(tag) + '</span>' +
-        '<span class="cs-text">' + esc(line.text) + '</span>' +
-        '</li>';
+      return '<li class="lyric-line">' + esc(line) + '</li>';
     }).join("");
 
     list.hidden = lines.length === 0;
@@ -691,18 +684,6 @@
     setInterval(updateProgress, 1000);
   }
 
-  /* ---------------- Día / noche: un clic en el fondo ---------------- */
-  function setupThemeToggle() {
-    var IGNORE = ".win, a, button, input, textarea, select, code, img, .eq, .deco-gif, .motto-strip, .toast";
-
-    document.addEventListener("click", function (e) {
-      if (e.target.closest && e.target.closest(IGNORE)) return;
-      var day = document.documentElement.classList.toggle("is-day");
-      document.dispatchEvent(new Event("themechange"));
-      toast(day ? "Modo día" : "Modo noche");
-    });
-  }
-
   /* ---------------- Ventanas, ecualizador e imágenes ---------------- */
   function setupEq() {
     $$(".eq").forEach(function (host) {
@@ -743,52 +724,42 @@
     optional("#chibiImg", deco.chibi);
     optional("#profileChibi", deco.chibiProfile);
 
-    /* Banner de arriba: una imagen cambia con día/noche y otra es fija. */
-    var banner = $("#gifBanner");
-    var modeImg = $("#gifMode");
-    var alwaysImg = $("#gifAlways");
-
-    var modeSrc = function () {
-      return document.documentElement.classList.contains("is-day")
-        ? deco.bannerDay
-        : deco.bannerNight;
-    };
-
-    var updateMode = function () {
-      if (modeImg && modeSrc()) modeImg.src = modeSrc();
-    };
-
-    if (modeImg && (deco.bannerDay || deco.bannerNight)) {
-      modeImg.hidden = true;
-      modeImg.addEventListener("load", function () {
-        modeImg.hidden = false;
-        if (banner) banner.hidden = false;
+    /* Banner de arriba: una sola imagen, opcional. */
+    var wrap = $("#bannerWrap");
+    var img = $("#bannerImg");
+    if (img && deco.banner) {
+      img.hidden = true;
+      img.addEventListener("load", function () {
+        img.hidden = false;
+        if (wrap) wrap.hidden = false;
       });
-      modeImg.addEventListener("error", function () { modeImg.hidden = true; });
-      updateMode();
-    }
-
-    if (alwaysImg && deco.bannerAlways) {
-      alwaysImg.hidden = true;
-      alwaysImg.addEventListener("load", function () {
-        alwaysImg.hidden = false;
-        if (banner) banner.hidden = false;
+      img.addEventListener("error", function () {
+        if (wrap) wrap.hidden = true;
+        img.remove();
       });
-      alwaysImg.addEventListener("error", function () { alwaysImg.remove(); });
-      alwaysImg.src = deco.bannerAlways;
+      img.src = deco.banner;
     }
-
-    /* Cuando cambia día/noche, se cambia la imagen del banner */
-    document.addEventListener("themechange", updateMode);
   }
 
   function renderProfile() {
     var p = CFG.profile || {};
+
     var ig = $("#profileIg");
-    if (!ig) return;
-    ig.setAttribute("href", p.instagramUrl || "#");
-    var handle = $(".ig-handle", ig);
-    if (handle) handle.textContent = p.instagram || "@tu_instagram";
+    if (ig) {
+      ig.setAttribute("href", p.instagramUrl || "#");
+      var handle = $(".ig-handle", ig);
+      if (handle) handle.textContent = p.instagram || "@tu_instagram";
+    }
+
+    /* Especificaciones del PC. */
+    var specs = $("#profileSpecs");
+    if (!specs) return;
+    var list = Array.isArray(p.specs) ? p.specs : [];
+    specs.innerHTML = list.map(function (s) {
+      return '<li class="profile-spec"><span class="spec-k">' + esc(s.k) + ':</span> ' +
+        '<span class="spec-v">' + esc(s.v) + '</span></li>';
+    }).join("");
+    specs.hidden = list.length === 0;
   }
 
   /* ---------------- Pestañas: cada una con su apartado ---------------- */
@@ -863,7 +834,7 @@
   /* ---------------- Arranque ---------------- */
   function init() {
     applyConfig();
-    renderCsChat();
+    renderLyrics();
     renderPosts();
     renderMonuments();
     renderNetworks();
@@ -871,7 +842,6 @@
     setupTabs();
     setupLive();
     setupWindows();
-    setupThemeToggle();
     setupEq();
     setupDeco();
     renderProfile();

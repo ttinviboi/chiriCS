@@ -113,18 +113,17 @@ window.LITTTIN_CONFIG = {
     }
   ],
 
-  /* ---------- Referencias del Counter-Strike ----------
-     Sustituyen a los chips de IP y versión del hero. El "tag" le da el color
-     de la consola: RADIO, DEAD, CT, T o SERVER. */
-  csChat: [
-    { tag: "SERVER", text: "de_mirage · 24/7 · AR/BR" },
-    { tag: "RADIO", text: "Rush B, no stop, boludo" },
-    { tag: "RADIO", text: "Go go go!" },
-    { tag: "T", text: "Eco round, no compren nada" },
-    { tag: "RADIO", text: "Enemy spotted" },
-    { tag: "DEAD", text: "gg, me la hizo un jumping AWP de coldzera" },
-    { tag: "CT", text: "200 de ping, culpa del server de Brasil" },
-    { tag: "SERVER", text: "Bomb has been planted" }
+  /* ---------- Letra de la canción (hero) ----------
+     Cada línea es un string y se pinta tal cual, donde antes iba la consola
+     del Counter-Strike. */
+  lyrics: [
+    "She may be the reason I survive",
+    "The why and wherefore I'm alive",
+    "The one I'll care for through the rough and ready years",
+    "Me, I'll take her laughter and her tears",
+    "And make them all my souvenirs",
+    "For where she goes, I've got to be",
+    "The meaning of my life is she"
   ],
 
   /* ---------- El Culto De Chiri (dashboard de redes) ----------
@@ -182,16 +181,12 @@ window.LITTTIN_CONFIG = {
   },
 
   /* ---------- Imágenes decorativas ----------
-     bannerDay    -> imagen de arriba cuando la web está en modo DÍA.
-     bannerNight  -> imagen de arriba cuando está en modo NOCHE.
-     bannerAlways -> imagen que aparece siempre, junto a la de día/noche.
+     banner       -> imagen de arriba (se ve siempre).
      chibi        -> muñeco al frente del texto principal.
      chibiProfile -> muñeco de la ventana PROFILE.
      Si un archivo no existe, se oculta y no rompe nada. */
   deco: {
-    bannerDay: "assets/img/mayuri-banner.jpg",
-    bannerNight: "assets/img/mayuri-chibi.webp",
-    bannerAlways: "assets/img/anime-girl.gif",
+    banner: "assets/img/mayuri-shiina.gif",
     chibi: "assets/img/mayuri-chibi.webp",
     chibiProfile: "assets/img/mayuri-profile.png"
   },
@@ -203,13 +198,23 @@ window.LITTTIN_CONFIG = {
     source: "Code Geass — Lelouch"
   },
 
-  /* ---------- Profile (ventana de abajo) ---------- */
+  /* ---------- Profile (ventana de abajo) ----------
+     specs -> las piezas del PC, en la ventana PROFILE. Cada una es { k, v }. */
   profile: {
     title: "PROFILE",
     name: "chiri",
     tagline: "El Culto De Chiri",
     instagram: "@lilttin",
     instagramUrl: "https://instagram.com/lilttin",
-    bio: "Streamer, jugador de CS, LoL y Geometry Dash. Este es mi rincón digital."
+    bio: "Streamer, jugador de CS, LoL y Geometry Dash. Este es mi rincón digital.",
+    specs: [
+      { k: "CPU", v: "AMD Ryzen 5 5600G (6 núcleos / 12 hilos · 3.9 GHz)" },
+      { k: "Gráfica", v: "AMD Radeon RX 7600 8 GB" },
+      { k: "RAM", v: "16 GB DDR4 3200 MHz (2×8 GB)" },
+      { k: "Placa madre", v: "Gigabyte B550M AORUS Elite" },
+      { k: "SSD", v: "WD PC SN740 512 GB NVMe" },
+      { k: "HDD", v: "WD Blue 1 TB" },
+      { k: "Sistema", v: "Windows 11 Pro" }
+    ]
   }
 };

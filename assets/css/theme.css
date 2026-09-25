@@ -1,36 +1,34 @@
 /* ==========================================================================
-   litttin · theme.css — día / noche (colores de Shiina Mayuri)
-   Todo el color va en variables: la clase .is-day en <html> (que alterna el
-   clic en el fondo) cambia la paleta entera, incluidos los pétalos y la luna.
-   base.css aporta la estructura.
+   litttin · theme.css — paleta, pestañas y botones (colores de Shiina Mayuri)
+   Todo el color va en variables CSS. base.css aporta la estructura.
    ========================================================================== */
 
-/* ---------- Paleta: NOCHE (por defecto) ---------- */
+/* ---------- Paleta: blanco + celeste (colores de Shiina Mayuri) ---------- */
 html {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --bg: #060a14;
-  --surface: #0f1726;
-  --surface-2: #141f33;
-  --surface-hover: #182642;
-  --code-bg: #0a1120;
-  --topbar-bg: #060a14;
-  --line: #22304a;
-  --line-strong: #33456a;
+  --bg: #eef6ff;
+  --surface: #ffffff;
+  --surface-2: #f4f9ff;
+  --surface-hover: #eaf3ff;
+  --code-bg: #f7fbff;
+  --topbar-bg: #eef6ff;
+  --line: #cfe2f5;
+  --line-strong: #a9c9e8;
 
-  --text: #eef4ff;
-  --text-dim: #b7c6e0;
-  --text-faint: #7f8fb0;
-  --heading: #cfeaff;
+  --text: #16283d;
+  --text-dim: #41607f;
+  --text-faint: #7d94ad;
+  --heading: #123a5c;
 
-  --accent: #8fd6ff;
-  --accent-hover: #6cc4f7;
-  --accent-fg: #062033;
+  --accent: #2f8fd8;
+  --accent-hover: #2477b8;
+  --accent-fg: #ffffff;
 
-  --ok: #5ad1a0;
-  --bad: #ff7a90;
-  --warn: #ffcf70;
-  --greentext: #86c46a;
+  --ok: #2f9e6a;
+  --bad: #d0405a;
+  --warn: #b8860b;
+  --greentext: #4f8f3a;
 
   --font-body: Georgia, "Times New Roman", serif;
   --font-display: Georgia, "Times New Roman", serif;
@@ -57,78 +55,33 @@ html {
   /* --- Ventanas + ecualizador --- */
   --win-bar: #8fd6ff;
   --win-bar-fg: #062033;
-  --win-shadow: rgba(0, 0, 0, .5);
-  --eq-bar: #8fd6ff;
-  --eq-bar-2: #4f9fd6;
-
-  /* --- Escena: noche con luna celeste --- */
-  --scene-sky: linear-gradient(180deg, #04060e 0%, #08122a 55%, #0e1c3a 100%);
-  --scene-stars-op: 1;
-  --scene-orb: radial-gradient(circle at 35% 32%, #f2fbff, #a9dcff 55%, #5aa9e6);
-  --scene-orb-glow: rgba(143, 214, 255, .55);
-  --scene-cloud: rgba(120, 160, 230, .16);
-  --scene-clouds-op: .35;
-  --scene-far: #101c33;
-  --scene-near: #0a1322;
-  --scene-torii: #1f3358;
-  --scene-torii-dark: #182848;
-  --scene-torii-op: .8;
-  --scene-halftone-dot: rgba(255, 255, 255, .05);
-  --petals-op: .85;
-  --petal-a: #bcd9ff;
-  --petal-b: #7fb8f0;
-  --jp-color: #8fd6ff;
-}
-
-/* ---------- Paleta: DÍA ---------- */
-html.is-day {
-  color-scheme: light;
-
-  --bg: #eef6ff;
-  --surface: #ffffff;
-  --surface-2: #f4f9ff;
-  --surface-hover: #eaf3ff;
-  --code-bg: #f7fbff;
-  --topbar-bg: #eef6ff;
-  --line: #cfe2f5;
-  --line-strong: #a9c9e8;
-
-  --text: #16283d;
-  --text-dim: #41607f;
-  --text-faint: #7d94ad;
-  --heading: #123a5c;
-
-  --accent: #2f8fd8;
-  --accent-hover: #2477b8;
-  --accent-fg: #ffffff;
-
-  --ok: #2f9e6a;
-  --bad: #d0405a;
-  --warn: #b8860b;
-  --greentext: #4f8f3a;
-
-  --win-bar: #8fd6ff;
-  --win-bar-fg: #062033;
   --win-shadow: rgba(47, 143, 216, .22);
   --eq-bar: #2f8fd8;
   --eq-bar-2: #8fd6ff;
 
-  /* --- Escena: día con sol y nubes --- */
+  /* --- Pestañas y botones (estilo web de Daniele) --- */
+  --tab: #2f8fd8;
+  --tab-hover: #2477b8;
+  --tab-border: #1f6aa8;
+
+  /* --- Escena: cielo celeste con cerezo --- */
   --scene-sky: linear-gradient(180deg, #eaf6ff 0%, #f8fcff 55%, #e3f1ff 100%);
-  --scene-stars-op: 0;
   --scene-orb: radial-gradient(circle at 35% 32%, #ffffff, #dff0ff 55%, #bfe0ff);
   --scene-orb-glow: rgba(255, 255, 255, .85);
   --scene-cloud: rgba(255, 255, 255, .95);
   --scene-clouds-op: .8;
   --scene-far: #cfe4f7;
   --scene-near: #b8d6f0;
+  --scene-land-h: 32vh;
   --scene-torii: #9fc0dd;
   --scene-torii-dark: #86aacb;
   --scene-torii-op: .85;
-  --scene-halftone-dot: rgba(47, 143, 216, .10);
-  --petals-op: .9;
-  --petal-a: #ffd6e6;
-  --petal-b: #ff9ec4;
+  --scene-halftone-dot: rgba(47, 143, 216, .1);
+  --scene-halftone-op: 0;
+  --petals-op: .95;
+  --petal-a: #ffc2d8;
+  --petal-b: #f2789f;
+
   --jp-color: #2f8fd8;
 }
 
@@ -136,27 +89,41 @@ html.is-day {
 html a { color: var(--accent); text-decoration: none; }
 html a:hover { text-decoration: underline; }
 
-/* ---------- Nav vertical (board list) ---------- */
-html .nav { flex-direction: column; gap: 0; }
+/* ---------- Nav vertical: pestañas agrupadas (estilo web de Daniele) ---------- */
+html .nav { flex-direction: column; gap: 14px; }
+html .nav-group { display: flex; flex-direction: column; gap: 5px; }
+html .nav-group-title {
+  margin: 0 0 2px;
+  padding: 0 3px;
+  font-family: var(--font-ui);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
 html .nav a {
   display: block;
-  padding: 5px 8px;
+  padding: 6px 10px;
   font-family: var(--font-ui);
-  font-size: 11px;
-  font-weight: 400;
-  color: var(--accent);
-  border-radius: 0;
-  border-bottom: 1px dotted var(--line);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--tab);
+  border: 1px solid var(--tab-border);
+  border-radius: 5px;
 }
 html .nav a:hover {
-  background: var(--surface-2);
-  color: var(--accent-hover);
+  background: var(--tab-hover);
+  border-color: var(--tab-hover);
+  color: #ffffff;
   text-decoration: none;
 }
 html .nav a[aria-selected="true"] {
-  color: var(--win-bar-fg);
+  color: var(--accent-fg);
   font-weight: 700;
   background: var(--accent);
+  border-color: var(--accent);
   box-shadow: none;
 }
 
@@ -191,8 +158,22 @@ html .eq span:nth-child(3n + 2) { background: var(--eq-bar-2); }
 html .profile-name { color: var(--heading); }
 html .profile-tag { font-family: var(--font-ui); font-size: 10px; color: var(--accent); }
 html .profile-bio { font-size: 12.5px; color: var(--text-dim); }
-html .profile-ig { border-color: var(--line-strong); border-radius: 0; color: var(--accent); }
-html .profile-ig:hover { border-color: var(--accent); color: var(--accent-hover); }
+html .profile-ig { border-color: var(--tab-border); border-radius: 5px; color: #ffffff; background: var(--tab); }
+html .profile-ig:hover { border-color: var(--tab-hover); color: #ffffff; background: var(--tab-hover); }
+
+/* ---------- Especificaciones del PC ---------- */
+html .profile-specs-title {
+  margin: 14px 0 6px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+html .profile-spec { margin: 0; font-size: 12.5px; color: var(--text-dim); }
+html .spec-k { color: var(--text-faint); }
+html .spec-v { color: var(--text); }
 
 /* ---------- Frase (quote) ---------- */
 html .quote { border-left: 3px solid var(--accent); }
@@ -218,50 +199,55 @@ html .hero-intro { font-size: 13.3px; color: var(--text); }
 
 html .hero-actions { margin-top: 16px; gap: 8px; }
 
-/* ---------- Botones = botones de formulario ---------- */
+/* ---------- Botones (estilo web de Daniele) ---------- */
 html .btn {
-  padding: 3px 9px;
+  padding: 6px 13px;
   font-family: var(--font-ui);
   font-size: 11.5px;
-  font-weight: 400;
-  color: var(--text);
-  background: var(--code-bg);
-  border: 1px solid var(--line-strong);
-  border-radius: 0;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--tab);
+  border: 1px solid var(--tab-border);
+  border-radius: 5px;
 }
 html .btn:hover {
-  background: var(--surface-2);
-  border-color: var(--accent);
-  color: var(--accent-hover);
+  background: var(--tab-hover);
+  border-color: var(--tab-hover);
+  color: #ffffff;
   transform: none;
 }
-html .btn--primary {
-  font-weight: 700;
-  color: var(--accent-fg);
-  background: var(--accent);
+html .btn--primary { font-weight: 700; }
+html .btn--ghost {
+  color: var(--accent);
+  background: transparent;
   border-color: var(--accent);
 }
-html .btn--ghost { background: var(--surface); }
-html .btn--icon { padding: 3px 7px; }
+html .btn--ghost:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+}
+html .btn--icon {
+  padding: 6px 10px;
+  color: var(--accent);
+  background: transparent;
+  border-color: var(--accent);
+}
+html .btn--icon:hover { background: color-mix(in srgb, var(--accent) 18%, transparent); }
 
-/* ---------- Charla del Counter-Strike ---------- */
-html .cs-chat {
+/* ---------- Letra de la canción (hero) ---------- */
+html .lyrics {
   max-width: 430px;
   margin-top: 16px;
-  padding: 8px 10px;
-  gap: 1px;
-  font-size: 11.5px;
+  padding: 12px 16px;
+  gap: 2px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-style: italic;
+  color: var(--text-dim);
   background: var(--code-bg);
   border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
 }
-html .cs-tag { min-width: 52px; font-size: 10px; letter-spacing: .04em; }
-html .cs-line--radio .cs-text { color: var(--text); }
-html .cs-line--server .cs-tag,
-html .cs-line--server .cs-text { color: var(--warn); }
-html .cs-line--ct .cs-tag,
-html .cs-line--ct .cs-text { color: var(--accent); }
-html .cs-line--t .cs-tag,
-html .cs-line--t .cs-text { color: var(--bad); }
 
 /* ---------- Secciones ---------- */
 html .section { padding: 0; }
