@@ -17,7 +17,7 @@
 .scene-orb {
   position: absolute;
   top: 12vh;
-  right: 11vw;
+  left: 11vw;
   width: clamp(74px, 10vw, 132px);
   aspect-ratio: 1;
   border-radius: 50%;
@@ -70,25 +70,29 @@
 .scene-land .l-far { fill: var(--scene-far); opacity: .85; }
 .scene-land .l-near { fill: var(--scene-near); }
 
-/* ---------- Cerezo en pixel art ---------- */
-.scene-sakura {
-  position: absolute;
-  left: -3vw;
-  bottom: calc(var(--scene-land-h, 34vh) - 8vh);
-  width: clamp(320px, 64vw, 860px);
-  height: auto;
-  filter: drop-shadow(0 10px 22px rgba(47, 143, 216, .18));
-}
-
 /* ---------- Torii ---------- */
 .scene-torii {
   position: absolute;
-  right: 8vw;
-  bottom: calc(var(--scene-land-h, 34vh) - 6vh);
-  width: clamp(78px, 9vw, 128px);
   height: auto;
-  opacity: var(--scene-torii-op, .85);
-  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, .18));
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, .16));
+}
+.scene-torii--a {
+  left: 4vw;
+  bottom: calc(var(--scene-land-h, 34vh) - 4vh);
+  width: clamp(122px, 15vw, 200px);
+  opacity: .9;
+}
+.scene-torii--b {
+  left: 27vw;
+  bottom: calc(var(--scene-land-h, 34vh) + 3vh);
+  width: clamp(74px, 8.5vw, 110px);
+  opacity: .58;
+}
+.scene-torii--c {
+  right: 9vw;
+  bottom: calc(var(--scene-land-h, 34vh) - 1vh);
+  width: clamp(96px, 11vw, 150px);
+  opacity: .78;
 }
 .scene-torii rect { fill: var(--scene-torii); }
 .scene-torii .t-pillar { fill: var(--scene-torii-dark, var(--scene-torii)); }
@@ -139,6 +143,64 @@
   to { transform: translateX(calc(var(--sway, 26px) * .5)) rotate(18deg); }
 }
 
+/* ---------- Rama de sakura (imagen, con balanceo) ---------- */
+.scene-tree {
+  position: absolute;
+  top: 0;
+  right: -2vw;
+  width: clamp(320px, 48vw, 660px);
+  aspect-ratio: 227 / 215;
+  background: var(--scene-tree, #3a3340);
+  -webkit-mask: url("../img/sakura-rama.png") no-repeat center / contain;
+  mask: url("../img/sakura-rama.png") no-repeat center / contain;
+  transform-origin: 86% 6%;
+  opacity: var(--scene-tree-op, .92);
+  pointer-events: none;
+  filter: drop-shadow(0 10px 22px rgba(58, 51, 64, .16));
+  animation: tree-sway 7s ease-in-out infinite alternate;
+}
+
+@keyframes tree-sway {
+  from { transform: rotate(-1.7deg); }
+  to { transform: rotate(1.7deg); }
+}
+
+/* ---------- Hojas que caen del árbol ---------- */
+.scene-leaves {
+  position: absolute;
+  inset: 0;
+}
+
+.leaf {
+  position: absolute;
+  top: -8vh;
+  display: block;
+  animation-name: leaf-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.leaf i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 62% 0 62% 0;
+  background: linear-gradient(140deg, var(--leaf-a), var(--leaf-b));
+  box-shadow: 0 1px 3px rgba(169, 140, 187, .35);
+  animation: leaf-sway var(--leaf-sway-dur, 3.2s) ease-in-out infinite alternate;
+}
+
+@keyframes leaf-fall {
+  from { transform: translate3d(0, 0, 0) rotate(0deg); }
+  to { transform: translate3d(var(--leaf-drift, -60px), 120vh, 0) rotate(var(--leaf-spin, -420deg)); }
+}
+
+@keyframes leaf-sway {
+  from { transform: translateX(calc(var(--leaf-sway, 24px) * -.5)) rotate(-16deg); }
+  to { transform: translateX(calc(var(--leaf-sway, 24px) * .5)) rotate(16deg); }
+}
+
 /* ---------- Acentos en japonés ---------- */
 .jp {
   display: block;
@@ -165,5 +227,7 @@
 /* ---------- Movimiento reducido: sin pétalos ni nubes ---------- */
 @media (prefers-reduced-motion: reduce) {
   .scene-petals { display: none; }
+  .scene-leaves { display: none; }
+  .scene-tree { animation: none; }
   .scene-clouds::before, .scene-clouds::after { animation: none; }
 }

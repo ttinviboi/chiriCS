@@ -112,7 +112,7 @@
         file = '<p class="post-file">File: <span class="post-file-name">' + esc(name) + '</span>' +
           (post.imgMeta ? ' <span class="post-file-meta">' + esc(post.imgMeta) + '</span>' : '') +
           '</p>' +
-          '<a class="post-img" href="' + esc(post.img) + '" target="_blank" rel="noopener noreferrer">' +
+          '<a class="post-img" href="' + esc(post.img) + '" data-lightbox>' +
           '<img src="' + esc(post.img) + '" alt="' + esc(post.imgAlt || name) + '" loading="lazy" decoding="async">' +
           '</a>';
       }
@@ -142,7 +142,7 @@
       var name = String(m.img || "").split("/").pop();
       var text = m.text ? '<p class="monument-text">' + esc(m.text).replace(/\n/g, "<br>") + "</p>" : "";
       return '<figure class="monument">' +
-        '<a class="monument-img" href="' + esc(m.img) + '" target="_blank" rel="noopener noreferrer">' +
+        '<a class="monument-img" href="' + esc(m.img) + '" data-lightbox>' +
         '<img src="' + esc(m.img) + '" alt="' + esc(m.alt || name) + '" loading="lazy" decoding="async">' +
         '</a>' +
         '<figcaption class="monument-cap">' +
@@ -380,6 +380,42 @@
         "--spin:" + spin.toFixed(0) + "deg;" +
         "--sway:" + sway.toFixed(0) + "px;" +
         "--sway-dur:" + (2.8 + Math.random() * 2.6).toFixed(1) + "s" +
+        '"><i></i></span>';
+    }
+
+    host.innerHTML = html;
+  }
+
+  /* ---------------- Hojas que caen del árbol ---------------- */
+  function setupLeaves() {
+    var host = $("#leaves");
+    if (!host) return;
+
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) { host.hidden = true; return; }
+
+    var count = window.innerWidth < 720 ? 12 : (window.innerWidth < 1200 ? 20 : 30);
+    var html = "";
+
+    for (var i = 0; i < count; i++) {
+      var size = 8 + Math.random() * 10;
+      var left = 42 + Math.random() * 56;          // bajo la copa del árbol (derecha)
+      var dur = 9 + Math.random() * 10;
+      var delay = -Math.random() * dur;
+      var drift = -(30 + Math.random() * 150);     // cae hacia la izquierda, como la rama
+      var spin = -(200 + Math.random() * 380);
+      var sway = 16 + Math.random() * 40;
+
+      html += '<span class="leaf" style="' +
+        "left:" + left.toFixed(2) + "%;" +
+        "width:" + size.toFixed(1) + "px;" +
+        "height:" + (size * 1.25).toFixed(1) + "px;" +
+        "animation-duration:" + dur.toFixed(1) + "s;" +
+        "animation-delay:" + delay.toFixed(1) + "s;" +
+        "--leaf-drift:" + drift.toFixed(0) + "px;" +
+        "--leaf-spin:" + spin.toFixed(0) + "deg;" +
+        "--leaf-sway:" + sway.toFixed(0) + "px;" +
+        "--leaf-sway-dur:" + (2.6 + Math.random() * 2.4).toFixed(1) + "s" +
         '"><i></i></span>';
     }
 
@@ -831,6 +867,46 @@
     });
   }
 
+  /* ---------------- Lightbox: las fotos se abren en la misma página ---------------- */
+  function setupLightbox() {
+    var box = $("#lightbox");
+    if (!box) return;
+    var img = $(".lightbox-img", box);
+    var lastFocus = null;
+
+    function open(src, alt) {
+      if (!img) return;
+      img.src = src;
+      img.alt = alt || "";
+      box.hidden = false;
+      document.body.classList.add("no-scroll");
+      var btn = $(".lightbox-close", box);
+      if (btn) btn.focus();
+    }
+
+    function close() {
+      box.hidden = true;
+      if (img) img.src = "";
+      document.body.classList.remove("no-scroll");
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    document.addEventListener("click", function (e) {
+      var link = e.target.closest ? e.target.closest("[data-lightbox]") : null;
+      if (link) {
+        e.preventDefault();
+        lastFocus = document.activeElement;
+        var inner = link.querySelector("img");
+        open(link.getAttribute("href"), inner ? inner.alt : "");
+        return;
+      }
+      if (e.target === box || (e.target.closest && e.target.closest(".lightbox-close"))) close();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !box.hidden) close();
+    });
+  }
   /* ---------------- Arranque ---------------- */
   function init() {
     applyConfig();
@@ -842,6 +918,7 @@
     setupTabs();
     setupLive();
     setupWindows();
+    setupLightbox();
     setupEq();
     setupDeco();
     renderProfile();
@@ -850,6 +927,7 @@
     setupTopbar();
     stampPosts();
     setupPetals();
+    setupLeaves();
     setupMotto();
 
     var refresh = $("#refreshStatus");

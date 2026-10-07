@@ -57,59 +57,47 @@ window.LITTTIN_CONFIG = {
   monuments: [
     {
       img: "assets/img/gato-1.jpg",
-      title: "La chiri mira fijo",
+      title: "Nya~ ¿me miras?",
       meta: "(86 KB, 608x1080)",
       alt: "Gato mirando fijo a la cámara",
-      text: "No pestañea hasta que ganes el eco round."
+      text: "La chiri te clava los ojitos desde el regazo. No los aparta hasta que le das caricias (｡•́‿•̀｡)♡"
     },
     {
       img: "assets/img/gato-2.jpg",
-      title: "La chiri reacciona",
+      title: "Kyaa~ ¡sorpresa!",
       meta: "(74 KB, 608x1080)",
       alt: "Gato sorprendido con los ojos muy abiertos",
-      text: "Cara de la chiri cuando ganamos con pistolas."
+      text: "Modo juguete activado: orejitas atrás y ojitos brillantes, pura energía de anime. ¡Nya! (=^･ω･^=)"
     },
     {
       img: "assets/img/monumento-1.jpg",
-      title: "Siesta de la chiri",
+      title: "Siestaaa ♡",
       alt: "Gato durmiendo acurrucado en una manta gris",
-      text: "Modo ahorro de energía activado."
-    },
-    {
-      img: "assets/img/monumento-2.jpg",
-      title: "La chiri te mira",
-      alt: "Gato carey mirando fijo a la cámara",
-      text: "Ojos abiertos: te está evaluando."
+      text: "Recargando batería gatuna en su mantita. Shhh… no la despiertes, está soñando con atún u.u"
     },
     {
       img: "assets/img/monumento-3.jpg",
-      title: "Jefa de obra",
+      title: "Jefa de obra ♪",
       alt: "Gato carey sentado en el suelo de madera entre escombros",
-      text: "Supervisando la construcción desde el suelo."
+      text: "Supervisando la construcción desde su fortaleza de madera. ¡Aprobado por la chiri, nya~! ✩"
     },
     {
       img: "assets/img/monumento-4.jpg",
-      title: "Ojos en la penumbra",
+      title: "Ojos en la penumbra ✧",
       alt: "Gato con ojos brillantes en una habitación oscura",
-      text: "De noche solo se ven dos linternas amarillas."
+      text: "De noche solo se ven dos lunitas amarillas brillando entre las sombras. ¿Te asustaste? Ufufu~"
     },
     {
       img: "assets/img/monumento-5.jpg",
-      title: "Mirando el cielo",
+      title: "Quiero saliiir~",
       alt: "Gato carey mirando hacia arriba tras una puerta de vidrio",
-      text: "Esperando a que le abran la puerta."
-    },
-    {
-      img: "assets/img/monumento-6.jpg",
-      title: "Cabeza arriba",
-      alt: "Primer plano de un gato mirando hacia arriba",
-      text: "Le hacen cariño y mira al techo."
+      text: "Estirándose contra la puerta de vidrio, mirando el cielo con ojitos de 'ábreme, por favor~' (｡♥‿♥｡)"
     },
     {
       img: "assets/img/monumento-7.jpg",
-      title: "Retrato oficial",
+      title: "Retrato oficial ☆",
       alt: "Primer plano de un gato atigrado de ojos amarillos",
-      text: "La foto de perfil del culto."
+      text: "La foto de perfil del culto. Pose de idol con la cabecita ladeada: '¿me sacaste una foto? baka~' (=^-ω-^=)"
     }
   ],
 
@@ -150,9 +138,9 @@ window.LITTTIN_CONFIG = {
     ,{
       id: "instagram",
       name: "Instagram",
-      handle: "@lilttin",
+      handle: "@liltttin",
       description: "Fotos y el día a día del culto.",
-      url: "https://instagram.com/lilttin",
+      url: "https://instagram.com/liltttin",
       cta: "Ver perfil"
     }
 
@@ -186,26 +174,26 @@ window.LITTTIN_CONFIG = {
      chibiProfile -> muñeco de la ventana PROFILE.
      Si un archivo no existe, se oculta y no rompe nada. */
   deco: {
-    banner: "assets/img/mayuri-shiina.gif",
-    chibi: "assets/img/mayuri-chibi.webp",
-    chibiProfile: "assets/img/mayuri-profile.png"
+    banner: "assets/img/banner.gif",
+    chibi: "assets/img/akemi.webp",
+    chibiProfile: "assets/img/profile.png"
   },
 
   /* ---------- Frase junto al chibi ----------
      Cita corta de Steins;Gate o Code Geass. Cámbiala por la que prefieras. */
   quote: {
-    text: "Solo quienes están preparados para morir tienen derecho a matar.",
-    source: "Code Geass — Lelouch"
+    text: "No importa en qué línea del mundo esté: siempre volveré a encontrarte.",
+    source: "Steins;Gate — Okabe Rintarou"
   },
 
   /* ---------- Profile (ventana de abajo) ----------
      specs -> las piezas del PC, en la ventana PROFILE. Cada una es { k, v }. */
   profile: {
     title: "PROFILE",
-    name: "chiri",
+    name: "Setup de chiri",
     tagline: "El Culto De Chiri",
-    instagram: "@lilttin",
-    instagramUrl: "https://instagram.com/lilttin",
+    instagram: "@liltttin",
+    instagramUrl: "https://instagram.com/liltttin",
     bio: "Streamer, jugador de CS, LoL y Geometry Dash. Este es mi rincón digital.",
     specs: [
       { k: "CPU", v: "AMD Ryzen 5 5600G (6 núcleos / 12 hilos · 3.9 GHz)" },

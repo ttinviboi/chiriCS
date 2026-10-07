@@ -1,34 +1,34 @@
 /* ==========================================================================
-   litttin · theme.css — paleta, pestañas y botones (colores de Shiina Mayuri)
+   litttin · theme.css — paleta, pestañas y botones (colores del personaje)
    Todo el color va en variables CSS. base.css aporta la estructura.
    ========================================================================== */
 
-/* ---------- Paleta: blanco + celeste (colores de Shiina Mayuri) ---------- */
+/* ---------- Paleta: carbón + crema + lavanda + rosa (colores del personaje) ---------- */
 html {
   color-scheme: light;
 
-  --bg: #eef6ff;
+  --bg: #f2eff1;
   --surface: #ffffff;
-  --surface-2: #f4f9ff;
-  --surface-hover: #eaf3ff;
-  --code-bg: #f7fbff;
-  --topbar-bg: #eef6ff;
-  --line: #cfe2f5;
-  --line-strong: #a9c9e8;
+  --surface-2: #f7f5f8;
+  --surface-hover: #efeaf1;
+  --code-bg: #f7f5f8;
+  --topbar-bg: #f2eff1;
+  --line: #ded7e2;
+  --line-strong: #c6bbce;
 
-  --text: #16283d;
-  --text-dim: #41607f;
-  --text-faint: #7d94ad;
-  --heading: #123a5c;
+  --text: #2e2e36;
+  --text-dim: #5b5566;
+  --text-faint: #8a8a96;
+  --heading: #24242c;
 
-  --accent: #2f8fd8;
-  --accent-hover: #2477b8;
+  --accent: #7b6b9e;
+  --accent-hover: #6a5b8a;
   --accent-fg: #ffffff;
 
-  --ok: #2f9e6a;
-  --bad: #d0405a;
-  --warn: #b8860b;
-  --greentext: #4f8f3a;
+  --ok: #4e8c6a;
+  --bad: #c4566e;
+  --warn: #b08a4a;
+  --greentext: #6f8f4a;
 
   --font-body: Georgia, "Times New Roman", serif;
   --font-display: Georgia, "Times New Roman", serif;
@@ -53,36 +53,42 @@ html {
   --topbar-h: 44px;
 
   /* --- Ventanas + ecualizador --- */
-  --win-bar: #8fd6ff;
-  --win-bar-fg: #062033;
-  --win-shadow: rgba(47, 143, 216, .22);
-  --eq-bar: #2f8fd8;
-  --eq-bar-2: #8fd6ff;
+  --win-bar: #c9bfd6;
+  --win-bar-fg: #2e2e36;
+  --win-shadow: rgba(46, 46, 54, .16);
+  --eq-bar: #7b6b9e;
+  --eq-bar-2: #c9bfd6;
 
   /* --- Pestañas y botones (estilo web de Daniele) --- */
-  --tab: #2f8fd8;
-  --tab-hover: #2477b8;
-  --tab-border: #1f6aa8;
+  --tab: #7b6b9e;
+  --tab-hover: #6a5b8a;
+  --tab-border: #5e5078;
 
-  /* --- Escena: cielo celeste con cerezo --- */
-  --scene-sky: linear-gradient(180deg, #eaf6ff 0%, #f8fcff 55%, #e3f1ff 100%);
-  --scene-orb: radial-gradient(circle at 35% 32%, #ffffff, #dff0ff 55%, #bfe0ff);
+  /* --- Escena: cielo crema-lavanda con cerezo --- */
+  --scene-sky: linear-gradient(180deg, #ede8f0 0%, #faf8fa 55%, #e8e1ee 100%);
+  --scene-orb: radial-gradient(circle at 35% 32%, #ffffff, #f4eff6 55%, #ded4e8);
   --scene-orb-glow: rgba(255, 255, 255, .85);
   --scene-cloud: rgba(255, 255, 255, .95);
   --scene-clouds-op: .8;
-  --scene-far: #cfe4f7;
-  --scene-near: #b8d6f0;
+  --scene-far: #ddd5e4;
+  --scene-near: #cbbfd6;
   --scene-land-h: 32vh;
-  --scene-torii: #9fc0dd;
-  --scene-torii-dark: #86aacb;
+  --scene-torii: #b7a9c9;
+  --scene-torii-dark: #9e8fb3;
   --scene-torii-op: .85;
-  --scene-halftone-dot: rgba(47, 143, 216, .1);
+  --scene-halftone-dot: rgba(123, 107, 158, .12);
   --scene-halftone-op: 0;
   --petals-op: .95;
-  --petal-a: #ffc2d8;
-  --petal-b: #f2789f;
+  --petal-a: #dcc8e6;
+  --petal-b: #9f88bd;
 
-  --jp-color: #2f8fd8;
+  /* --- Rama de sakura y sus hojas --- */
+  --scene-tree: #3a3340;
+  --scene-tree-op: .92;
+  --leaf-a: #e8c6d8;
+  --leaf-b: #a98cbb;
+
+  --jp-color: #7b6b9e;
 }
 
 /* ---------- Enlaces ---------- */
