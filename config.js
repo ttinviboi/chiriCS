@@ -19,8 +19,8 @@ window.LITTTIN_CONFIG = {
   /* ---------- Servidor de Minecraft ---------- */
   server: {
     name: "El Living de la chiri",
-    ip: "play.tuservidor.net",   // ←←← CAMBIA ESTO POR TU IP (ej: 123.45.67.89:25565)
-    version: "Java 1.21.x",
+    ip: "100.89.26.24:25565",    // IP de Tailscale de la PC del server
+    version: "Java 1.20.1",
     bedrockPort: "",             // Si tienes Bedrock pon el puerto aquí (ej: "19132"). Si no, déjalo vacío.
     checkStatus: true            // true = consulta online/offline automáticamente
   },
@@ -174,7 +174,7 @@ window.LITTTIN_CONFIG = {
      chibiProfile -> muñeco de la ventana PROFILE.
      Si un archivo no existe, se oculta y no rompe nada. */
   deco: {
-    banner: "assets/img/banner.gif",
+    banner: "assets/img/homura2.webp",
     chibi: "assets/img/akemi.webp",
     chibiProfile: "assets/img/profile.png"
   },

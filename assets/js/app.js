@@ -311,7 +311,7 @@
     var controller = typeof AbortController !== "undefined" ? new AbortController() : null;
     var timer = setTimeout(function () { if (controller) controller.abort(); }, 9000);
 
-    return fetch("https://api.mcsrvstat.us/3/" + ip.replace(/\s+/g, ""), controller ? { signal: controller.signal } : undefined)
+    return fetch("status.json?t=" + Date.now(), controller ? { signal: controller.signal } : undefined)
       .then(function (res) { return res.json(); })
       .then(function (data) {
         if (!data || data.online !== true) {
@@ -328,7 +328,7 @@
         }
       })
       .catch(function () {
-        setState("", "No se pudo comprobar el estado (revisa la IP o inténtalo de nuevo)", null);
+        setState("", "No se pudo leer el estado del servidor", null);
       })
       .then(function () {
         clearTimeout(timer);
